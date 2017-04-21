@@ -1,0 +1,5 @@
+mzitu
+    pip install BeautifulSoup4
+
+insert_sql
+    pip install Pillow
