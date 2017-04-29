@@ -5,12 +5,14 @@ import datetime
 from PIL import Image
 import pyodbc
 import sys
+
 try:
     from color_print import *
 except ImportError:
     from .color_print import *
 
 con_text = pyodbc.connect('DRIVER={SQL Server};SERVER=.;DATABASE=ImageSite;UID=Link-ImageSite;PWD=P@ssw0rd')
+
 
 # 清空数据库
 def clean_image_site():
@@ -19,6 +21,7 @@ def clean_image_site():
     con_text.commit()
     sql_cursor.execute("delete from Folders")
     con_text.commit()
+
 
 # 文件夹信息
 class Folder:
@@ -34,6 +37,7 @@ class Folder:
         self.CreateDate = createDate
         self.ImgNum = imgNum
         self.TotalSize = totalSize
+
 
 # 图片信息(Img)
 class Img:
@@ -60,6 +64,7 @@ class Img:
         self.CreateDate = createDate
         self.ChangeDate = changeDate
 
+
 # 获取图片文件的信息  文件夹名 路径 创建时间 文件夹内图片数量 文件的大小
 def get_folder_info(root, files):
     create_date = datetime.datetime.fromtimestamp(os.path.getctime(root)).strftime('%Y-%m-%d %H:%M:%S')
@@ -69,6 +74,7 @@ def get_folder_info(root, files):
     _size = sum([os.path.getsize(os.path.join(root, name)) for name in files]) / 1024 / 1024
     total_size = round(_size, 2)
     return Folder(name, path, create_date, img_num, total_size)
+
 
 # 获取图片文件具体信息
 def get_images(path):
@@ -93,6 +99,7 @@ def get_images(path):
     height = Image.open(path).size[1]
     return Img(folder_id, name, path, type, size, width, height, visit_date, create_date, change_date)
 
+
 # 文件夹信息插入数据库
 def insert_folders(folder):
     insert = "insert into [Folders] ([Name],[Path],[CreateDate],[ImgNum],[TotalSize])"
@@ -103,15 +110,18 @@ def insert_folders(folder):
     sql_cursor.execute(insert_sql)
     con_text.commit()
 
+
 # 图片信息插入数据库
 def insert_images(img):
     insert = "insert into [Images] ([FolderId],[Name],[Path],[Type],[Size],[Width],[Height],[VisitDate],[CreateDate],[ChangeDate])"
     values = "values ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}','{9}')" \
-        .format(img.FolderId, img.Name, img.Path, img.Type, img.Size, img.Width, img.Height, img.VisitDate,img.CreateDate, img.ChangeDate)
+        .format(img.FolderId, img.Name, img.Path, img.Type, img.Size, img.Width, img.Height, img.VisitDate,
+                img.CreateDate, img.ChangeDate)
     insert_sql = insert + '\n' + values
     sql_cursor = con_text.cursor()
     sql_cursor.execute(insert_sql)
     con_text.commit()
+
 
 # 添加虚拟模拟的历经 IIS    F:\\ > F
 def add_virtical_directory():
@@ -119,6 +129,7 @@ def add_virtical_directory():
     sql_cursor = con_text.cursor()
     sql_cursor.execute(sql_change)
     con_text.commit()
+
 
 # Folders中的FolderId == Images的FolderId  先插入文件夹信息再插入图片信息
 def get_folder_id(folder_name):
@@ -131,6 +142,7 @@ def get_folder_id(folder_name):
         return '0'
     return str(row.Id)
 
+
 # 输出文件夹信息
 def folder_print(folder):
     print(folder.Name)
@@ -139,6 +151,7 @@ def folder_print(folder):
     print(folder.ImgNum)
     print(folder.TotalSize)
     print('\n')
+
 
 # 输出图片信息
 def image_print(img):
@@ -154,6 +167,7 @@ def image_print(img):
     print(img.ChangeDate)
     print('\n')
 
+
 # 数据插入数据库 部分 -- Test
 def insert_sql(folder_path):
     for root, dirs, files in os.walk(folder_path):
@@ -163,20 +177,21 @@ def insert_sql(folder_path):
             folder = get_folder_info(root, files)
             insert_folders(folder)
             # sys.stdout.write(folder.Name)
-            printGreen('folder_name :  '+folder.Name+'\n')
-            cnt=1
+            printGreen('folder_name :  ' + folder.Name + '\n')
+            cnt = 1
         for file in files:
             path = os.path.join(root, file)
             image = get_images(path)
             insert_images(image)
-            if cnt%8!=0:
-                sys.stdout.write(image.Path.split("\\")[-1]+'   ')
+            if cnt % 8 != 0:
+                sys.stdout.write(image.Path.split("\\")[-1] + '   ')
             else:
                 sys.stdout.write(image.Path.split("\\")[-1] + '   ')
                 sys.stdout.write('\r\n')
-            cnt+=1
+            cnt += 1
         sys.stdout.write('\r\n')
     add_virtical_directory()
+
 
 # 数据插入数据库 全部
 def init_sql():
@@ -189,19 +204,20 @@ def init_sql():
             folder = get_folder_info(root, files)
             insert_folders(folder)
             # sys.stdout.write(folder.Name)
-            printGreen('\n'+folder.Name+'\n')
+            printGreen('\n' + folder.Name + '\n')
             cnt = 1
         for file in files:
             path = os.path.join(root, file)
             image = get_images(path)
             insert_images(image)
             if cnt % 9 != 0:
-                sys.stdout.write(image.Path.split("\\")[-1] +'   ')
+                sys.stdout.write(image.Path.split("\\")[-1] + '   ')
             else:
                 sys.stdout.write('\n')
             cnt += 1
         sys.stdout.write('\n')
     add_virtical_directory()
+
 
 if __name__ == "__main__":
     init_sql()
