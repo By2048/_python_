@@ -12,3 +12,5 @@ print(help(os.path))
 'abc'.upper()
 'ABC'
 
+
+print('---|-')

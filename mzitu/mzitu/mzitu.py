@@ -13,11 +13,11 @@ try:
     from color_print import *
 except ImportError:
     from .color_print import *
-
-try:
-    from insert_sql import insert_sql
-except:
-    from .insert_sql import insert_sql
+#
+# try:
+#     from insert_sql import insert_sql
+# except:
+#     from .insert_sql import insert_sql
 
 import sys
 
@@ -242,9 +242,8 @@ def start_mzitu():
                 printGreen('image_max_num     :  ' + str(max_image_num) + '\n')
                 down_group_img(down_link_list, meizi.title)
                 keep_has_down(meizi)
-                insert_sql(mzitu_path + meizi.title)
+                # insert_sql(mzitu_path + meizi.title)
     print('End')
 
 if __name__ == '__main__':
     pass
-    # start_mzitu()

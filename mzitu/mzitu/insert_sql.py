@@ -6,10 +6,10 @@ from PIL import Image
 import pyodbc
 import sys
 
-try:
-    from color_print import *
-except ImportError:
-    from .color_print import *
+# try:
+#     from color_print import *
+# except ImportError:
+#     from .color_print import *
 
 con_text = pyodbc.connect('DRIVER={SQL Server};SERVER=.;DATABASE=ImageSite;UID=Link-ImageSite;PWD=P@ssw0rd')
 
