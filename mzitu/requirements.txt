@@ -1,5 +1,6 @@
-mzitu
-    pip install BeautifulSoup4
 
-insert_sql
-    pip install Pillow
+
+pip install BeautifulSoup4
+pip install Pillow
+pip install pyodbc
+
