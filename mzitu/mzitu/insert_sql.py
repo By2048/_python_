@@ -42,6 +42,7 @@ class Folder:
 # 图片信息(Img)
 class Img:
     FolderId = ""
+    FolderName=""
     Name = ""
     Path = ""
     Type = ""
@@ -52,8 +53,9 @@ class Img:
     CreateDate = ""  # 文件创建时间
     ChangeDate = ""  # 文件最后修改时间
 
-    def __init__(self, folderId, name, path, type, size, width, heigth, visitDate, createDate, changeDate):
+    def __init__(self, folderId,folderName, name, path, type, size, width, heigth, visitDate, createDate, changeDate):
         self.FolderId = folderId
+        self.FolderName=folderName
         self.Name = name
         self.Path = path
         self.Type = type
@@ -97,7 +99,7 @@ def get_images(path):
                   str(_mtime[3]) + ":" + str(_mtime[4]) + ":" + str(_mtime[5])
     width = Image.open(path).size[0]
     height = Image.open(path).size[1]
-    return Img(folder_id, name, path, type, size, width, height, visit_date, create_date, change_date)
+    return Img(folder_id,folder_name, name, path, type, size, width, height, visit_date, create_date, change_date)
 
 
 # 文件夹信息插入数据库
@@ -113,9 +115,9 @@ def insert_folders(folder):
 
 # 图片信息插入数据库
 def insert_images(img):
-    insert = "insert into [Images] ([FolderId],[Name],[Path],[Type],[Size],[Width],[Height],[VisitDate],[CreateDate],[ChangeDate])"
-    values = "values ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}','{9}')" \
-        .format(img.FolderId, img.Name, img.Path, img.Type, img.Size, img.Width, img.Height, img.VisitDate,
+    insert = "insert into [Images] ([FolderId],[FolderName],[Name],[Path],[Type],[Size],[Width],[Height],[VisitDate],[CreateDate],[ChangeDate])"
+    values = "values ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}','{9}','{10}')" \
+        .format(img.FolderId, img.FolderName,img.Name, img.Path, img.Type, img.Size, img.Width, img.Height, img.VisitDate,
                 img.CreateDate, img.ChangeDate)
     insert_sql = insert + '\n' + values
     sql_cursor = con_text.cursor()
@@ -168,7 +170,7 @@ def image_print(img):
     print('\n')
 
 
-# 数据插入数据库 部分 -- Test
+# 数据插入数据库 部分
 def insert_sql(folder_path):
     for root, dirs, files in os.walk(folder_path):
         if len(files) == 0:

@@ -2,13 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4685160e-41b4-4d03-afaf-2659978d97ae" name="默认的" comment="-">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/Python.iml" afterPath="$PROJECT_DIR$/.idea/Python.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mzitu/has_down.txt" afterPath="$PROJECT_DIR$/mzitu/has_down.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mzitu/mzitu/insert_sql.py" afterPath="$PROJECT_DIR$/mzitu/mzitu/insert_sql.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mzitu/mzitu/mzitu.py" afterPath="$PROJECT_DIR$/mzitu/mzitu/mzitu.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mzitu/requirements.txt" afterPath="$PROJECT_DIR$/mzitu/requirements.txt" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -78,110 +74,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="mzitu.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/mzitu/mzitu/mzitu.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1133">
-              <caret line="43" column="18" lean-forward="true" selection-start-line="43" selection-start-column="18" selection-end-line="43" selection-end-column="18" />
-              <folding>
-                <element signature="e#46#55#0" expanded="true" />
-                <element signature="e#775#892#0" expanded="false" />
-                <element signature="e#846#889#0" expanded="false" />
-                <element signature="e#941#2197#0" expanded="false" />
-                <element signature="e#1275#2031#0" expanded="false" />
-                <element signature="e#1306#2031#0" expanded="false" />
-                <element signature="e#2101#2197#0" expanded="false" />
-                <element signature="e#2246#2354#0" expanded="false" />
-                <element signature="e#2401#2427#0" expanded="false" />
-                <element signature="e#2486#2839#0" expanded="false" />
-                <element signature="e#2709#2815#0" expanded="false" />
-                <element signature="e#2917#3541#0" expanded="false" />
-                <element signature="e#3102#3449#0" expanded="false" />
-                <element signature="e#3200#3449#0" expanded="false" />
-                <element signature="e#3245#3274#0" expanded="false" />
-                <element signature="e#3608#4106#0" expanded="false" />
-                <element signature="e#3723#3838#0" expanded="false" />
-                <element signature="e#3876#3904#0" expanded="false" />
-                <element signature="e#4186#4604#0" expanded="false" />
-                <element signature="e#4665#4990#0" expanded="false" />
-                <element signature="e#4900#4987#0" expanded="false" />
-                <element signature="e#5027#5163#0" expanded="false" />
-                <element signature="e#5110#5163#0" expanded="false" />
-                <element signature="e#5231#5520#0" expanded="false" />
-                <element signature="e#5355#5487#0" expanded="false" />
-                <element signature="e#5798#5941#0" expanded="false" />
-                <element signature="e#5982#6319#0" expanded="false" />
-                <element signature="e#6383#6833#0" expanded="false" />
-                <element signature="e#6680#6810#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="test.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/all-test/test.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="15" column="11" lean-forward="false" selection-start-line="15" selection-start-column="11" selection-end-line="15" selection-end-column="11" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="insert_sql.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="insert_sql.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/mzitu/mzitu/insert_sql.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1346">
-              <caret line="193" column="0" lean-forward="true" selection-start-line="193" selection-start-column="0" selection-end-line="193" selection-end-column="0" />
+            <state relative-caret-position="73">
+              <caret line="188" column="68" lean-forward="true" selection-start-line="188" selection-start-column="68" selection-end-line="188" selection-end-column="68" />
               <folding>
                 <element signature="e#24#33#0" expanded="true" />
-                <marker date="1493907110167" expanded="true" signature="399:417" ph="delete from " />
-                <marker date="1493907110167" expanded="true" signature="466:485" ph="delete from " />
-                <marker date="1493907110167" expanded="true" signature="3183:3254" ph="insert into " />
-                <marker date="1493907110167" expanded="true" signature="3594:3710" ph="insert into " />
-                <marker date="1493907110167" expanded="true" signature="4172:4219" ph="update Image... " />
-                <marker date="1493907110167" expanded="true" signature="4473:4512" ph="select Id fr... Folders" />
+                <marker date="1494853395893" expanded="true" signature="399:417" ph="delete from " />
+                <marker date="1494853395893" expanded="true" signature="466:485" ph="delete from " />
+                <marker date="1494853395893" expanded="true" signature="3259:3330" ph="insert into " />
+                <marker date="1494853395893" expanded="true" signature="3670:3799" ph="insert into " />
+                <marker date="1494853395893" expanded="true" signature="4283:4330" ph="update Image... " />
+                <marker date="1494853395893" expanded="true" signature="4584:4623" ph="select Id fr... Folders" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="color_print.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/mzitu/mzitu/color_print.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="890">
-              <caret line="194" column="31" lean-forward="true" selection-start-line="194" selection-start-column="31" selection-end-line="194" selection-end-column="31" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="backup.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/mzitu/mzitu/backup.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="399">
-              <caret line="27" column="0" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/mzitu/mzitu/__init__.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="setup.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/mzitu/setup.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="133">
-              <caret line="7" column="0" lean-forward="true" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -280,9 +186,9 @@
         <option value="$PROJECT_DIR$/mzitu/requirements.txt" />
         <option value="$PROJECT_DIR$/mzitu/setup.py" />
         <option value="$PROJECT_DIR$/all-test/test.py" />
-        <option value="$PROJECT_DIR$/mzitu/mzitu/insert_sql.py" />
         <option value="$PROJECT_DIR$/mzitu/has_down.txt" />
         <option value="$PROJECT_DIR$/mzitu/mzitu/mzitu.py" />
+        <option value="$PROJECT_DIR$/mzitu/mzitu/insert_sql.py" />
       </list>
     </option>
   </component>
@@ -293,10 +199,10 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="2334" />
-    <option name="y" value="8" />
-    <option name="width" value="1393" />
-    <option name="height" value="1032" />
+    <option name="x" value="1912" />
+    <option name="y" value="-8" />
+    <option name="width" value="1936" />
+    <option name="height" value="1096" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -314,8 +220,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -360,26 +264,14 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Python" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Python" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="all-test" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="settings.editor.selected.configurable" value="vcs.Git" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Font" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="js.eslint.eslintPackage" value="" />
     <property name="com.intellij.database.dataSource.DataSourceTemplate" value="MySQL" />
@@ -966,7 +858,14 @@
       <option name="project" value="LOCAL" />
       <updated>1493822096850</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="-">
+      <created>1493907710905</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1493907710905</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -987,18 +886,18 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="2334" y="8" width="1393" height="1032" extended-state="0" />
+    <frame x="1912" y="-8" width="1936" height="1096" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19825707" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1421875" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3281412" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="调试" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3281412" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28308025" sideWeight="0.5143505" order="14" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3281412" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24818276" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
+      <window_info id="运行" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.31675127" sideWeight="0.48564956" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.41640705" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="运行" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3170467" sideWeight="0.48564956" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1319,6 +1218,29 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/mzitu/has_down.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="486">
+          <caret line="3436" column="0" lean-forward="true" selection-start-line="3436" selection-start-column="0" selection-end-line="3436" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/all-test/test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="15" column="11" lean-forward="false" selection-start-line="15" selection-start-column="11" selection-end-line="15" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mzitu/mzitu/color_print.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="826">
+          <caret line="194" column="31" lean-forward="true" selection-start-line="194" selection-start-column="31" selection-end-line="194" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/mzitu/mzitu/backup.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="399">
@@ -1335,14 +1257,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/all-test/test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="15" column="11" lean-forward="false" selection-start-line="15" selection-start-column="11" selection-end-line="15" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/mzitu/setup.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="133">
@@ -1351,42 +1265,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mzitu/mzitu/color_print.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="890">
-          <caret line="194" column="31" lean-forward="true" selection-start-line="194" selection-start-column="31" selection-end-line="194" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mzitu/mzitu/insert_sql.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1346">
-          <caret line="193" column="0" lean-forward="true" selection-start-line="193" selection-start-column="0" selection-end-line="193" selection-end-column="0" />
-          <folding>
-            <element signature="e#24#33#0" expanded="true" />
-            <marker date="1493907110167" expanded="true" signature="399:417" ph="delete from " />
-            <marker date="1493907110167" expanded="true" signature="466:485" ph="delete from " />
-            <marker date="1493907110167" expanded="true" signature="3183:3254" ph="insert into " />
-            <marker date="1493907110167" expanded="true" signature="3594:3710" ph="insert into " />
-            <marker date="1493907110167" expanded="true" signature="4172:4219" ph="update Image... " />
-            <marker date="1493907110167" expanded="true" signature="4473:4512" ph="select Id fr... Folders" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mzitu/has_down.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="486">
-          <caret line="3436" column="0" lean-forward="true" selection-start-line="3436" selection-start-column="0" selection-end-line="3436" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/mzitu/mzitu/mzitu.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1133">
-          <caret line="43" column="18" lean-forward="true" selection-start-line="43" selection-start-column="18" selection-end-line="43" selection-end-column="18" />
+        <state relative-caret-position="1741">
+          <caret line="239" column="30" lean-forward="false" selection-start-line="239" selection-start-column="16" selection-end-line="239" selection-end-column="30" />
           <folding>
             <element signature="e#46#55#0" expanded="true" />
             <element signature="e#775#892#0" expanded="false" />
@@ -1417,6 +1299,22 @@
             <element signature="e#5982#6319#0" expanded="false" />
             <element signature="e#6383#6833#0" expanded="false" />
             <element signature="e#6680#6810#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mzitu/mzitu/insert_sql.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="73">
+          <caret line="188" column="68" lean-forward="true" selection-start-line="188" selection-start-column="68" selection-end-line="188" selection-end-column="68" />
+          <folding>
+            <element signature="e#24#33#0" expanded="true" />
+            <marker date="1494853395893" expanded="true" signature="399:417" ph="delete from " />
+            <marker date="1494853395893" expanded="true" signature="466:485" ph="delete from " />
+            <marker date="1494853395893" expanded="true" signature="3259:3330" ph="insert into " />
+            <marker date="1494853395893" expanded="true" signature="3670:3799" ph="insert into " />
+            <marker date="1494853395893" expanded="true" signature="4283:4330" ph="update Image... " />
+            <marker date="1494853395893" expanded="true" signature="4584:4623" ph="select Id fr... Folders" />
           </folding>
         </state>
       </provider>
