@@ -15,9 +15,10 @@ except ImportError:
     from .color_print import *
 
 try:
-    from insert_sql import insert_sql
+    from .insert_sql import *
 except:
-    from .insert_sql import insert_sql
+    from insert_sql import *
+
 
 import sys
 
