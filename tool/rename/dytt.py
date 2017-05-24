@@ -3,12 +3,11 @@ import re
 
 
 class FileInfo:
-    num = ''
+    index = ''
     old_name = ''
     new_name = ''
-
-    def __init__(self, num, old_name, new_name):
-        self.num = num
+    def __init__(self, index, old_name, new_name):
+        self.index = index
         self.old_name = old_name
         self.new_name = new_name
 
@@ -31,26 +30,28 @@ def get_new_name(old_name):
 
 def print_file_info(file_info):
     print('\n')
-    print('index      ' + file_info.num)
+    print('index      ' + file_info.index)
     print('old_name   ' + file_info.old_name)
     print('new_name   ' + file_info.new_name)
     print('\n')
 
+start_path='f:\\'
 
 def insert_file_info():
-    index = 1
+    cnt = 1
     dytt_title = re.compile(".*\[(.*)\].*")
-    for name in os.listdir(r'f:\video'):
+    for name in os.listdir(start_path):
         if re.match(dytt_title, name) is not None:
-            num = str(index)
-            old_name = 'f:/video/' + name
+            index = str(cnt)
+            old_name = start_path + name
             new_name = get_new_name(old_name)
-            file_info = FileInfo(num, old_name, new_name)
+            file_info = FileInfo(index, old_name, new_name)
             file_infos.append(file_info)
             print_file_info(file_info)
+            cnt+=1
 
 def input_nums():
-    str = input('选择需要重命名的项。。。\n')
+    str = input('选择需要重命名的项。。。\n\n')
     if str.find('.') == -1:
         nums = []
         for num in str[:]:
@@ -71,7 +72,7 @@ if __name__ == '__main__':
             os.rename(file_info.old_name, file_info.new_name)
     else:
         for file_info in file_infos:
-            if file_info.id in nums:
+            if file_info.index in nums:
                 os.rename(file_info.old_name, file_info.new_name)
 
     # old_str="egerg455hert985"
