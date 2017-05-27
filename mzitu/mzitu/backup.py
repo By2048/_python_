@@ -1,12 +1,12 @@
-# Coding=utf-8
-# Author By2048 Time 2017-1-18
-import os
-import urllib
-import urllib.request
-from bs4 import BeautifulSoup
-import multiprocessing
-import re
-import socket
+# # Coding=utf-8
+# # Author By2048 Time 2017-1-18
+# import os
+# import urllib
+# import urllib.request
+# from bs4 import BeautifulSoup
+# import multiprocessing
+# import re
+# import socket
 
 
 start_url = 'http://www.mzitu.com/all'
@@ -23,5 +23,3 @@ def get_all_link(start_url):
             tmp = meizi(change_coding(link.get_text()), link['href'])
             all_meizi_link.append(tmp)
     return all_meizi_link
-
-

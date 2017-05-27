@@ -4,10 +4,13 @@
     <bookmark url="file://$PROJECT_DIR$/tool/rename/dytt.py" line="80" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4685160e-41b4-4d03-afaf-2659978d97ae" name="默认的" comment="电影天堂重命名">
+    <list default="true" id="4685160e-41b4-4d03-afaf-2659978d97ae" name="默认的" comment="电影天堂重命名完善">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mzitu/has_down.txt" afterPath="$PROJECT_DIR$/mzitu/has_down.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tool/rename/dytt.py" afterPath="$PROJECT_DIR$/tool/rename/dytt.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mzitu/mzitu/backup.py" afterPath="$PROJECT_DIR$/mzitu/mzitu/backup.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mzitu/mzitu/color_print.py" afterPath="$PROJECT_DIR$/mzitu/mzitu/color_print.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mzitu/mzitu/mzitu.py" afterPath="$PROJECT_DIR$/mzitu/mzitu/mzitu.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mzitu/setup.py" afterPath="$PROJECT_DIR$/mzitu/setup.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -77,14 +80,93 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="dytt.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="dytt.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tool/rename/dytt.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="159">
-              <caret line="54" column="27" lean-forward="true" selection-start-line="54" selection-start-column="27" selection-end-line="54" selection-end-column="27" />
+            <state relative-caret-position="133">
+              <caret line="60" column="17" lean-forward="true" selection-start-line="60" selection-start-column="17" selection-end-line="60" selection-end-column="17" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="setup.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/mzitu/setup.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="57">
+              <caret line="3" column="35" lean-forward="true" selection-start-line="3" selection-start-column="35" selection-end-line="3" selection-end-column="35" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/mzitu/__init__.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="mzitu.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/mzitu/mzitu/mzitu.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="785">
+              <caret line="95" column="16" lean-forward="true" selection-start-line="95" selection-start-column="16" selection-end-line="95" selection-end-column="16" />
+              <folding>
+                <element signature="e#46#55#0" expanded="true" />
+                <element signature="e#866#983#0" expanded="false" />
+                <element signature="e#1032#2288#0" expanded="false" />
+                <element signature="e#1366#2122#0" expanded="false" />
+                <element signature="e#1397#2122#0" expanded="false" />
+                <element signature="e#2192#2288#0" expanded="false" />
+                <element signature="e#2337#2445#0" expanded="false" />
+                <element signature="e#2492#2518#0" expanded="false" />
+                <element signature="e#2577#2930#0" expanded="false" />
+                <element signature="e#2800#2906#0" expanded="false" />
+                <element signature="e#3008#3632#0" expanded="false" />
+                <element signature="e#3193#3540#0" expanded="false" />
+                <element signature="e#3291#3540#0" expanded="false" />
+                <element signature="e#3336#3365#0" expanded="false" />
+                <element signature="e#3699#4197#0" expanded="false" />
+                <element signature="e#3814#3929#0" expanded="false" />
+                <element signature="e#3967#3995#0" expanded="false" />
+                <element signature="e#4277#4695#0" expanded="false" />
+                <element signature="e#4756#5081#0" expanded="false" />
+                <element signature="e#4991#5078#0" expanded="false" />
+                <element signature="e#5118#5254#0" expanded="false" />
+                <element signature="e#5201#5254#0" expanded="false" />
+                <element signature="e#5322#5611#0" expanded="false" />
+                <element signature="e#5446#5578#0" expanded="false" />
+                <element signature="e#5889#6032#0" expanded="false" />
+                <element signature="e#6073#6410#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="color_print.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/mzitu/mzitu/color_print.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="190">
+              <caret line="10" column="35" lean-forward="true" selection-start-line="10" selection-start-column="35" selection-end-line="10" selection-end-column="35" />
+              <folding>
+                <element signature="e#0#13#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="backup.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/mzitu/mzitu/backup.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="190">
+              <caret line="10" column="0" lean-forward="true" selection-start-line="10" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -171,22 +253,22 @@
         <option value="$PROJECT_DIR$/pixiv/pixiv.py" />
         <option value="$PROJECT_DIR$/mzitu/mzitu/init_sql.py" />
         <option value="$PROJECT_DIR$/all-test/fps.py" />
-        <option value="$PROJECT_DIR$/mzitu/mzitu/backup.py" />
         <option value="$PROJECT_DIR$/mzitu/tests/insert test.py" />
         <option value="$PROJECT_DIR$/mzitu/tests/tqdm.py" />
         <option value="$PROJECT_DIR$/pixiv/requirements.txt" />
         <option value="$PROJECT_DIR$/mzitu/tests/tree.py" />
         <option value="$PROJECT_DIR$/mzitu/tests/print.py" />
-        <option value="$PROJECT_DIR$/mzitu/mzitu/color_print.py" />
         <option value="$PROJECT_DIR$/mzitu/mzitu/has_down.txt" />
         <option value="$PROJECT_DIR$/mzitu/requirements.txt" />
-        <option value="$PROJECT_DIR$/mzitu/setup.py" />
         <option value="$PROJECT_DIR$/all-test/test.py" />
         <option value="$PROJECT_DIR$/mzitu/mzitu/insert_sql.py" />
         <option value="$PROJECT_DIR$/tool/alt+f4.py" />
         <option value="$PROJECT_DIR$/mzitu/has_down.txt" />
-        <option value="$PROJECT_DIR$/mzitu/mzitu/mzitu.py" />
         <option value="$PROJECT_DIR$/tool/rename/dytt.py" />
+        <option value="$PROJECT_DIR$/mzitu/setup.py" />
+        <option value="$PROJECT_DIR$/mzitu/mzitu/color_print.py" />
+        <option value="$PROJECT_DIR$/mzitu/mzitu/backup.py" />
+        <option value="$PROJECT_DIR$/mzitu/mzitu/mzitu.py" />
       </list>
     </option>
   </component>
@@ -197,10 +279,10 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="2117" />
-    <option name="y" value="49" />
-    <option name="width" value="1211" />
-    <option name="height" value="1030" />
+    <option name="x" value="2205" />
+    <option name="y" value="62" />
+    <option name="width" value="1393" />
+    <option name="height" value="982" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -909,7 +991,14 @@
       <option name="project" value="LOCAL" />
       <updated>1495460690789</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="电影天堂重命名完善">
+      <created>1495606896359</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1495606896359</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -930,12 +1019,13 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="2117" y="49" width="1211" height="1030" extended-state="0" />
+    <frame x="2205" y="62" width="1393" height="982" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16317992" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16267247" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3281412" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="调试" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3281412" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="查找" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295063" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28308025" sideWeight="0.5143505" order="14" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3281412" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
@@ -951,7 +1041,6 @@
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="查找" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297062" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32941177" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -990,7 +1079,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="u disk" />
     <MESSAGE value="udisk-copy" />
     <MESSAGE value="rename" />
     <MESSAGE value="del" />
@@ -1015,7 +1103,8 @@
     <MESSAGE value="-" />
     <MESSAGE value="add folderName" />
     <MESSAGE value="电影天堂重命名" />
-    <option name="LAST_COMMIT_MESSAGE" value="电影天堂重命名" />
+    <MESSAGE value="电影天堂重命名完善" />
+    <option name="LAST_COMMIT_MESSAGE" value="电影天堂重命名完善" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1026,25 +1115,23 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/mzitu/mzitu/mzitu.py</url>
-          <line>39</line>
+          <line>45</line>
           <option name="timeStamp" value="27" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/mzitu/mzitu/mzitu.py</url>
+          <line>41</line>
+          <option name="timeStamp" value="28" />
         </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="28" />
+      <option name="time" value="29" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/jw/test3.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="12" column="18" lean-forward="false" selection-start-line="12" selection-start-column="18" selection-end-line="12" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/jw/test.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="25">
@@ -1263,20 +1350,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mzitu/mzitu/color_print.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="826">
-          <caret line="194" column="31" lean-forward="true" selection-start-line="194" selection-start-column="31" selection-end-line="194" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mzitu/mzitu/backup.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="27" column="0" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/mzitu/mzitu/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1295,13 +1368,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="65702">
           <caret line="3458" column="0" lean-forward="false" selection-start-line="3458" selection-start-column="0" selection-end-line="3458" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mzitu/setup.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="7" column="0" lean-forward="true" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -1340,45 +1406,81 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mzitu/mzitu/mzitu.py">
+    <entry file="file://$PROJECT_DIR$/tool/rename/dytt.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="229" column="20" lean-forward="false" selection-start-line="229" selection-start-column="20" selection-end-line="229" selection-end-column="20" />
+        <state relative-caret-position="133">
+          <caret line="60" column="17" lean-forward="true" selection-start-line="60" selection-start-column="17" selection-end-line="60" selection-end-column="17" />
           <folding>
-            <element signature="e#924#2180#0" expanded="false" />
-            <element signature="e#1258#2014#0" expanded="false" />
-            <element signature="e#1289#2014#0" expanded="false" />
-            <element signature="e#2084#2180#0" expanded="false" />
-            <element signature="e#2229#2337#0" expanded="false" />
-            <element signature="e#2384#2410#0" expanded="false" />
-            <element signature="e#2469#2822#0" expanded="false" />
-            <element signature="e#2692#2798#0" expanded="false" />
-            <element signature="e#2900#3524#0" expanded="false" />
-            <element signature="e#3085#3432#0" expanded="false" />
-            <element signature="e#3183#3432#0" expanded="false" />
-            <element signature="e#3228#3257#0" expanded="false" />
-            <element signature="e#3591#4089#0" expanded="false" />
-            <element signature="e#3706#3821#0" expanded="false" />
-            <element signature="e#3859#3887#0" expanded="false" />
-            <element signature="e#4169#4587#0" expanded="false" />
-            <element signature="e#4648#4973#0" expanded="false" />
-            <element signature="e#4883#4970#0" expanded="false" />
-            <element signature="e#5010#5146#0" expanded="false" />
-            <element signature="e#5093#5146#0" expanded="false" />
-            <element signature="e#5214#5503#0" expanded="false" />
-            <element signature="e#5338#5470#0" expanded="false" />
-            <element signature="e#5781#5924#0" expanded="false" />
-            <element signature="e#5965#6302#0" expanded="false" />
+            <element signature="e#0#9#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tool/rename/dytt.py">
+    <entry file="file://$PROJECT_DIR$/mzitu/setup.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="159">
-          <caret line="54" column="27" lean-forward="true" selection-start-line="54" selection-start-column="27" selection-end-line="54" selection-end-column="27" />
+        <state relative-caret-position="57">
+          <caret line="3" column="35" lean-forward="true" selection-start-line="3" selection-start-column="35" selection-end-line="3" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mzitu/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mzitu/mzitu/color_print.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="10" column="35" lean-forward="true" selection-start-line="10" selection-start-column="35" selection-end-line="10" selection-end-column="35" />
           <folding>
-            <element signature="e#0#9#0" expanded="true" />
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mzitu/mzitu/backup.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="10" column="0" lean-forward="true" selection-start-line="10" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mzitu/mzitu/mzitu.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="785">
+          <caret line="95" column="16" lean-forward="true" selection-start-line="95" selection-start-column="16" selection-end-line="95" selection-end-column="16" />
+          <folding>
+            <element signature="e#46#55#0" expanded="true" />
+            <element signature="e#866#983#0" expanded="false" />
+            <element signature="e#1032#2288#0" expanded="false" />
+            <element signature="e#1366#2122#0" expanded="false" />
+            <element signature="e#1397#2122#0" expanded="false" />
+            <element signature="e#2192#2288#0" expanded="false" />
+            <element signature="e#2337#2445#0" expanded="false" />
+            <element signature="e#2492#2518#0" expanded="false" />
+            <element signature="e#2577#2930#0" expanded="false" />
+            <element signature="e#2800#2906#0" expanded="false" />
+            <element signature="e#3008#3632#0" expanded="false" />
+            <element signature="e#3193#3540#0" expanded="false" />
+            <element signature="e#3291#3540#0" expanded="false" />
+            <element signature="e#3336#3365#0" expanded="false" />
+            <element signature="e#3699#4197#0" expanded="false" />
+            <element signature="e#3814#3929#0" expanded="false" />
+            <element signature="e#3967#3995#0" expanded="false" />
+            <element signature="e#4277#4695#0" expanded="false" />
+            <element signature="e#4756#5081#0" expanded="false" />
+            <element signature="e#4991#5078#0" expanded="false" />
+            <element signature="e#5118#5254#0" expanded="false" />
+            <element signature="e#5201#5254#0" expanded="false" />
+            <element signature="e#5322#5611#0" expanded="false" />
+            <element signature="e#5446#5578#0" expanded="false" />
+            <element signature="e#5889#6032#0" expanded="false" />
+            <element signature="e#6073#6410#0" expanded="false" />
           </folding>
         </state>
       </provider>

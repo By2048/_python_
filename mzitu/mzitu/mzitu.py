@@ -9,15 +9,20 @@ import re
 import socket
 import time
 
-try:
-    from color_print import *
-except ImportError:
-    from .color_print import *
+from .color_print import *
+from .insert_sql import *
 
-try:
-    from .insert_sql import *
-except:
-    from insert_sql import *
+# try:
+#     from color_print import *
+# except ImportError:
+#     from .color_print import *
+#
+# try:
+#     from .insert_sql import *
+# except:
+#     from insert_sql import *
+
+
 
 
 import sys
@@ -30,9 +35,10 @@ mzitu_path = "F:\\Image\\mzitu\\"
 has_down_txt = "has_down.txt"
 user_agent = 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36'
 headers = {'User-Agent': user_agent}
+start_url = 'http://www.mzitu.com/all'
 
 
-# 连接类 连接名字 连接地址
+# 连接名字 连接地址
 class meizi:
     title = ""
     link = ""
@@ -211,8 +217,23 @@ def get_max_page_num():
     return int(max_num)
 
 
+# 获取主页下所有的meizi连接
+def get_all_link(start_url):
+    all_meizi_link = []
+    html = urllib.request.Request(start_url, headers=headers)
+    request = urllib.request.urlopen(html)
+    soup = BeautifulSoup(request, "html.parser")
+    all_ul = soup.find_all('ul', class_='archives')
+    for ul in all_ul:
+        links = ul.find_all('a')
+        for link in links:
+            tmp = meizi(change_coding(link.get_text()), link['href'])
+            all_meizi_link.append(tmp)
+    return all_meizi_link
+
+
 # 获取开始页面每页的图片的详细连接
-def get_meizi_link_in_page(page_num):
+def get_meizi_link_in_one_page(page_num):
     page_link = 'http://www.mzitu.com/page/' + str(page_num)
     html = urllib.request.Request(page_link, headers=headers)
     request = urllib.request.urlopen(html)
@@ -230,20 +251,21 @@ def start_mzitu():
     print('\nStart')
     has_down_list = get_has_down()
     # max_page_num=get_max_page_num()
-    max_page_num = 5
-    for page_num in range(max_page_num):
-        meizi_links = get_meizi_link_in_page(page_num + 1)
-        for meizi in meizi_links:
-            if meizi.link not in has_down_list:
-                printGreen('\n'+'meizi_index_link  :  ' + meizi.link + '\n')
-                printGreen('meizi_index_title :  ' + meizi.title + '\n')
-                max_image_num = get_max_image_num(meizi.link)
-                down_link_list = get_down_link_list_by_str(meizi.link, max_image_num)
-                printGreen('image_start_link  :  ' + down_link_list[0] + '\n')
-                printGreen('image_max_num     :  ' + str(max_image_num) + '\n')
-                down_group_img(down_link_list, meizi.title)
-                keep_has_down(meizi)
-                insert_sql(mzitu_path + meizi.title)
+    # max_page_num = 5
+    # for page_num in range(max_page_num):
+    #     meizi_links = get_meizi_link_in_one_page(page_num + 1)
+    meizi_links=get_all_link(start_url)
+    for meizi in meizi_links:
+        if meizi.link not in has_down_list:
+            printGreen('\n'+'meizi_index_link  :  ' + meizi.link + '\n')
+            printGreen('meizi_index_title :  ' + meizi.title + '\n')
+            max_image_num = get_max_image_num(meizi.link)
+            down_link_list = get_down_link_list_by_str(meizi.link, max_image_num)
+            printGreen('image_start_link  :  ' + down_link_list[0] + '\n')
+            printGreen('image_max_num     :  ' + str(max_image_num) + '\n')
+            down_group_img(down_link_list, meizi.title)
+            keep_has_down(meizi)
+            insert_sql(mzitu_path + meizi.title)
     print('End')
 
 if __name__ == '__main__':

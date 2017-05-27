@@ -1,4 +1,5 @@
-import ctypes, sys
+import ctypes
+import sys
 
 STD_INPUT_HANDLE = -10
 STD_OUTPUT_HANDLE = -11
