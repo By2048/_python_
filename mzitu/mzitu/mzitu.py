@@ -7,32 +7,27 @@ from bs4 import BeautifulSoup
 import multiprocessing
 import re
 import socket
+import sys
 import time
 
-from .color_print import *
-from .insert_sql import *
+try:
+    from color_print import *
+except ImportError:
+    from .color_print import *
 
-# try:
-#     from color_print import *
-# except ImportError:
-#     from .color_print import *
-#
-# try:
-#     from .insert_sql import *
-# except:
-#     from insert_sql import *
+try:
+    from .insert_sql import *
+except:
+    from insert_sql import *
 
-
-
-
-import sys
 
 # 基本环境设置 超时等待时间 下载路径 进程池数量 已经下载的文件路径 浏览器标识
 wait_time = 10
 socket.setdefaulttimeout(wait_time)
 pool_num = multiprocessing.cpu_count() * 3
 mzitu_path = "F:\\Image\\mzitu\\"
-has_down_txt = "has_down.txt"
+# has_down_path = "has_down.txt"
+has_down_path = "has_down.txt"
 user_agent = 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36'
 headers = {'User-Agent': user_agent}
 start_url = 'http://www.mzitu.com/all'
@@ -40,12 +35,22 @@ start_url = 'http://www.mzitu.com/all'
 
 # 连接名字 连接地址
 class meizi:
+    year = ""
+    month = ""
+    day = ""
     title = ""
     link = ""
 
     def __init__(self, title, link):
         self.title = title
         self.link = link
+
+    # def __init__(self, year, month, day, title, link):
+    #     self.year = year
+    #     self.month = month
+    #     self.day = day
+    #     self.title = title
+    #     self.link = link
 
 
 # 编码转换 去除非 汉字 英文字符
@@ -180,19 +185,12 @@ def download(link, path):
 
 
 # 下载一组图片 一个连接下所有图片
-def down_group_img(img_down_list, title):
-    create_keep_path(title)
-    pool = multiprocessing.Pool(processes=pool_num)
-    for img_down_link in img_down_list:
-        down_path = mzitu_path + title + '\\' + get_image_name(img_down_link)
-        pool.apply_async(download, (img_down_link, down_path))
-    pool.close()
-    pool.join()
+
 
 
 # 获取已经下载的连接  has_down.txt -> has_down_list
 def get_has_down():
-    file = open(has_down_txt, 'r')
+    file = open(has_down_path, 'r')
     # has_down = [line.strip() for line in file]
     has_down = [line.split('<|>')[0].strip() for line in file]
     return has_down
@@ -254,10 +252,10 @@ def start_mzitu():
     # max_page_num = 5
     # for page_num in range(max_page_num):
     #     meizi_links = get_meizi_link_in_one_page(page_num + 1)
-    meizi_links=get_all_link(start_url)
+    meizi_links = get_all_link(start_url)
     for meizi in meizi_links:
         if meizi.link not in has_down_list:
-            printGreen('\n'+'meizi_index_link  :  ' + meizi.link + '\n')
+            printGreen('\n' + 'meizi_index_link  :  ' + meizi.link + '\n')
             printGreen('meizi_index_title :  ' + meizi.title + '\n')
             max_image_num = get_max_image_num(meizi.link)
             down_link_list = get_down_link_list_by_str(meizi.link, max_image_num)
@@ -268,5 +266,6 @@ def start_mzitu():
             insert_sql(mzitu_path + meizi.title)
     print('End')
 
+
 if __name__ == '__main__':
-    pass
+    start_mzitu()

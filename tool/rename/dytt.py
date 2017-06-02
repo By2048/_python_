@@ -52,13 +52,14 @@ def insert_file_info():
 
 def input_nums():
     str = input('选择需要重命名的项。。。\n\n')
-    if str.find('.') == -1:
-        nums = []
-        for num in str[:]:
-            nums.append(num)
-        return nums
-    else:
+    if str=='0':
+        return '0'
+    if str=='.':
         return 'all'
+    nums = []
+    for num in str[:]:
+        nums.append(num)
+    return nums
 
 
 if __name__ == '__main__':
@@ -70,6 +71,8 @@ if __name__ == '__main__':
     if nums == 'all':
         for file_info in file_infos:
             os.rename(file_info.old_name, file_info.new_name)
+    elif nums=='0':
+        exit()
     else:
         for file_info in file_infos:
             if file_info.index in nums:

@@ -14,3 +14,14 @@ print(help(os.path))
 
 
 print('---|-')
+
+
+
+
+str = input('选择需要重命名的项。。。\n\n')
+if str=='0':
+    print('0')
+if str=='.':
+    print('all')
+nums = str[:]
+print(type(nums))
