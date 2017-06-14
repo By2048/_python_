@@ -185,7 +185,14 @@ def download(link, path):
 
 
 # 下载一组图片 一个连接下所有图片
-
+def down_group_img(img_down_list, title):
+    create_keep_path(title)
+    pool = multiprocessing.Pool(processes=pool_num)
+    for img_down_link in img_down_list:
+        down_path = mzitu_path + title + '\\' + get_image_name(img_down_link)
+        pool.apply_async(download, (img_down_link, down_path))
+    pool.close()
+    pool.join()
 
 
 # 获取已经下载的连接  has_down.txt -> has_down_list
@@ -262,8 +269,8 @@ def start_mzitu():
             printGreen('image_start_link  :  ' + down_link_list[0] + '\n')
             printGreen('image_max_num     :  ' + str(max_image_num) + '\n')
             down_group_img(down_link_list, meizi.title)
-            keep_has_down(meizi)
             insert_sql(mzitu_path + meizi.title)
+            keep_has_down(meizi)
     print('End')
 
 
