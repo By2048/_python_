@@ -21,6 +21,8 @@ def clean_image_site():
     con_text.commit()
     sql_cursor.execute("delete from Folders")
     con_text.commit()
+    sql_cursor.execute("delete from Favorites")
+    con_text.commit()
 
 
 # 文件夹信息

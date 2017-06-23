@@ -1,5 +1,9 @@
+# 重命名电影天堂下载后的文件名
+
 import os
 import re
+
+
 
 
 class FileInfo:
@@ -11,7 +15,7 @@ class FileInfo:
         self.old_name = old_name
         self.new_name = new_name
 
-
+start_path='f:\\'
 file_infos = []
 
 
@@ -35,7 +39,6 @@ def print_file_info(file_info):
     print('new_name   ' + file_info.new_name)
     print('\n')
 
-start_path='f:\\'
 
 def insert_file_info():
     cnt = 1
@@ -51,7 +54,7 @@ def insert_file_info():
             cnt+=1
 
 def input_nums():
-    str = input('选择需要重命名的项。。。\n\n')
+    str = input('选择需要重命名的项（直接输入数字，[.]重命名所有）\n\n')
     if str=='0':
         return '0'
     if str=='.':
