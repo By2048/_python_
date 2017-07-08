@@ -2,10 +2,16 @@ from pymouse import PyMouse
 from pymouse import PyMouseEvent
 from pykeyboard import PyKeyboard
 from pykeyboard import PyKeyboardEvent
+
 import time
+1
+import win32api
+import win32con
+
 
 mouse=PyMouse()
 key=PyKeyboard()
+
 x_dim,y_dim=mouse.screen_size()
 
 if __name__=='__main__':
@@ -15,6 +21,8 @@ if __name__=='__main__':
         key.tap_key(chr(49 + num))
         mouse.press(2880, 551, 1)
         time.sleep(300)
+
+
 
     # key.tap_key('e')
     # time.sleep(1)
