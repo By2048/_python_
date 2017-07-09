@@ -1,4 +1,4 @@
-import io
+# Java编程思想中 对源码进行一些美化
 import re
 import os
 
@@ -12,6 +12,7 @@ str_2_1='''// i'''
 str_3='''} /*'''
 str_3_1='} \n\n/*'
 
+start_path="E:\Desktop\TIJ4-code\src\main\java"
 
 matchObj = re.compile('\t \*',re.S)
 
@@ -33,7 +34,6 @@ def replace_file(old_path,new_path):
                 continue
             file.write(line)
 
-start_path="E:\Desktop\TIJ4-code\src\main\java"
 
 def start_replace():
     for root, dirs, files in os.walk(start_path):
