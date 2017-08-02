@@ -1,4 +1,14 @@
 import os
+import functools
+
+class MDLine:
+    Level=0
+    Folder=''
+    SplitPaths=[]
+    def __init__(self,level,folder,splitPaths):
+        self.Level=level
+        self.Folder=folder
+        self.SplitPaths=splitPaths
 
 def my_join(lists):
     path=''
@@ -25,32 +35,62 @@ def is_equal(list):
     else:
         return False
 
+md_lines=[]
 lines=[]
+
 def get_summary(rootDir, level=1):
     # if level == 1:
     #     print(rootDir)
-    for list in os.listdir(rootDir):
-        if list.endswith('.json') or list in ['images','SUMMARY.md','.git']:
+    for folder in os.listdir(rootDir):
+        if folder.endswith('.json') or folder in ['images','SUMMARY.md','.git']:
             continue
-        path = os.path.join(rootDir, list)
+        path = os.path.join(rootDir, folder)
         if os.path.isdir(path)==True:
-            split_path =(path+'\\'+list+'.md').split('\\')[-level-1:]
+            split_path =(path+'\\'+folder+'.md').split('\\')[-level-1:]
         else:
-            split_path = (rootDir + '\\' + list).split('\\')[-level:]
+            split_path = (rootDir + '\\' + folder).split('\\')[-level:]
 
-        line=''
-        line+=' '* (level - 1)*4+'* '+'['+list+']'+'('+my_join(split_path)+')'
-        line=line.replace('\\','/')
-        lines.append(line)
+        # print(split_path)
+
+        md_line=MDLine(level,folder,split_path)
+        md_lines.append(md_line)
+
+        # line=''
+        # line+=' '* (level - 1)*4+'* '+'['+folder+']'+'('+my_join(split_path)+')'
+        # line=line.replace('\\','/')
+        # lines.append(line)
 
         if is_equal(split_path)==True:
             if os.path.isfile(path)==True:
-                lines.pop()
+                # lines.pop()
+                md_lines.pop()
 
         if os.path.isdir(path):
             get_summary(path, level + 1)
 
     return lines
+
+def my_cmp_md(item1,item2):
+    cnt1=len(item1.SplitPaths)
+    cnt2=len(item2.SplitPaths)
+    if cnt2==1:
+        return -1
+    else:
+        return 0
+
+
+def get_lines_by_md_line():
+    md_lines.sort(key=functools.cmp_to_key(mycmp=my_cmp_md))
+    for md_line in md_lines:
+        print(md_line.SplitPaths)
+        line=''
+        line+=' '* (md_line.Level - 1)*4+'* '+'['+md_line.Folder+']'+'('+my_join(md_line.SplitPaths)+')'
+        line=line.replace('\\','/')
+        lines.append(line)
+
+
+
+
 
 def keep_summary(start_path):
     summary_path = start_path + '\\' + 'SUMMARY.md'
@@ -68,8 +108,9 @@ def clean():
 
 
 if __name__=='__main__':
-    start_path = r'F:\- Test\c-sharp'
+    start_path = r'F:\- Test\android'
     get_summary(start_path)
+    get_lines_by_md_line()
     keep_summary(start_path)
     pass
 
