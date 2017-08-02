@@ -4,7 +4,6 @@ from pykeyboard import PyKeyboard
 from pykeyboard import PyKeyboardEvent
 
 import time
-1
 import win32api
 import win32con
 
