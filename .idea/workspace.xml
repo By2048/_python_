@@ -7,10 +7,7 @@
     <bookmark url="file://$PROJECT_DIR$/mzt-mmjpg/main.py" line="274" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4685160e-41b4-4d03-afaf-2659978d97ae" name="默认的" comment="readme">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
-    </list>
+    <list default="true" id="4685160e-41b4-4d03-afaf-2659978d97ae" name="默认的" comment="readme" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -197,8 +194,8 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1993" />
-    <option name="y" value="58" />
+    <option name="x" value="1977" />
+    <option name="y" value="11" />
     <option name="width" value="1426" />
     <option name="height" value="1057" />
   </component>
@@ -1014,7 +1011,14 @@
       <option name="project" value="LOCAL" />
       <updated>1501744929806</updated>
     </task>
-    <option name="localTasksCounter" value="49" />
+    <task id="LOCAL-00049" summary="readme">
+      <created>1501745196635</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1501745196635</updated>
+    </task>
+    <option name="localTasksCounter" value="50" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1059,10 +1063,9 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1993" y="58" width="1426" height="1057" extended-state="0" />
-    <editor active="true" />
+    <frame x="1977" y="11" width="1426" height="1057" extended-state="0" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20354609" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20354609" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3281412" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28308025" sideWeight="0.5143505" order="14" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32980973" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
@@ -1119,7 +1122,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="douban book" />
     <MESSAGE value="rename-test" />
     <MESSAGE value="add bing temp.image" />
     <MESSAGE value="bing image change" />
@@ -1144,7 +1146,8 @@
     <MESSAGE value="日常备份" />
     <MESSAGE value="。" />
     <MESSAGE value="v1.0 over" />
-    <option name="LAST_COMMIT_MESSAGE" value="v1.0 over" />
+    <MESSAGE value="readme" />
+    <option name="LAST_COMMIT_MESSAGE" value="readme" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
