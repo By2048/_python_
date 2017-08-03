@@ -30,8 +30,8 @@ def create_md(rootPath):
             else:
                 _path=os.path.join(root,dir)+'\\'+dir+'.md'
                 print('create .md    '+_path)
-                # with open(_path,'w') as file:
-                #     file.close()
+                with open(_path,'w') as file:
+                    file.close()
 
 
 if __name__ == '__main__':
