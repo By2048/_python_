@@ -42,7 +42,7 @@ def get_summary(rootDir, level=1):
     # if level == 1:
     #     print(rootDir)
     for folder in os.listdir(rootDir):
-        if folder.endswith('.json') or folder in ['images','SUMMARY.md','.git']:
+        if folder.endswith('.json') or folder in ['images','SUMMARY.md','.git','.cmd']:
             continue
         path = os.path.join(rootDir, folder)
         if os.path.isdir(path)==True:
@@ -82,18 +82,16 @@ def my_cmp_md(item1,item2):
 def get_lines_by_md_line():
     md_lines.sort(key=functools.cmp_to_key(mycmp=my_cmp_md))
     for md_line in md_lines:
-        print(md_line.SplitPaths)
+        # print(md_line.SplitPaths)
         line=''
         line+=' '* (md_line.Level - 1)*4+'* '+'['+md_line.Folder+']'+'('+my_join(md_line.SplitPaths)+')'
         line=line.replace('\\','/')
         lines.append(line)
 
 
-
-
-
 def keep_summary(start_path):
     summary_path = start_path + '\\' + 'SUMMARY.md'
+    print('create summary.md    '+summary_path)
     with open(summary_path, 'w+', encoding='utf-8') as file:
         for line in lines:
             file.write(line)
@@ -102,12 +100,18 @@ def keep_summary(start_path):
     clean()
 
 def clean():
+    md_lines.clear()
     lines.clear()
 
 
 
+def create_summary(path):
+    get_summary(path)
+    get_lines_by_md_line()
+    keep_summary(path)
 
 if __name__=='__main__':
+    # Test...
     start_path = r'F:\- Test\android'
     get_summary(start_path)
     get_lines_by_md_line()
