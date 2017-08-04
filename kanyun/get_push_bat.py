@@ -44,7 +44,7 @@ def create_cmd_file(note_name):
         file.write('git add *' + '\n')
         file.write('git remote add origin https://git.kancloud.cn/am-note/'+note_name.lower()+'.git' + '\n')
         file.write('git commit -m "commit"' + '\n')
-        file.write('git push -f origin master' + '\n')
+        file.write('git push -u origin master' + '\n')
     file.close()
 
 

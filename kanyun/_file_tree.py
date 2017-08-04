@@ -31,15 +31,6 @@ def get_all_md_path(rootPath):
     return all_path
 
 
-def my_cmp(str1,str2):
-    cnt1=str1.count('\\')
-    cnt2=str2.count('\\')
-    if cnt1>cnt2:
-        return -1
-    elif cnt1<cnt2:
-        return 1
-    else:
-        return 0
 
 
 json_data={}
@@ -56,9 +47,6 @@ def get_summary_by_md_path(paths):
     return
 
 
-
-paths=get_all_md_path(start_path)
-paths.sort(key=functools.cmp_to_key(mycmp=my_cmp))
 
 
 # for path in paths:
