@@ -25,7 +25,7 @@ pool_num = multiprocessing.cpu_count() * 3
 
 keep_path = "F:\\Image\\mzt-mmjpg\\"
 
-os.chdir('mzt-mmjpg') 
+# os.chdir('mzt-mmjpg')
 has_down_path = os.path.abspath('has_down.txt')
 
 user_agent = 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36'
