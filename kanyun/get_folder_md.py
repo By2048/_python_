@@ -13,7 +13,7 @@ def create_md(rootPath):
     for root, dirs, files in os.walk(rootPath):
         for dir in dirs:
 
-            if dir in ['images','.git','.cmd']:
+            if dir[0] in ['_','.']:
                 continue
 
             file_path=os.path.join(root,dir)

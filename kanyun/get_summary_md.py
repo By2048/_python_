@@ -42,7 +42,7 @@ def get_summary(rootDir, level=1):
     # if level == 1:
     #     print(rootDir)
     for folder in os.listdir(rootDir):
-        if folder.endswith('.json') or folder in ['images','SUMMARY.md','.git','.cmd']:
+        if folder.endswith('.json') or folder[0] in ['_','.'] or folder=='SUMMARY.md':
             continue
         path = os.path.join(rootDir, folder)
         if os.path.isdir(path)==True:
