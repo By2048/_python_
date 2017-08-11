@@ -15,7 +15,7 @@ def get_all_video_path(rootDir):
     return all_video_path
 
 
-def get_json_path(video_path):
+def get_video_json_path(video_path):
     path_list = video_path.split('\\')[:-2]
     json_path = video_join(path_list) + 'entry.json'
     return json_path
@@ -72,7 +72,7 @@ def change_name(old_name):
 if __name__ == '__main__':
     all_video_path = get_all_video_path(start_path)
     for video_path in all_video_path:
-        json_path = get_json_path(video_path)
+        json_path = get_video_json_path(video_path)
         video_name = get_video_name(os.path.basename(video_path), json_path)
         video_new_path = os.path.dirname(video_path) + '\\' + video_name
         os.rename(video_path, video_new_path)
