@@ -1,12 +1,11 @@
 import os
 import json
-import sys
 import shutil
 
 
-start_path = 'F:\\_Test\\bilibili'
+start_path = 'F:\\bilibili'
 
-end_path='F:\\_Test\\bilibili_over'
+end_path='F:\\Video\\BillBill'
 
 # 将后缀名 .blv 替换成 .flv
 def replace_blv_to_flv():
@@ -77,7 +76,13 @@ def get_video_name(original_name, json_path):
 
 
 def change_name(old_name):
-    new_name = old_name.replace('?', '').replace('？', '').replace('【', '[').replace('】', ']')
+    new_name = old_name\
+        .replace('?', '')\
+        .replace('？', '')\
+        .replace('【', '[')\
+        .replace('】', ']')\
+        .replace('| ','')\
+        .replace('*','')
     return new_name
 
 
@@ -92,21 +97,44 @@ def move_video():
         shutil.move(path,new_path)
 
 
+def hava_next_file(curr_path):
+    folder_path,base_name= os.path.split(curr_path)
+    next_name=''
+    if base_name.endswith('.mp4'):
+        next_name=base_name.replace('0.mp4','1.mp4')
+    elif base_name.endswith('.flv'):
+        next_name=base_name.replace('0.flv','1.flv')
+    next_path=folder_path+'\\'+next_name
+
+    return os.path.isfile(next_path)
+
+
+def replace_0():
+    for root, dirs, files in os.walk(end_path):
+        for file in files:
+            old_name = os.path.join(root, file)
+            if file.endswith(' 0.flv') and hava_next_file(old_name)==False:
+                new_name=old_name.replace(' 0.flv','.flv')
+                print(old_name+'\n'+new_name+'\n')
+                os.rename(old_name,new_name)
+
+            if file.endswith(' 0.mp4') and hava_next_file(old_name)==False:
+                new_name=old_name.replace(' 0.mp4','.mp4')
+                print(old_name+'\n'+new_name+'\n')
+                os.rename(old_name,new_name)
+
+
+
 if __name__ == '__main__':
     # replace_blv_to_flv()
     # all_video_path = get_all_video_path()
     #
-    # for path in all_video_path:
-    #     file_name=os.path.basename(path)
-    #     print(end_path+'\\'+file_name)
-
     # for video_path in all_video_path:
     #     json_path = get_video_json_path(video_path)
     #     video_name = get_video_name(os.path.basename(video_path), json_path)
     #     video_new_path = os.path.dirname(video_path) + '\\' + video_name
     #     os.rename(video_path, video_new_path)
+    #
+    # move_video()
 
-    # p1='F:\\_Test\\test\\1.txt'
-    # p2='F:\\1.txt'
-    # shutil.move(p1,p2)
-    move_video()
+    replace_0()
