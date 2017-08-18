@@ -126,15 +126,14 @@ def replace_0():
 
 
 if __name__ == '__main__':
-    # replace_blv_to_flv()
-    # all_video_path = get_all_video_path()
-    #
-    # for video_path in all_video_path:
-    #     json_path = get_video_json_path(video_path)
-    #     video_name = get_video_name(os.path.basename(video_path), json_path)
-    #     video_new_path = os.path.dirname(video_path) + '\\' + video_name
-    #     os.rename(video_path, video_new_path)
-    #
-    # move_video()
+    replace_blv_to_flv()
+    all_video_path = get_all_video_path()
 
+    for video_path in all_video_path:
+        json_path = get_video_json_path(video_path)
+        video_name = get_video_name(os.path.basename(video_path), json_path)
+        video_new_path = os.path.dirname(video_path) + '\\' + video_name
+        os.rename(video_path, video_new_path)
+
+    move_video()
     replace_0()

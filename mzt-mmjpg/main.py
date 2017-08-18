@@ -10,7 +10,7 @@ import socket
 import time
 import sys
 import requests
-
+import sqlite3
 
 try:
     from color_print import *
@@ -28,22 +28,40 @@ keep_path = "F:\\Image\\mzt-mmjpg\\"
 # os.chdir('mzt-mmjpg')
 has_down_path = os.path.abspath('has_down.txt')
 
-user_agent = 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36'
+user_agent = 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:54.0) Gecko/20100101 Firefox/54.0'
 headers = {'User-Agent': user_agent}
 start_url = 'http://www.mzitu.com/all'
 
 
 # 连接名字 连接地址
 class meizi:
-    title = ''
     link = ''
-    date = ''
-
-    def __init__(self, title, link):
-        self.title = title
+    title=''
+    tag=''
+    release_time=''
+    browse_num = ''
+    def __init__(self,  link,title,tag,release_time,browse_num):
         self.link = link
-        self.date = ''
+        self.title = title
+        self.tag = tag
+        self.release_time = release_time
+        self.browse_num = browse_num
 
+def init_sql():
+    if os.path.isfile('mzt-mmjpg.db'):
+        pass
+    else:
+        cur.execute('''
+        create table has_down
+        (
+            id              integer primary key autoincrement not null,
+            link            varchar not null,
+            title           nvarchar not null,
+            tag             nvarchar not null,
+            release_time    text not null,
+            browse_num      integer not null
+        );
+        ''')
 
 # # 编码转换 去除非 汉字 英文字符
 # def change_coding(inStr):
@@ -161,24 +179,26 @@ def down_group_img(img_down_list, title):
         pool.apply_async(download, (img_down_link, down_path))
     pool.close()
     pool.join()
+    time.sleep(5)
 
 
-# 获取已经下载的连接  has_down.txt -> has_down_list
-def get_has_down():
-    # file = open(has_down_path, 'r', encoding='utf-8')
-    with open(has_down_path, 'r', encoding='utf-8') as file:
-    # has_down = [line.strip() for line in file]
-        has_down = [line.split('|')[1].strip() for line in file]
-    return has_down
+def get_has_down_by_sql():
+    cur.execute("select * from has_down")
+    cnt=0
+    has_down_link=[]
+    for item in cur.fetchall():
+        # cnt+=1
+        # item=[str(cnt),str(item[0]),item[1],item[2],item[3],item[4],str(item[5])]
+        # print('    '.join(item))
+        has_down_link.append(item[1])
+    return has_down_link
 
 
-# 保存已经下载的链接到
-def keep_has_down(meizi):
-    has_down_txt = open('has_down.txt', 'a', encoding='utf-8')
-    has_down_txt.write(meizi.date + '\t' + '|' + '\t' +
-                       meizi.link + '\t' + '|' + '\t' + meizi.title + '\n')
-    has_down_txt.close()
 
+def keep_has_down_into_sql(info):
+    item = [info.link, info.title, info.tag, info.release_time, info.browse_num]
+    cur.execute("insert into has_down(link,title,tag,release_time,browse_num) values(?,?,?,?,?)", item)
+    conn.commit()
 
 # 获取页数  get 共70页  return 70
 def get_max_page_num():
@@ -192,13 +212,6 @@ def get_max_page_num():
     return max_num[1:-1]
 
 
-def get_date(link):
-    html = urllib.request.Request(link, headers=headers)
-    request = urllib.request.urlopen(html)
-    soup = BeautifulSoup(request, "html.parser")
-    date = soup.find('div', class_='info').find('i').get_text()[5:]
-    return date
-
 
 # 获取开始页面每页的图片的详细连接
 def get_meizi_link_in_one_page(page_num):
@@ -210,26 +223,15 @@ def get_meizi_link_in_one_page(page_num):
     for li in soup.find('div', class_='pic').find('ul').find_all('li'):
         link = li.find('span', class_='title').find('a')
         # tmp = meizi(change_coding(link.get_text()), link['href'])
-        tmp = meizi(link.get_text(), link['href'])
+        tmp = meizi(link['href'],link.get_text(),'','','')
         meizi_links.append(tmp)
     return meizi_links
 
 
-# 获取一个页面的最大图片数量 方便合成连接  40
-def get_max_image_num(link):
-    html = urllib.request.Request(link, headers=headers)
-    request = urllib.request.urlopen(html)
-    soup = BeautifulSoup(request, "html.parser")
-    for a in soup.find('div', class_='page').find_all('a'):
-        if (a.get_text() == '下一张'):
-            max_num = a.previous_sibling.previous_sibling.get_text()
-    return int(max_num)
-
 
 #  获取第一张图片的下载地址 根据地址合成下载连接
-def get_down_link_list_by_str(link, max_num):
+def get_down_link_list_by_str(first_link, max_num):
     down_links = []
-    first_link = get_first_img_down_link(link)
     start_link, image_name = os.path.split(first_link)
     start_str = image_name.split('.')[0][:-2]
     end_num = int(image_name.split('.')[0][-2:])
@@ -245,15 +247,41 @@ def get_first_img_down_link(link):
     html = urllib.request.Request(link, headers=headers)
     request = urllib.request.urlopen(html)
     soup = BeautifulSoup(request, "html.parser")
-    imgs = soup.find('div', class_='content').find('img')
-    return imgs['src']
+    img = soup.find('div', class_='content').find('img')
+    return img['src']
 
+
+def get_other_info(link):
+    html = urllib.request.Request(link, headers=headers)
+    request = urllib.request.urlopen(html)
+    soup = BeautifulSoup(request, "html.parser")
+    infos = soup.find('div', class_='info').find_all('i')
+    title=soup.find('div', class_='article').find('h2').get_text()
+    time=infos[0].get_text()[5:]
+
+    tags=soup.find('div', class_='tags')
+    tag=','.join([item.get_text() for item in tags.find_all('a')])
+
+    num=infos[3].get_text()[2:][1:-1]
+
+    # print(link+'    '+title+'   '+time+'   '+tag+'   '+num)
+    # http://www.mmjpg.com/mm/1051    大胸妹悠悠黑色性感内衣图片无可挑剔   2017年07月20日   美胸,内衣,萌妹   1295841
+
+    for a in soup.find('div', class_='page').find_all('a'):
+        if (a.get_text() == '下一张'):
+            max_num = a.previous_sibling.previous_sibling.get_text()
+
+    first_img_link = soup.find('div', class_='content').find('img')['src']
+
+
+    return first_img_link,int(max_num),meizi(link,title,tag,time,num)
 
 def start():
     print('\nStart')
-    has_down_list = get_has_down()
+
+    has_down_list = get_has_down_by_sql()
     max_page_num = get_max_page_num()
-    max_page_num = 1
+    max_page_num = 5
     for page_num in range(int(max_page_num)):
         meizi_links = get_meizi_link_in_one_page(page_num + 1)
         for meizi in meizi_links:
@@ -261,17 +289,16 @@ def start():
                 printGreen('\n' + 'meizi_index_link  :  ' + meizi.link + '\n')
                 printGreen('meizi_index_title :  ' + meizi.title + '\n')
 
-                max_image_num = get_max_image_num(meizi.link)
-                date = get_date(meizi.link)
-                meizi.date = date
-                down_link_list = get_down_link_list_by_str(
-                    meizi.link, max_image_num)
+                first_img_link,max_image_num,meizi=get_other_info(meizi.link)
+
+                down_link_list = get_down_link_list_by_str(first_img_link, max_image_num)
 
                 printGreen('image_start_link  :  ' + down_link_list[0] + '\n')
                 printGreen('image_max_num     :  ' + str(max_image_num) + '\n')
 
-                down_group_img(down_link_list, meizi.title)
-                keep_has_down(meizi)
+                print('\n'.join(down_link_list))
+                # down_group_img(down_link_list, meizi.title)
+                # keep_has_down_into_sql(meizi)
     print('End')
 
 
@@ -283,13 +310,19 @@ def new_down(link, path):
 
 
 if __name__ == '__main__':
-    start()
+    conn = sqlite3.connect('mzt-mmjpg.db')
+    cur = conn.cursor()
 
+    # a,b,c=get_other_info('http://www.mmjpg.com/mm/1079')
+    # print(a)
+    # print(str(b))
+    # print(c.link)
+    # print(c.title)
+    # print(c.tag)
+    # print(c.browse_num)
+    # print(c.release_time)
 
-    # ul='http://www.mmjpg.com/mm/1047'
-    # print(get_max_image_num(ul))
-    # pp=get_down_link_list_by_str(ul,35)
-    #
-    # for p in pp:
-    #     down_path = keep_path + "-Test" + '\\' + get_image_name(p)
-    #     new_down(p, down_path)
+    # start()
+
+    down_link_list = get_down_link_list_by_str('http://img.mmjpg.com/2017/1080/1.jpg', 41)
+    down_group_img(down_link_list, meizi.title)
