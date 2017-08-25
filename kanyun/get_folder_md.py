@@ -29,7 +29,7 @@ def create_md(rootPath):
                 # print('exit .md')
             else:
                 _path=os.path.join(root,dir)+'\\'+dir+'.md'
-                print('create .md    '+_path)
+                print('create [folder].md    '+_path)
                 with open(_path,'w') as file:
                     file.close()
 

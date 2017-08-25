@@ -129,7 +129,12 @@ def insert_images(img):
 
 # 添加虚拟模拟的历经 IIS    F:\\ > F
 def add_virtical_directory():
-    sql_change = "update Images set Path=REPLACE(Path,'F:\\','F')"
+    sql_change = "update Images set Path=REPLACE(Path,'G:\\','G\\')"
+    sql_cursor = con_text.cursor()
+    sql_cursor.execute(sql_change)
+    con_text.commit()
+
+    sql_change = "update Folders set Path=REPLACE(Path,'G:\\','G\\')"
     sql_cursor = con_text.cursor()
     sql_cursor.execute(sql_change)
     con_text.commit()
@@ -200,7 +205,7 @@ def insert_sql(folder_path):
 # 数据插入数据库 全部
 def init_sql():
     clean_image_site()
-    rootDir = "F:\\Image\\mzitu"
+    rootDir = "G:\\Backup\\mzitu_old"
     for root, dirs, files in os.walk(rootDir):
         if len(files) == 0:
             pass
@@ -220,10 +225,10 @@ def init_sql():
                 sys.stdout.write('\n')
             cnt += 1
         sys.stdout.write('\n')
-    add_virtical_directory()
 
 
 if __name__ == "__main__":
-    init_sql()
+    # init_sql()
+    add_virtical_directory()
     # fpath="F:\\Image\\mzitu\\抚媚熟女的黑丝诱惑 Beautyleg美腿写真 No2068 Vicni"
     # insert_sql(fpath)

@@ -58,6 +58,7 @@ def create_cmd_file(note_name):
 #     print(tmp)
 
 def create_push_bat():
+    print('\n\ncreate .cmd')
     for folder in folders:
         create_cmd_file(folder)
 
