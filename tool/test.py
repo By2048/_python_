@@ -1,15 +1,3 @@
-str='123456weagwae487354gwweaghser234234'
+nums = [[0 for i in range(3)] for j in range(3)]
 
-sentinel = '====' # 遇到这个就结束
-lines = []
-for line in iter(input, sentinel):
-    lines.append(line)
-
-print('\n'.join(lines))
-
-print('\n')
-
-for line in lines:
-    print(line)
-
-print(lines)
+print(nums)
