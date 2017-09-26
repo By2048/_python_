@@ -1,5 +1,10 @@
 import os
 import functools
+try:
+    from get_folder_md import is_Yu_Writer_folder
+except ImportError:
+    from .get_folder_md import is_Yu_Writer_folder
+
 
 class MDLine:
     Level=0
@@ -35,6 +40,15 @@ def is_equal(list):
     else:
         return False
 
+def is_ignore(folder):
+    if folder.endswith('.json') \
+            or folder[0] in ['_', '.'] \
+            or folder == 'SUMMARY.md'\
+            or is_Yu_Writer_folder(folder) == True:
+        return True
+    else:
+        return False
+
 md_lines=[]
 lines=[]
 
@@ -42,7 +56,7 @@ def get_summary(rootDir, level=1):
     # if level == 1:
     #     print(rootDir)
     for folder in os.listdir(rootDir):
-        if folder.endswith('.json') or folder[0] in ['_','.'] or folder=='SUMMARY.md':
+        if is_ignore(folder):
             continue
         path = os.path.join(rootDir, folder)
         if os.path.isdir(path)==True:

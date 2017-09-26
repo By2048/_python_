@@ -1,6 +1,15 @@
 import os
 
 
+def is_Yu_Writer_folder(path):
+    split_paths = path.split('.')
+    if len(split_paths)==1:
+        return False
+    if split_paths[1] =='resource':
+        return True
+    else:
+        return False
+
 def is_git_folder(path):
     split_paths=path.split('\\')
     is_git=False
@@ -17,7 +26,10 @@ def create_md(rootPath):
                 continue
 
             file_path=os.path.join(root,dir)
-            if is_git_folder(file_path):
+            if is_git_folder(file_path)==True:
+                continue
+            # print(is_Yu_Writer_folder(file_path))
+            if is_Yu_Writer_folder(file_path) == True:
                 continue
 
 
@@ -36,7 +48,7 @@ def create_md(rootPath):
 
 if __name__ == '__main__':
     # Test...
-    rootPath = r'F:\- Test\Python'
+    rootPath = r'E:\Desktop\NoteBook\Python'
     create_md(rootPath)
 
     # print(is_git_folder('F:\\- Test\\Python\\.git'))
