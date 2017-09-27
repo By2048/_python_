@@ -1,6 +1,5 @@
 from hanziconv import HanziConv
 
-
 print(HanziConv.toSimplified('繁簡轉換器'))
 # 繁简转换器
 print(HanziConv.toTraditional('繁简转换器'))
@@ -17,7 +16,6 @@ print(HanziConv.toSimplified('mix English and Chinese. 繁簡轉換器'))
 # mix English and Chinese. 繁简转换器
 print(HanziConv.toTraditional('mix English and Chinese. 繁简转换器'))
 # mix English and Chinese. 繁簡轉換器
-
 
 
 print(u'繁簡轉換器' ==  u'繁简转换器')
