@@ -1,5 +1,4 @@
-# Python
-Python 项目汇总
+Python 项目信息
 
 #### all-test
     临时测试目录
