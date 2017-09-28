@@ -25,3 +25,18 @@ if str=='.':
     print('all')
 nums = str[:]
 print(type(nums))
+
+
+from _datetime import datetime
+
+
+
+if __name__ == '__main__':
+    now = datetime.today()
+    print(now.year)
+    print(now.month)
+    print(now.day)
+
+    da="20170317"
+    print(da[0:4]+'-'+da[4:6]+'-'+da[6:8])
+
