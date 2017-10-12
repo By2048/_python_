@@ -3,7 +3,7 @@ import functools
 try:
     from get_folder_md import is_Yu_Writer_folder
 except ImportError:
-    from .get_folder_md import is_Yu_Writer_folder
+    from .get_empty_folder_md import is_Yu_Writer_folder
 
 
 class MDLine:
@@ -41,8 +41,8 @@ def is_equal(list):
         return False
 
 def is_ignore(folder):
-    if folder.endswith('.json') \
-            or folder[0] in ['_', '.'] \
+    if folder.endswith(('.json','.pdf')) \
+            or folder.startswith(('_', '.')) \
             or folder == 'SUMMARY.md'\
             or is_Yu_Writer_folder(folder) == True:
         return True

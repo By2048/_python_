@@ -5,9 +5,9 @@ except ImportError:
     from get_summary_md import *
 
 try:
-    from .get_folder_md import *
+    from .get_empty_folder_md import *
 except ImportError:
-    from get_folder_md import *
+    from get_empty_folder_md import *
 
 try:
     from .get_push_bat import *
