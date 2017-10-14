@@ -40,8 +40,9 @@ def is_equal(list):
     else:
         return False
 
+# 设置忽略的 文件夹 文件 信息
 def is_ignore(folder):
-    if folder.endswith(('.json','.pdf')) \
+    if folder.endswith(('.json','.pdf','.mhtml')) \
             or folder.startswith(('_', '.')) \
             or folder == 'SUMMARY.md'\
             or is_Yu_Writer_folder(folder) == True:
