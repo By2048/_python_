@@ -4,14 +4,12 @@ from openpyxl import Workbook
 wb=load_workbook('e:\\desktop\\test.xlsx')
 # ws = wb.active
 
-# row_len = ws1.rows  # hang
-# col_len = ws1.columns  # lie
 
-# 行列
+# 所有的行列
 sheet_rows=[]
 sheet_cols=[]
 
-sheet_names=wb.get_sheet_names();
+sheet_names=wb.get_sheet_names()
 
 def get_sheet_rows():
     for name in sheet_names:
