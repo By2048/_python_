@@ -1,7 +1,7 @@
 import os
 import functools
 try:
-    from get_folder_md import is_Yu_Writer_folder
+    from get_empty_folder_md import is_Yu_Writer_folder
 except ImportError:
     from .get_empty_folder_md import is_Yu_Writer_folder
 
