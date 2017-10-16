@@ -20,4 +20,11 @@ result = re.findall(".*entry(.*)for.*", string)
 for x in result:
     print(x)
 #
-#     # '某某内容'
+#     # '某某
+    #
+    #
+    # 容'
+
+a=['a','b','c','d']
+print(a)
+print('--'.join(a))

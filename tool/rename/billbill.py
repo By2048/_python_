@@ -1,11 +1,13 @@
 import os
 import json
 import shutil
+from hanziconv import HanziConv
 
+# start_path = 'F:\\bilibili'
+# end_path='F:\\Video\\BillBill'
 
-start_path = 'F:\\bilibili'
-
-end_path='F:\\Video\\BillBill'
+start_path = 'F:\\_tv.danmaku.bili\\download'
+end_path='F:\\_video'
 
 # 将后缀名 .blv 替换成 .flv
 def replace_blv_to_flv():
@@ -28,8 +30,8 @@ def get_all_video_path():
 
 def get_video_json_path(video_path):
     path_list = video_path.split('\\')[:-2]
-    json_path = video_join(path_list) + 'entry.json'
-    return json_path
+    path_list.append('entry.json')
+    return '\\'.join(path_list)
 
 
 def get_folder_num(folder_path):
@@ -49,14 +51,6 @@ def get_video_num(video_path):
     return video_num
 
 
-def video_join(paths):
-    out_path = ''
-    for path in paths:
-        if path != '':
-            out_path = out_path + path + '\\'
-    return out_path
-
-
 def get_video_name(original_name, json_path):
     video_name = ''
     try:
@@ -64,6 +58,7 @@ def get_video_name(original_name, json_path):
             date = json.load(file)
             video_page = date['page_data']['page']
             video_name += date['title']
+            print(video_name)
             video_name = video_name.replace('/', ' ').replace('\\', ' ')
             if video_page != 1:
                 video_name += str(video_page - 1)
@@ -74,6 +69,39 @@ def get_video_name(original_name, json_path):
         pass
     return video_name
 
+#  def get_video_name(original_name, json_path):
+#     video_name = ''
+#     try:
+#         with open(json_path, 'r', encoding='utf-8') as file:
+#             date = json.load(file)
+#             video_page = date['page_data']['page']
+#             video_name += date['title']
+#             print(video_name)
+#             video_name = video_name.replace('/', ' ').replace('\\', ' ')
+#             if video_page != 1:
+#                 video_name += str(video_page - 1)
+#             # print(video_name +" -> + str(date['avid']))
+#             video_name += ' ' + original_name
+#             video_name = change_name(video_name)
+#     except:
+#         pass
+#     return video_name
+
+
+def get_video_name(video_path, json_path):
+    new_name = ''
+    base_name=os.path.basename(video_path)
+    try:
+        with open(json_path, 'r', encoding='utf-8') as file:
+            date = json.load(file)
+            new_name += date['title']
+            new_name = new_name.replace('/', ' ').replace('\\', ' ')
+            new_name = change_name(new_name)
+            new_name=new_name+' '+base_name
+    except:
+        pass
+    return new_name
+
 
 def change_name(old_name):
     new_name = old_name\
@@ -83,18 +111,19 @@ def change_name(old_name):
         .replace('】', ']')\
         .replace('| ','')\
         .replace('*','')
+    new_name=HanziConv.toSimplified(new_name)
+    print(new_name)
     return new_name
 
 
 def move_video():
     all_video_path = get_all_video_path()
-
-    for path in all_video_path:
-        file_name=os.path.basename(path)
-
+    for old_path in all_video_path:
+        file_name=os.path.basename(old_path)
         new_path=end_path+'\\'+file_name
-        print(path+'\n'+new_path+'\n')
-        shutil.move(path,new_path)
+        new_path=os.path.join(end_path,file_name)
+        print('old_path   '+old_path+'\n'+'new_path   '+new_path+'\n')
+        shutil.move(old_path,new_path)
 
 
 def hava_next_file(curr_path):
@@ -105,35 +134,34 @@ def hava_next_file(curr_path):
     elif base_name.endswith('.flv'):
         next_name=base_name.replace('0.flv','1.flv')
     next_path=folder_path+'\\'+next_name
-
     return os.path.isfile(next_path)
 
 
-def replace_0():
+def replace_single_zero():
     for root, dirs, files in os.walk(end_path):
         for file in files:
             old_name = os.path.join(root, file)
             if file.endswith(' 0.flv') and hava_next_file(old_name)==False:
                 new_name=old_name.replace(' 0.flv','.flv')
-                print(old_name+'\n'+new_name+'\n')
+                print('old_name   ' + old_name + '\n' + 'new_name   ' + new_name + '\n')
                 os.rename(old_name,new_name)
-
             if file.endswith(' 0.mp4') and hava_next_file(old_name)==False:
                 new_name=old_name.replace(' 0.mp4','.mp4')
-                print(old_name+'\n'+new_name+'\n')
+                print('old_name   ' + old_name + '\n' + 'new_name   ' + new_name + '\n')
                 os.rename(old_name,new_name)
-
 
 
 if __name__ == '__main__':
     replace_blv_to_flv()
     all_video_path = get_all_video_path()
-
-    for video_path in all_video_path:
-        json_path = get_video_json_path(video_path)
-        video_name = get_video_name(os.path.basename(video_path), json_path)
-        video_new_path = os.path.dirname(video_path) + '\\' + video_name
-        os.rename(video_path, video_new_path)
-
+    for old_path in all_video_path:
+        if len(os.path.basename(old_path).split('.')[0]) != 1:
+            continue
+        json_path = get_video_json_path(old_path)
+        # video_name = get_video_name(os.path.basename(video_path), json_path)
+        new_name = get_video_name(old_path, json_path)
+        dir_name=os.path.dirname(old_path)
+        new_path=os.path.join(dir_name,new_name)
+        os.rename(old_path, new_path)
     move_video()
-    replace_0()
+    replace_single_zero()
