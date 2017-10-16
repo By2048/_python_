@@ -2,10 +2,6 @@ from bs4 import *
 import functools
 import sys
 
-
-
-
-
 def get_lines_num():
     num = len(soup.find('tr').find_all('th'))
     if num==0:

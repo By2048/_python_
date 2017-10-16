@@ -10,7 +10,7 @@ git_paths = []
 def get_all_note_path():
     paths = os.listdir(start_path)
     for path in paths:
-        if path not in ['.git','.gitignore','README.md','.cmd']:
+        if path not in ['.git','.gitignore','README.md','.cmd','.vscode']:
             git_path='https://git.kancloud.cn/am-note/'+path.lower()+'.git'
             git_paths.append(git_path)
             note_path = os.path.join(start_path, path)

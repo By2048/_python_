@@ -9,6 +9,8 @@ def is_git_folder(path):
             return True
     return is_git
 
+
+
 rootPath = r'F:\_Test\Program'
 for root, dirs, files in os.walk(rootPath):
     for dir in dirs:

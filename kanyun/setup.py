@@ -37,4 +37,4 @@ if __name__=='__main__':
     for path in paths:
         create_md(path)
         create_summary(path)
-    create_push_bat()
+    # create_push_bat()
