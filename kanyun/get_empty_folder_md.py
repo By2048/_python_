@@ -24,21 +24,17 @@ def create_md(rootPath):
 
             if dir[0] in ['_','.']:
                 continue
-
             file_path=os.path.join(root,dir)
             if is_git_folder(file_path)==True:
                 continue
-            # print(is_Yu_Writer_folder(file_path))
             if is_Yu_Writer_folder(file_path) == True:
                 continue
 
 
             _files=os.listdir(os.path.join(root,dir))
-            # print(_files)
 
             if (dir+'.md') in _files: # exit .md
                 pass
-                # print('exit .md')
             else:
                 _path=os.path.join(root,dir)+'\\'+dir+'.md'
                 print('create [folder].md    '+_path)
@@ -51,6 +47,5 @@ if __name__ == '__main__':
     rootPath = r'E:\Desktop\NoteBook\Python'
     create_md(rootPath)
 
-    # print(is_git_folder('F:\\- Test\\Python\\.git'))
 
 
