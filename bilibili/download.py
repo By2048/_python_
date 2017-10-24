@@ -27,9 +27,11 @@ def call_back(blocknum, blocksize, totalsize):
         print('Download_Success ')
 
 # 下载图片
-def download_image(link, path):
-    try:
-        urllib.request.urlretrieve(link, path, call_back)
-    except:
-        print('download_error   '+link)
+
+def download_image(links):
+    for link in links:
+        try:
+            urllib.request.urlretrieve(link, get_keep_path(link), call_back)
+        except:
+            print('download_error   '+link)
 
