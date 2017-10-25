@@ -8,7 +8,6 @@ class bili_img:
     # num
     # upload_time
     # tag
-    # md5
     # character_name
     # source_anime
     # discription
@@ -22,7 +21,6 @@ class bili_img:
         self.num=num
         self.upload_time=upload_time
         self.tag=tag
-        self.md5=md5
         self.character_name=character_name
         self.source_anime=source_anime
         self.discription=discription

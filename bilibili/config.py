@@ -1,6 +1,6 @@
 import pymysql
 
-image_keep_path = "F:\\- Bilibili"
+image_keep_path = "F:\\- BiliBili"
 
 chrome_path = "C:\Program Files (x86)\Google\Chrome\Application\chromedriver.exe"
 
@@ -52,11 +52,11 @@ draw_new_person='http://h.bilibili.com/common/ranklist?biz=draw&type=day'
 # 摄影 首页
 photo_index='http://h.bilibili.com/common/rank#/photo'
 # 摄影 cos 周榜
-'http://h.bilibili.com/common/ranklist?biz=photo&category=cos&type=week'
+cos_week='http://h.bilibili.com/common/ranklist?biz=photo&category=cos&type=week'
 # 摄影 cos 月榜
-'http://h.bilibili.com/common/ranklist?biz=photo&category=cos&type=month'
+cos_month='http://h.bilibili.com/common/ranklist?biz=photo&category=cos&type=month'
 # 摄影 cos 新人榜
-'http://h.bilibili.com/common/ranklist?biz=photo&category=cos&type=day'
+cos_day='http://h.bilibili.com/common/ranklist?biz=photo&category=cos&type=day'
 
 
 
