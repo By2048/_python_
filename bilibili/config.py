@@ -9,7 +9,7 @@ headers = {'User-Agent': user_agent}
 
 db=pymysql.connect('localhost','root','admin','bilibili')
 
-
+step=5
 
 # 全部 最热
 all_hot='http://h.bilibili.com/eden/draw_area#/all/hot‘'

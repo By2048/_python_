@@ -16,11 +16,10 @@ try:
 except:
     from config import *
 
-
-def get_md5(path):
+def get_sha1(path):
     if not os.path.isfile(path):
         return
-    hash=hashlib.md5()
+    hash=hashlib.sha1()
     file=open(path,'rb')
     while True:
         byte=file.read(8096)
@@ -28,9 +27,9 @@ def get_md5(path):
             break
         hash.update(byte)
     file.close()
-    md5=hash.hexdigest()
-    md5=md5.lower()
-    return md5
+    sha1=hash.hexdigest()
+    sha1=sha1.lower()
+    return sha1
 
 def page_down(chrome,cnt):
     for i in range(cnt):
@@ -48,15 +47,9 @@ def get_down_link(html):
     return link_group
 
 
-
-
-
-
-
-
-
-
-
+# ======== Test ========
+# sha1=get_sha1('e:\\desktop\\1.jpg')
+# print(sha1)
 
 
 

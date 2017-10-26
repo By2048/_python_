@@ -18,7 +18,6 @@ def insert_image(img):
         # 发生错误时回滚
         db.rollback()
 
-
 def get_img_id(md5):
     data=None
     try:
@@ -29,4 +28,3 @@ def get_img_id(md5):
     except:
         pass
     return data[0]
-

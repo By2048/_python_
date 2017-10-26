@@ -17,11 +17,11 @@ try:
     from tool import *
     from image import *
 except ImportError:
-    from .config import *
-    from .download import *
-    from .sql import *
-    from .tool import *
-    from .image import *
+    from bilibili.config import *
+    from bilibili.download import *
+    from bilibili.sql import *
+    from bilibili.tool import *
+    from bilibili.image import *
 
 chrome = webdriver.Chrome(chrome_path)
 chrome.set_window_position(100, 50)
