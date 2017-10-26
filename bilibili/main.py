@@ -64,19 +64,54 @@ def get_other_info(handle,bili_img):
     chrome.switch_to.window(handle)
     images=chrome.find_element_by_class_name('images')
     imgs=images.find_elements_by_tag_name('img')
+
+    create_date = chrome.find_element_by_class_name('create-date').text.replace('上传时间：', '')
+    category = [item.text for item in chrome.find_elements_by_class_name('category')]
+    tag=[item.text for item in chrome.find_elements_by_class_name('tag-item')]
+    meta_info = chrome.find_element_by_class_name('meta-info').find_elements_by_tag_name('p')
+    character_name,source=None,None
+    try:
+        if len(meta_info)==0:
+            character_name = []
+            source = []
+        elif len(meta_info)==1:
+            all_item=[item.text for item in meta_info[0].find_elements_by_tag_name('span')]
+            if all_item[0]=='来源：':
+                character_name =[]
+                source=all_item
+            elif all_item[0]=='角色：':
+                character_name = all_item
+                source = []
+        else:
+            character_name=[item.text for item in meta_info[0].find_elements_by_tag_name('span')]
+            source=[item.text for item in meta_info[1].find_elements_by_tag_name('span')]
+    except:
+        character_name='get false'
+        source='get false'
+    discription=chrome.find_element_by_class_name('discription').text
     if len(imgs)==0:
         return
     else:
         for img in imgs:
             down_link=img.get_attribute('data-photo-imager-src')
             name=os.path.basename(down_link)
-            # print(name)
-            # print(down_link)
+
+            # for category in all_category:
+            #     print(category.text)
+
             bili_img.name.append(name)
             bili_img.down_link.append(down_link)
             bili_img.num+=1
+
+    bili_img.create_date=create_date
+    bili_img.category=category
+    bili_img.tag=tag
+    bili_img.discription=discription
+
+    bili_img.character_name=character_name
+    bili_img.source=source
+
     chrome.close()
-    print()
     bili_img.print_all()
     return bili_img
 
@@ -86,9 +121,6 @@ def download_first_page_image(bili_imgs):
             if _name not in os.listdir(image_keep_path):
                 print(_name+'   '+_down_link,end='\n')
                 download_image_list(_down_link)
-
-def test_print():
-    print('rwerwerwerawtawetwear-----------------')
 
 if __name__=='__main__':
     bili_imgs=[]
@@ -101,7 +133,7 @@ if __name__=='__main__':
     time.sleep(3)
     WebDriverWait(chrome,10).until(EC.title_is('插画_画友_哔哩哔哩相簿'))
     # page_down(chrome,30)
-    time.sleep(5)
+    # time.sleep(5)
     bili_imgs=get_bili_img()
 
     # download_first_page_image(bili_imgs)
@@ -121,6 +153,6 @@ if __name__=='__main__':
 
     # ============= Test ==============
 
-
-    print('--- over ---')
-    chrome.quit()
+    #
+    # print('--- over ---')
+    # chrome.quit()
