@@ -12,9 +12,10 @@ from selenium.webdriver.common.action_chains import ActionChains
 # from selenium.webdriver.support import expected_conditions as EC
 
 try:
-    from .config import *
-except:
     from config import *
+except:
+    from .config import *
+
 
 def get_sha1(path):
     if not os.path.isfile(path):
@@ -45,6 +46,17 @@ def get_down_link(html):
     link_match = re.search(r'(http)(.*)(\.png|\.jpg)', url_group)
     link_group = link_match.group()
     return link_group
+
+
+def list_to_string(list):
+    return separator.join(list)
+
+def string_to_list(string):
+    list=string.split(separator)
+    if len(list)==1 and list[0]=='':
+        list=[]
+    return list
+
 
 
 # ======== Test ========

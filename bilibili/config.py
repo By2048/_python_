@@ -7,9 +7,11 @@ chrome_path = "C:\Program Files (x86)\Google\Chrome\Application\chromedriver.exe
 user_agent = 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36'
 headers = {'User-Agent': user_agent}
 
-db=pymysql.connect('localhost','root','admin','bilibili')
+db=pymysql.connect(host='localhost',user='root',passwd='admin',db='bilibili',use_unicode = True,charset ='utf8')
 
 step=5
+
+separator='<->'
 
 # 全部 最热
 all_hot='http://h.bilibili.com/eden/draw_area#/all/hot‘'

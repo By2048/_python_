@@ -49,16 +49,11 @@ def get_bili_img():
         down_link=[get_down_link(img_html)]
         name=[os.path.basename(down_link[0])]
         author=li.find_element_by_tag_name('span').text
-        img=bili_img(name,author,detail_link,down_link,1,'','','','','','')
+        img=bili_img(name,down_link,author,detail_link,1,'','','','','','')
         bili_imgs.append(img)
         # img.print_first()
     return bili_imgs
 
-#
-# def open_detail_link(chrome,link):
-#     js = "window.open('{0}')".format(link)
-#     print('js==='+js)
-#     chrome.execute_script(js)
 
 def get_other_info(handle,bili_img):
     chrome.switch_to.window(handle)
@@ -96,9 +91,6 @@ def get_other_info(handle,bili_img):
             down_link=img.get_attribute('data-photo-imager-src')
             name=os.path.basename(down_link)
 
-            # for category in all_category:
-            #     print(category.text)
-
             bili_img.name.append(name)
             bili_img.down_link.append(down_link)
             bili_img.num+=1
@@ -112,7 +104,7 @@ def get_other_info(handle,bili_img):
     bili_img.source=source
 
     chrome.close()
-    bili_img.print_all()
+    # bili_img.print_all()
     return bili_img
 
 def download_first_page_image(bili_imgs):
@@ -147,7 +139,8 @@ if __name__=='__main__':
         handles = chrome.window_handles
 
         for (handle,img) in zip(handles[-1:-len(handles):-1],tmp_imgs):
-            get_other_info(handle,img)
+            bili_img=get_other_info(handle,img)
+            insert_bili_img(bili_img)
         time.sleep(3)
         chrome.switch_to.window(handles[0])
 
