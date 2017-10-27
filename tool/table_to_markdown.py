@@ -35,6 +35,7 @@ def is_zh_cn(letter):
         return True
     else:
         return False
+
 def is_zh_code(symbol):
     codes='！？｡＂＃＄％＆＇（）＊＋，－／：；＜＝＞＠［＼］＾＿｀｛｜｝～｟｠｢｣､、〃》「」『』【】〔〕〖〗〘〙〚〛〜〝〞〟〰〾〿–—‘’‛“”„‟…‧﹏.'
     if symbol in codes:
@@ -48,6 +49,7 @@ def get_zh_cn_num(word):
         if is_zh_cn(letter):
             num+=1
     return num
+
 def get_zh_code_num(word):
     num=0
     for letter in word:
