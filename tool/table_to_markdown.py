@@ -61,20 +61,32 @@ def get_word_length(word):
             num+=1
     return num
 
+def splite_items(line):
+    splite_tab=line.split('\t')
+    splite_space=line.split('    ')
+    if len(splite_tab)>len(splite_space):
+        items=splite_tab
+    elif len(splite_tab)<len(splite_space):
+        items=splite_space
+    else:
+        items=splite_tab
+    return items
+
 # 获取列数
 def get_tab_num(input_lines):
-    first_line=input_lines[0]
-    num=len(first_line.split('\t'))
+    first_line=splite_items(input_lines[0])
+    num=len(first_line)
     return num
 
 # 获取每行的长度
 def get_all_word_length(input_lines):
     lengths=[]
-    for line in input_lines:
+    for each_line in input_lines:
         each_line_length=[]
-        split_lines=line.split('\t')
-        if len(split_lines)==1:
-            split_lines=line.split('    ')
+        split_lines=splite_items(each_line)
+        # split_lines=line.split('\t')
+        # if len(split_lines)==1:
+        #     split_lines=line.split('    ')
         for item in split_lines:
             length=get_word_length(item)
             each_line_length.append(length)
@@ -92,25 +104,11 @@ def get_word_max_lengths(word_lengths):
     return max_lengths
 
 
-
-# def get_second_line():
-#     item='    ----'
-#     line=''
-#     line+='|'
-#     for (length,num) in zip(word_max_lengths, range(tab_num)):
-#         line+=item.ljust(word_max_lengths[num]+4)+'|'
-#     return line
-
-
-
-
 # 获取主体
 def get_lines(input_lines,word_max_lengths,tab_num):
     lines=[]
     for each_line in input_lines:
-        items=each_line.split('\t')
-        if len(items)==1:
-            items=each_line.split('    ')
+        items=splite_items(each_line)
         line=''
         for (item ,num )in zip(items,range(tab_num)):
             line+='|'+' '*4
@@ -144,14 +142,14 @@ if __name__=='__main__':
     output_lines = []
 
     # 输入部分
-    sentinel = '===='  # 遇到这个就结束
+    sentinel = '===='  # 输入以 ==== 结束
     for line in iter(input, sentinel):
         input_lines.append(line)
     print('\n')
 
     # 检查输入
     for tab_line in input_lines:
-        items=tab_line.split('\t')
+        items=splite_items(tab_line)
         print(len(items),end='    ')
         print(items)
     print('\n')
