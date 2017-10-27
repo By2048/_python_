@@ -13,13 +13,11 @@ table= '''
 \	对下一个字符转义
 '''
 
-input_lines=[]
 
 tab_num=0
-word_lengths=[ [ 0 for i in range(5) ] for j in range(5) ]
 word_max_lengths=[]
-lines=[]
-
+input_lines=[]
+output_lines=[]
 
 def get_tab_num():
     first_line=input_lines[0]
@@ -37,11 +35,23 @@ def is_zh_cn(letter):
         return True
     else:
         return False
+def is_zh_code(symbol):
+    codes='！？｡＂＃＄％＆＇（）＊＋，－／：；＜＝＞＠［＼］＾＿｀｛｜｝～｟｠｢｣､、〃》「」『』【】〔〕〖〗〘〙〚〛〜〝〞〟〰〾〿–—‘’‛“”„‟…‧﹏.'
+    if symbol in codes:
+         return True
+    else:
+        return False
 
 def get_zh_cn_num(word):
     num=0
     for letter in word:
         if is_zh_cn(letter):
+            num+=1
+    return num
+def get_zh_code_num(word):
+    num=0
+    for letter in word:
+        if is_zh_code(letter):
             num+=1
     return num
 
@@ -50,6 +60,8 @@ def get_word_length(word):
     for letter in word:
         if is_zh_cn(letter):
             num+=2
+        if is_zh_code(letter):
+            num-=1
         else:
             num+=1
     return num
@@ -81,27 +93,22 @@ def get_second_line():
 
 def get_lines():
     lines=[]
-    # for tab_line in table.split('\n'):
-
     for tab_line in input_lines:
         items=tab_line.split('\t')
         line=''
         for (item ,num )in zip(items,range(tab_num)):
             line+='|'+' '*4
-            line+=item.ljust(word_max_lengths[num]-get_zh_cn_num(item))
+            line+=item.ljust(word_max_lengths[num]-get_zh_cn_num(item)-get_zh_code_num(item))
         line+='|'
         lines.append(line)
     return lines
 
-def add_tab_head(in_lines):
+def add_tab_head(lines):
     new_lines=[]
-    new_lines.append(in_lines[0])
+    new_lines.append(lines[0])
     new_lines.append(get_second_line())
-    new_lines+=in_lines[1:]
+    new_lines+=lines[1:]
     return new_lines
-
-
-
 
 
 
@@ -122,16 +129,16 @@ if __name__=='__main__':
     word_lengths=get_word_lengths()
     word_max_lengths=get_word_max_lengths()
 
-
-
     print('tab_num             '+str(tab_num))
     print('word_lengths        '+str(word_lengths))
     print('word_max_lengths    '+str(word_max_lengths))
 
     print('\n')
 
-    lines=get_lines()
-    lines=add_tab_head(lines)
+    output_lines=get_lines()
 
-    print('\n'.join(lines))
+    # lines=add_tab_head(lines)
+
+    print('\n'.join(output_lines))
+    print()
 
