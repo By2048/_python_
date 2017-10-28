@@ -12,15 +12,18 @@
 #### kanyun
     在本地写文档时，生成 SUMMARY.md, [看云](https://www.kancloud.cn) 网站
 
+#### markdown
+    将将指定html或特殊格式表格转换成 markdown 表格
+
 #### bing-bg-image
     下载Bing每日首页图片
 
 #### reptile -> mzitu ,mzt-mmjpg ,dmhy ,douban-book ,bilibili
-    爬去 http://www.mzitu.com 下的图片 并插入数据库
-    爬去 http://www.mmjpg.com/ 下的图片 并插入数据库(未进行反爬虫处理)
-    爬去 https://share.dmhy.org 中磁力链接 (Demo)
-    爬去豆瓣图书信息 （有坑未填）
-    获取bilibili插画区的图片(使用Chrome)
+    爬取 http://www.mzitu.com 下的图片 并插入数据库
+    爬取 http://www.mmjpg.com/ 下的图片 并插入数据库(未进行反爬虫处理)
+    爬取 https://share.dmhy.org 中磁力链接 (Demo)
+    爬取 豆瓣图书信息 （有坑未填）
+    爬取 bilibili插画区的图片(使用Chrome)
 
 #### pixiv
     P站爬虫，爬去作者下全部图片 (P站已跪...)
