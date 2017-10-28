@@ -43,12 +43,19 @@ def get_image_name(image):
                + image.link.split('.')[-1]
     return image_name
 
+def create_temp_jpg(img_path):
+    if os.path.exists(img_path)==False:
+        with open(img_path, 'w') as file:
+            file.close()
+
+
 if __name__ == '__main__':
     print('\nStart')
     image_keep_path = 'F:\\Image\\Bing\\'
     images = get_image(idx=0, n=7)
     image_path=""
     temp_image_path="F:\\Image\\Bing\\-Temp.jpg"
+    create_temp_jpg(temp_image_path)
     for image in images:
         image_path = image_keep_path + get_image_name(image)
         if os.path.isfile(image_path):
