@@ -1,15 +1,15 @@
 class bili_img:
-    # name
-    # down_link
-    # author
-    # detail_link
-    # num
-    # create_date
-    # category
-    # tag
-    # character_name
-    # source
-    # discription
+    # name 图片名
+    # down_link 下载链接
+    # author 作者
+    # detail_link 图片详情页
+    # num 图片数量
+    # create_date 上传事件
+    # category 分类
+    # tag 标签
+    # character_name 角色名
+    # source 来源
+    # discription 详细信息
 
     def __init__(self,name,down_link,author,detail_link,num,create_date,
                  category,tag,character_name,source,discription):

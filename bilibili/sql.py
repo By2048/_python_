@@ -24,8 +24,6 @@ def insert_bili_img(img):
     insert="insert into image(name,down_link,author,detail_link,num,create_date,category,tag,character_name,source,discription)"
     values="values ({0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8},{9},{10});"\
         .format(name,down_link,author,detail_link,num,create_date,category,tag,character_name,source,discription)
-    # values="values ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}','{9}','{10}');"\
-    #     .format(name,down_link,author,detail_link,num,create_date,category,tag,character_name,source,discription)
     insert_sql = insert + values
     print(insert_sql,end='\n\n')
     sql_cursor = db.cursor()
