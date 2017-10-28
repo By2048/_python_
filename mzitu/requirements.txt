@@ -1,6 +1,0 @@
-
-
-pip install BeautifulSoup4
-pip install Pillow
-pip install pyodbc
-

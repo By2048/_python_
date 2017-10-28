@@ -6,7 +6,7 @@ from email.header import Header
 # 第三方 SMTP 服务
 mail_host="smtp.qq.com"  #设置服务器
 mail_user="1247079575@qq.com"    #用户名
-mail_pass="ciaifqcjwtmmgahi"   #口令
+mail_pass="ciaifqcjw"   #口令
 
 from_usernaem = 'from_username-test'
 from_address = '1247079575@qq.com'

