@@ -122,12 +122,12 @@ def add_tab_head(output_lines,tab_num):
     first_line=''
     second_line=''
     for i in range(tab_num):
-        first_line+='| '+' '*10
-    first_line+=' |'
+        first_line+='| '+' '*9+' '
+    first_line+='|'
 
     for i in range(tab_num):
-        second_line+='| '+'-'*10
-    second_line+=' |'
+        second_line+='| '+'-'*9+' '
+    second_line+='|'
     output_lines.insert(0,second_line)
     output_lines.insert(0,first_line)
 
@@ -171,4 +171,42 @@ if __name__=='__main__':
     add_tab_head(output_lines,tab_num)
 
     print('\n'.join(output_lines),end='\n\n')
+
+
+
+
+
+
+
+
+
+
+
+# ============ Test ===================
+
+# |           |           |
+# | --------- | --------- |
+# |    Ctrl + Shift + P，F1    |    显示命令面板      |
+# |    Ctrl + P                |    快速快开          |
+# |    Ctrl + Shift + N        |    新窗口/实例       |
+# |    Ctrl + Shift + W        |    关闭窗口/实例     |
+# |    Ctrl + K Ctrl +S        |    显示所有快捷键    |
+#
+# First Header | Second Header
+# ------------ | -------------
+# Content from cell 1 | Content from cell 2
+# Content in the first column | Content in the second column
+#
+#
+# Ctrl + Shift + P，F1	显示命令面板
+# Ctrl + P	快速快开
+# Ctrl + Shift + N	新窗口/实例
+# Ctrl + Shift + W	关闭窗口/实例
+# Ctrl + K Ctrl +S	显示所有快捷键
+# First Header	Second Header
+# Content from cell 1	Content from cell 2
+# Content in the first column	Content in the second column
+
+# ============ Test ===================
+
 
