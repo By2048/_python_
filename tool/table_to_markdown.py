@@ -30,7 +30,7 @@ def is_zh_cn(letter):
         return False
 
 def is_zh_code(symbol):
-    codes='！？｡＂＃＄％＆＇（）＊＋，－／：；＜＝＞＠［＼］＾＿｀｛｜｝～｟｠｢｣､、〃》「」『』【】〔〕〖〗〘〙〚〛〜〝〞〟〰〾〿–—‘’‛“”„‟…‧﹏.'
+    codes="└＾＜｜〛＼〾〝〃＇＋〜＃〚〿“「、‘＄）【＆】；％＝’…｛｀｠〘﹏｟。＠〔［，－╚／？＞｝〟〰《–—」〙〕］（”〈〉』！·〞『：＂＿〗┐～╗〖》＊"
     if symbol in codes:
          return True
     else:
@@ -53,10 +53,10 @@ def get_zh_code_num(word):
 def get_word_length(word):
     num=0
     for letter in word:
-        if is_zh_cn(letter):
+        if is_zh_cn(letter) or is_zh_code(letter):
             num+=2
-        if is_zh_code(letter):
-            num-=1
+        # if is_zh_code(letter):
+        #     num-=1
         else:
             num+=1
     return num
@@ -122,12 +122,12 @@ def add_tab_head(output_lines,tab_num):
     first_line=''
     second_line=''
     for i in range(tab_num):
-        first_line+='|'+' '*8
-    first_line+='|'
+        first_line+='| '+' '*10
+    first_line+=' |'
 
     for i in range(tab_num):
-        second_line+='| ------ '
-    second_line+='|'
+        second_line+='| '+'-'*10
+    second_line+=' |'
     output_lines.insert(0,second_line)
     output_lines.insert(0,first_line)
 
