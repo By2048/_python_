@@ -107,29 +107,27 @@ def get_word_max_lengths(word_lengths):
 # 获取主体
 def get_lines(input_lines,word_max_lengths,tab_num):
     lines=[]
+
+    first_line=''
+    second_line=''
+    for (num,word_len) in zip(range(tab_num),word_max_lengths):
+        first_line+='|   '+' '*(word_len-3)+'   '
+    first_line+='|'
+    for (num,word_len) in zip(range(tab_num),word_max_lengths):
+        second_line+='|   '+'-'*(word_len-3)+'   '
+    second_line+='|'
+    lines.append(first_line)
+    lines.append(second_line)
+
     for each_line in input_lines:
         items=splite_items(each_line)
         line=''
         for (item ,num )in zip(items,range(tab_num)):
-            line+='|'+' '*4
+            line+='|'+' '*3
             line+=item.ljust(word_max_lengths[num]-get_zh_cn_num(item)-get_zh_code_num(item))
         line+='|'
         lines.append(line)
     return lines
-
-# 添加第一,第二行
-def add_tab_head(output_lines,tab_num):
-    first_line=''
-    second_line=''
-    for i in range(tab_num):
-        first_line+='| '+' '*9+' '
-    first_line+='|'
-
-    for i in range(tab_num):
-        second_line+='| '+'-'*9+' '
-    second_line+='|'
-    output_lines.insert(0,second_line)
-    output_lines.insert(0,first_line)
 
 
 
@@ -167,8 +165,6 @@ if __name__=='__main__':
 
     # 获取主体
     output_lines=get_lines(input_lines,word_max_lengths,tab_num)
-
-    add_tab_head(output_lines,tab_num)
 
     print('\n'.join(output_lines),end='\n\n')
 
