@@ -66,16 +66,7 @@ def add_virtical_directory(con_text):
     con_text.commit()
 
 
-# Folders中的FolderId == Images的FolderId  先插入文件夹信息再插入图片信息
-def get_folder_id(con_text,folder_name):
-    try:
-        sql_cursor = con_text.cursor()
-        search_sql = "select Id from Folders where Name='{0}'".format(folder_name)
-        sql_cursor.execute(search_sql)
-        row = sql_cursor.fetchone()
-    except:
-        return '0'
-    return str(row.Id)
+
 
 
 # 数据插入数据库 部分
@@ -92,19 +83,19 @@ def insert_sql_has_down(con_text,meizi):
     con_text.commit()
 
 # 下载的文件夹下文件插入数据库
-def insert_sql_download_file(folder_path):
+def insert_sql_download_file(sql_server_con_text,folder_path):
     for root, dirs, files in os.walk(folder_path):
         if len(files) == 0:
             pass
         else:
             folder = get_folder_info(root, files)
-            insert_folders(folder)
+            insert_folders(sql_server_con_text,folder)
             printGreen('folder_name :  ' + folder.Name + '\n')
             cnt = 1
         for file in files:
             path = os.path.join(root, file)
             image = get_image_info(path)
-            insert_images(image)
+            insert_images(sql_server_con_text,image)
             if cnt % 8 != 0:
                 sys.stdout.write(image.Path.split("\\")[-1] + '   ')
             else:
@@ -112,6 +103,7 @@ def insert_sql_download_file(folder_path):
                 sys.stdout.write('\r\n')
             cnt += 1
         sys.stdout.write('\r\n')
+    print()
 
 # 数据插入数据库 全部
 def init_sql(con_text,rootDir):
@@ -141,3 +133,18 @@ def init_sql(con_text,rootDir):
 
 if __name__ == "__main__":
     init_sql(sql_server_con_text,keep_path)
+
+
+
+
+"""
+select * from Folders
+select * from Images
+select * from HasDown
+
+
+delete from Images
+delete from HasDown
+delete from Folders
+
+"""

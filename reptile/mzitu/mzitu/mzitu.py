@@ -14,7 +14,7 @@ import requests
 try:
     from color_print import *
     from config import *
-    from sql_server import *
+    from sql import *
     from pymysql import *
     from download import *
     from tool import *
@@ -23,7 +23,6 @@ except ImportError:
     from .color_print import *
     from .config import *
     from .sql import *
-    from .mysql import *
     from .download import *
     from .tool import *
     from .all_class import *
@@ -160,7 +159,7 @@ def start_mzitu():
     for meizi in all_meizi:
         if meizi.link not in has_down_list:
             printGreen('meizi_index_title :  ' + meizi.title + '\n')
-            printGreen('\n' + 'meizi_index_link  :  ' + meizi.link + '\n')
+            printGreen('meizi_index_link  :  ' + meizi.link + '\n')
 
             max_num, first_down_link, category, date = get_other_info_in_detail_link(meizi.link)
             meizi.category = category
@@ -172,10 +171,10 @@ def start_mzitu():
 
             down_image_list(down_link_list, meizi.title)
 
-            insert_sql_has_down(meizi)
+            insert_sql_has_down(sql_server_con_text,meizi)
 
             down_folder_path = keep_path + meizi.title
-            insert_sql_download_file(down_folder_path)
+            insert_sql_download_file(sql_server_con_text,down_folder_path)
 
             time.sleep(5)
             # insert_sql(meizi)
