@@ -2,6 +2,7 @@ import re
 from numpy import *
 import numpy as np
 import sys
+from bs4 import *
 
 table= '''
 元字符	说明
@@ -129,6 +130,23 @@ def get_md_lines(input_lines, word_max_lengths, tab_num):
 
 
 
+def get_html_lines(soup):
+    lines=[]
+    first_th=[item.get_text() for item in soup.find('tr').find_all('th')]
+    if len(first_th)!=0:
+        lines.append("\t".join(first_th))
+    for tr in soup.find_all('tr')[1:]:
+        all_td=[]
+        for td in tr.find_all('td'):
+            if len(tr.find_all('td')) != 0:
+                if td.find('ul') != None:
+                    all_li= [item.get_text() for item in td.find('ul').find_all('li')]
+                    all_td.append(" ".join(all_li))
+                else:
+                    all_td.append(td.get_text())
+        lines.append("\t".join(all_td))
+    return lines
+
 
 if __name__=='__main__':
 
@@ -143,13 +161,17 @@ if __name__=='__main__':
         input_lines.append(line)
     print('\n')
 
+    if input_lines[0][0:6]=='<table':
+        soup = BeautifulSoup("".join(input_lines), "lxml")
+        input_lines = get_html_lines(soup)
+        print('\n'.join(output_lines), end='\n\n')
+
     # 检查输入
     for tab_line in input_lines:
         items=splite_items(tab_line)
         print(len(items),end='    ')
         print(items)
     print('\n')
-
 
     tab_num=get_tab_num(input_lines)
     word_lengths=get_all_word_length(input_lines)
@@ -163,10 +185,7 @@ if __name__=='__main__':
 
     # 获取主体
     output_lines=get_md_lines(input_lines, word_max_lengths, tab_num)
-
     print('\n'.join(output_lines),end='\n\n')
-
-
 
 
 
