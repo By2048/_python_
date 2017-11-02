@@ -7,6 +7,8 @@ import re
 import sys
 
 keep_path = 'G:\\Backup\\udisk-copy\\'
+copy_list = ['.xlsx', '.xls', '.ppt', '.pptx', '.pdf', '.png', '.jpg', '.txt', '.doc', '.docx', '.gif', '.bmp']
+
 
 def get_all_udisk_path():
     udisks = []
@@ -71,8 +73,7 @@ def copy_file(old_path,new_path):
         shutil.copyfile(old_path, new_path)
 
 
-def copy_file(udisk_path,folder_path):
-    copy_list=['.xlsx', '.xls', '.ppt', '.pptx', '.pdf', '.png', '.jpg', '.txt', '.doc', '.docx','.gif','.bmp']
+def copy_small_file(udisk_path, folder_path):
     # .rar .zip
     for root, dirs, files in os.walk(udisk_path):
         for file in files:
@@ -80,11 +81,20 @@ def copy_file(udisk_path,folder_path):
                 # pass
                 old_path=os.path.join(root,file)
                 new_path=folder_path+old_path[2:]
+                print(old_path+'\n'+new_path+'\n')
                 folder_name=os.path.dirname(new_path)
                 create_folder(folder_name)
-                print(old_path+'\n'+new_path+'\n')
-
                 copy_file(old_path, new_path)
+
+def copy_all_file(udisk_path, folder_path):
+    for root, dirs, files in os.walk(udisk_path):
+        for file in files:
+            old_path = os.path.join(root, file)
+            new_path = folder_path + old_path[2:]
+            print(old_path + '\n' + new_path + '\n')
+            folder_name = os.path.dirname(new_path)
+            create_folder(folder_name)
+            copy_file(old_path, new_path)
 
 
 if __name__ == "__main__":
@@ -97,4 +107,6 @@ if __name__ == "__main__":
         folder_path = keep_path + folder_name
         create_folder(folder_path)
 
-        copy_file(udisk_path, folder_path)
+        copy_small_file(udisk_path, folder_path)
+
+        copy_all_file(udisk_path, folder_path)
