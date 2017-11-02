@@ -188,38 +188,3 @@ if __name__=='__main__':
     print('\n'.join(output_lines),end='\n\n')
 
 
-
-
-
-
-
-
-
-# ============ Test ===================
-
-# |           |           |
-# | --------- | --------- |
-# |    Ctrl + Shift + P，F1    |    显示命令面板      |
-# |    Ctrl + P                |    快速快开          |
-# |    Ctrl + Shift + N        |    新窗口/实例       |
-# |    Ctrl + Shift + W        |    关闭窗口/实例     |
-# |    Ctrl + K Ctrl +S        |    显示所有快捷键    |
-#
-# First Header | Second Header
-# ------------ | -------------
-# Content from cell 1 | Content from cell 2
-# Content in the first column | Content in the second column
-#
-#
-# Ctrl + Shift + P，F1	显示命令面板
-# Ctrl + P	快速快开
-# Ctrl + Shift + N	新窗口/实例
-# Ctrl + Shift + W	关闭窗口/实例
-# Ctrl + K Ctrl +S	显示所有快捷键
-# First Header	Second Header
-# Content from cell 1	Content from cell 2
-# Content in the first column	Content in the second column
-
-# ============ Test ===================
-
-
