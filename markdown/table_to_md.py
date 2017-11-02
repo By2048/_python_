@@ -55,8 +55,6 @@ def get_word_length(word):
     for letter in word:
         if is_zh_cn(letter) or is_zh_code(letter):
             num+=2
-        # if is_zh_code(letter):
-        #     num-=1
         else:
             num+=1
     return num
@@ -105,16 +103,16 @@ def get_word_max_lengths(word_lengths):
 
 
 # 获取主体
-def get_lines(input_lines,word_max_lengths,tab_num):
+def get_md_lines(input_lines, word_max_lengths, tab_num):
     lines=[]
 
     first_line=''
     second_line=''
     for (num,word_len) in zip(range(tab_num),word_max_lengths):
-        first_line+='|   '+' '*(word_len-3)+'   '
+        first_line+='|   '+' '*(word_len-3-1)+'   '
     first_line+='|'
     for (num,word_len) in zip(range(tab_num),word_max_lengths):
-        second_line+='|   '+'-'*(word_len-3)+'   '
+        second_line+='|   '+'-'*(word_len-3-1)+'   '
     second_line+='|'
     lines.append(first_line)
     lines.append(second_line)
@@ -124,7 +122,7 @@ def get_lines(input_lines,word_max_lengths,tab_num):
         line=''
         for (item ,num )in zip(items,range(tab_num)):
             line+='|'+' '*3
-            line+=item.ljust(word_max_lengths[num]-get_zh_cn_num(item)-get_zh_code_num(item))
+            line+=item.ljust(word_max_lengths[num]-get_zh_cn_num(item)-get_zh_code_num(item)-1)
         line+='|'
         lines.append(line)
     return lines
@@ -164,7 +162,7 @@ if __name__=='__main__':
     print('\n')
 
     # 获取主体
-    output_lines=get_lines(input_lines,word_max_lengths,tab_num)
+    output_lines=get_md_lines(input_lines, word_max_lengths, tab_num)
 
     print('\n'.join(output_lines),end='\n\n')
 
