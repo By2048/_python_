@@ -3,20 +3,8 @@ from numpy import *
 import numpy as np
 import sys
 from bs4 import *
-
-table= '''
-元字符	说明
-.	匹配任意单个字符
-|	逻辑或操作符
-[]	匹配字符集合中的一个字符
-[^]	对字符集合求非
--	定义一个区间
-\	对下一个字符转义
-'''
-
-
-
-
+import re
+import os
 
 
 # test='3.1415926'
@@ -148,19 +136,32 @@ def get_html_lines(soup):
     return lines
 
 
+def replace_table_to_space(lines):
+    return lines
+
 if __name__=='__main__':
 
     tab_num = 0
     word_max_lengths = []
     input_lines = []
     output_lines = []
-
-    # 输入部分
     sentinel = '===='  # 输入以 ==== 结束
-    for line in iter(input, sentinel):
-        input_lines.append(line)
-    print('\n')
+    desktop_file_path = r'E:\Desktop\table_to_md_input.txt'
 
+    file_size = os.path.getsize(desktop_file_path)
+    if file_size!=0:
+        print('\n')
+        with open(desktop_file_path, 'r') as file:
+            for line in file.readlines():
+                input_lines.append(line.replace('\n',''))
+            print("\n".join(input_lines))
+        print('\n')
+    else:
+        print('输入以 ==== 结束')
+        # 输入部分
+        for line in iter(input, sentinel):
+            input_lines.append(line)
+        print('\n')
     if input_lines[0][0:6]=='<table':
         soup = BeautifulSoup("".join(input_lines), "lxml")
         input_lines = get_html_lines(soup)
