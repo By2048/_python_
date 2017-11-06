@@ -24,7 +24,7 @@ class meizi_img:
         print()
 
 # 图片信息(Img)
-class Image:
+class ImageInfo:
     FolderId = ""
     FolderName=""
     Name = ""
@@ -65,7 +65,7 @@ class Image:
 
 
 # 文件夹信息
-class Folder:
+class FolderInfo:
     Name = ""
     Path = ""
     CreateDate = ""  # 文件夹创建时间

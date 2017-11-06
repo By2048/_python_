@@ -28,6 +28,3 @@ print(match.group())
 
 # computer = keep_path + datetime.datetime.now().strftime("%Y-%m-%d--%H-%M")
 
-
-path=r'e:\\1.jpg'
-print(os.path.splitext(path)[1])

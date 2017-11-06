@@ -171,10 +171,9 @@ def start_mzitu():
 
             down_image_list(down_link_list, meizi.title)
 
-            insert_sql_has_down(sql_server_con_text,meizi)
-
-            down_folder_path = keep_path + meizi.title
-            insert_sql_download_file(sql_server_con_text,down_folder_path)
+            # insert_sql_has_down(sql_server_con_text,meizi)
+            # down_folder_path = keep_path + meizi.title
+            # insert_sql_download_file(sql_server_con_text,down_folder_path)
 
             time.sleep(5)
             # insert_sql(meizi)
@@ -182,5 +181,12 @@ def start_mzitu():
     print('End')
 
 
+def _test_name():
+    all_meizi = get_all_meizi()
+    for meizi in all_meizi:
+        print(meizi.title)
+        create_keep_path(meizi.title)
+
 if __name__ == '__main__':
-    start_mzitu()
+    # start_mzitu()
+    _test_name()
