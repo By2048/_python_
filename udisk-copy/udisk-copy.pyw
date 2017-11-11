@@ -81,7 +81,7 @@ def copy_small_file(udisk_path, folder_path):
                 # pass
                 old_path=os.path.join(root,file)
                 new_path=folder_path+old_path[2:]
-                print(old_path+'\n'+new_path+'\n')
+                # print(old_path+'\n'+new_path+'\n')
                 folder_name=os.path.dirname(new_path)
                 create_folder(folder_name)
                 copy_file(old_path, new_path)
@@ -91,7 +91,7 @@ def copy_all_file(udisk_path, folder_path):
         for file in files:
             old_path = os.path.join(root, file)
             new_path = folder_path + old_path[2:]
-            print(old_path + '\n' + new_path + '\n')
+            # print(old_path + '\n' + new_path + '\n')
             folder_name = os.path.dirname(new_path)
             create_folder(folder_name)
             copy_file(old_path, new_path)
