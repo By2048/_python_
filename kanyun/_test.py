@@ -1,22 +1,10 @@
 import os
 
+lk = r'E:\Desktop\NoteBook\Web\JavaScript\_code\Beginning JavaScript 5E downloads'
 
-def is_git_folder(path):
-    split_paths=path.split('\\')
-    is_git=False
-    for path in split_paths:
-        if path =='.git':
-            return True
-    return is_git
+aa=['1','2','3']
+print(aa)
 
-
-
-rootPath = r'F:\_Test\Program'
-for root, dirs, files in os.walk(rootPath):
-    for dir in dirs:
-        if dir[0] in [',','_']:
-            continue
-        file_path = os.path.join(root, dir)
-        if is_git_folder(file_path):
-            continue
-        print(dir)
+for a in aa:
+    if a in ['1','9','7']:
+        print(a)

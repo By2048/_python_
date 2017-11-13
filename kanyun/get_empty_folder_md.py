@@ -1,51 +1,46 @@
 import os
 
+try:
+    from config import *
+    from tool import *
+except ImportError:
+    from .config import *
+    from .tool import *
 
+
+# 忽略由Yu_Writer软件创建的文件夹
 def is_Yu_Writer_folder(path):
     split_paths = path.split('.')
-    if len(split_paths)==1:
+    if len(split_paths) == 1:
         return False
-    if split_paths[1] =='resource':
+    if split_paths[1] == 'resource':
         return True
     else:
         return False
 
-def is_git_folder(path):
-    split_paths=path.split('\\')
-    is_git=False
-    for path in split_paths:
-        if path =='.git':
-            return True
-    return is_git
 
-def create_md(rootPath):
-    for root, dirs, files in os.walk(rootPath):
-        for dir in dirs:
-
-            if dir[0] in ['_','.']:
-                continue
-            file_path=os.path.join(root,dir)
-            if is_git_folder(file_path)==True:
+# 创建空文件夹的同名的 .md 文件
+def create_empty_folder_md():
+    for root, folders, files in os.walk(note_book_path):
+        for folder in folders:
+            file_path = os.path.join(root, folder)
+            if is_exit_ignore_folder(file_path):
                 continue
             if is_Yu_Writer_folder(file_path) == True:
                 continue
 
-
-            _files=os.listdir(os.path.join(root,dir))
-
-            if (dir+'.md') in _files: # exit .md
+            # 文件夹下所有的文件
+            all_file = os.listdir(os.path.join(root, folder))
+            # 存在 文件名.md pass
+            if (folder + '.md') in all_file:  # exit .md
                 pass
             else:
-                _path=os.path.join(root,dir)+'\\'+dir+'.md'
-                print('create [folder].md    '+_path)
-                with open(_path,'w') as file:
-                    file.close()
-
+                # 创建 文件夹.md
+                new_empty_folder_path = os.path.join(root, folder) + '\\' + folder + '.md'
+                print('create [folder].md    ' + new_empty_folder_path)
+                new_file = open(new_empty_folder_path, 'w')
+                new_file.close()
 
 if __name__ == '__main__':
-    # Test...
-    rootPath = r'E:\Desktop\NoteBook\Python'
-    create_md(rootPath)
-
-
-
+    create_empty_folder_md()
+    pass
