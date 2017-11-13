@@ -7,16 +7,7 @@ except ImportError:
     from .config import *
     from .tool import *
 
-
-# 忽略由Yu_Writer软件创建的文件夹
-def is_Yu_Writer_folder(path):
-    split_paths = path.split('.')
-    if len(split_paths) == 1:
-        return False
-    if split_paths[1] == 'resource':
-        return True
-    else:
-        return False
+all_note_path = get_all_note_path()
 
 
 # 创建空文件夹的同名的 .md 文件
@@ -24,8 +15,14 @@ def create_empty_folder_md():
     for root, folders, files in os.walk(note_book_path):
         for folder in folders:
             file_path = os.path.join(root, folder)
+
+            # 一级目录忽略
+            if file_path in all_note_path:
+                continue
+            # 忽略ignore文件夹
             if is_exit_ignore_folder(file_path):
                 continue
+            # 忽略Yu_writee文件夹
             if is_Yu_Writer_folder(file_path) == True:
                 continue
 
@@ -40,6 +37,7 @@ def create_empty_folder_md():
                 print('create [folder].md    ' + new_empty_folder_path)
                 new_file = open(new_empty_folder_path, 'w')
                 new_file.close()
+
 
 if __name__ == '__main__':
     create_empty_folder_md()

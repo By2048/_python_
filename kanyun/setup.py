@@ -21,7 +21,7 @@ if __name__ == '__main__':
     print('------------------------ all node path ------------------------\n')
 
     for path in note_paths:
-        create_empty_folder_md(path)
-        create_summary_md(path)
+        create_empty_folder_md()
+        create_summary_md()
 
     # create_push_bat()

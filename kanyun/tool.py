@@ -20,6 +20,7 @@ def get_all_note_path():
         note_paths.append(note_path)
     return note_paths
 
+# 判断路径中是否包含被忽略的文件夹
 def is_exit_ignore_folder(base_path):
     split_paths=base_path.split('\\')
     for _path in split_paths:
@@ -27,6 +28,15 @@ def is_exit_ignore_folder(base_path):
             return True
     return False
 
+# 判断是否是由Yu_Writer软件创建的文件夹
+def is_Yu_Writer_folder(path):
+    split_paths = path.split('.')
+    if len(split_paths) == 1:
+        return False
+    if split_paths[1] == 'resource':
+        return True
+    else:
+        return False
 
 
 if __name__ == '__main__':

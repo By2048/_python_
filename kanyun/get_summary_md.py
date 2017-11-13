@@ -2,36 +2,31 @@ import os
 import functools
 
 try:
-    from get_empty_folder_md import is_Yu_Writer_folder
+    from config import *
+    from tool import *
 except ImportError:
-    from .get_empty_folder_md import is_Yu_Writer_folder
+    from .config import *
+    from .tool import *
 
 
 class MDLine:
     Level = 0
     Folder = ''
     SplitPaths = []
+
     def __init__(self, level, folder, splitPaths):
         self.Level = level
         self.Folder = folder
         self.SplitPaths = splitPaths
 
 
+# 将子目录拼接
 def my_join(lists):
     path = ''
     for list in lists[:-1]:
         path += list + '\\'
     path += lists[len(lists) - 1]
     return path
-
-
-def is_exit_md(list):
-    item = list[len(list) - 1]
-    print(str(item[-2:]))
-    if str(item[-2:]) == 'md':
-        return True
-    else:
-        return False
 
 
 def is_equal(list):
@@ -45,73 +40,42 @@ def is_equal(list):
         return False
 
 
-def exit__code_path(path):
-    for item in path.split('\\'):
-        if item == '_code':
-            print('===>   ' + path)
-            return True
-    return False
-
-
-# or is_code_folder(os.path.abspath(folder)) == True \
-
-
-# 设置忽略的 文件夹 文件 信息
-def is_ignore(folder):
-    if folder.endswith(('.json', '.pdf', '.mhtml')) \
-            or folder.startswith(('_', '.')) \
-            or folder == 'SUMMARY.md' \
-            or folder == 'HtmlKeep' \
-            or is_Yu_Writer_folder(folder) == True:
-        return True
-    else:
-        return False
-
-
-md_lines = []
-lines = []
-
-
-def get_summary(rootDir, level=1):
-    # if level == 1:
-    #     print(rootDir)
-    for folder in os.listdir(rootDir):
-        # if exit__code_path(os.path.abspath(folder)) == True :
-            # continue
-        if is_ignore(folder):
+def get_summary(md_lines, rootDir, level=1):
+    for file in os.listdir(rootDir):
+        # 排除文件忽略的文件
+        if file in ignore_file:
+            continue
+        # 排除完整文件路径中含有忽略的文件夹
+        if is_exit_ignore_folder(os.path.join(rootDir, file)):
+            continue
+        # 忽略Yu_writee文件夹
+        if is_Yu_Writer_folder(os.path.join(rootDir, file)):
             continue
 
-        path = os.path.join(rootDir, folder)
-        # print('----> '+path)
-        # if exit__code_path(path) == True :
-        #     continue
+        path = os.path.join(rootDir, file)
+
         if os.path.isdir(path) == True:
-            split_path = (path + '\\' + folder + '.md').split('\\')[-level - 1:]
+            split_path = (path + '\\' + file + '.md').split('\\')[-level - 1:]
         else:
-            split_path = (rootDir + '\\' + folder).split('\\')[-level:]
+            split_path = (rootDir + '\\' + file).split('\\')[-level:]
 
-        # print(split_path)
 
-        md_line = MDLine(level, folder, split_path)
+        md_line = MDLine(level, file, split_path)
         md_lines.append(md_line)
 
-        # line=''
-        # line+=' '* (level - 1)*4+'* '+'['+folder+']'+'('+my_join(split_path)+')'
-        # line=line.replace('\\','/')
-        # lines.append(line)
-
+        # 去除与文件夹相同的 .md 文件
         if is_equal(split_path) == True:
             if os.path.isfile(path) == True:
-                # lines.pop()
+                # pass
                 md_lines.pop()
 
         if os.path.isdir(path):
-            get_summary(path, level + 1)
+            get_summary(md_lines, path, level + 1)
+    return md_lines
 
-    return lines
 
-
-def get_lines_by_md_line():
+def get_lines_by_md_line(md_lines):
+    lines = []
     for md_line in md_lines:
         # print(md_line.SplitPaths)
         line = ''
@@ -119,31 +83,28 @@ def get_lines_by_md_line():
             md_line.SplitPaths) + ')'
         line = line.replace('\\', '/')
         lines.append(line)
+    return lines
 
 
-def keep_summary(start_path):
-    summary_path = start_path + '\\' + 'SUMMARY.md'
+def keep_summary(folder_path, lines):
+    summary_path = folder_path + '\\' + 'SUMMARY.md'
     print('create summary.md    ' + summary_path)
     with open(summary_path, 'w+', encoding='utf-8') as file:
         for line in lines:
             file.write(line)
             file.write('\n')
     file.close()
-    clean()
 
 
-
-def clean():
-    md_lines.clear()
-    lines.clear()
-
-
-def create_summary_md(path):
-    get_summary(path)
-    get_lines_by_md_line()
-    keep_summary(path)
+def create_summary_md():
+    note_paths = get_all_note_path()
+    for node_path in note_paths:
+        md_lines = []
+        md_lines = get_summary(md_lines, node_path)
+        lines = get_lines_by_md_line(md_lines)
+        keep_summary(node_path, lines)
 
 
 if __name__ == '__main__':
-    # Test...
-    pass
+    # pass
+    create_summary_md()
