@@ -33,19 +33,27 @@ def is_equal(list):
         return False
 
 
-# 自定义比较 将较短的放到后面
-# 将第一目录下的文件放在最后
-def md_line_cmp(md_line_1, md_line_2):
-    split_path_1 = md_line_1.SplitPaths
-    split_path_2 = md_line_2.SplitPaths
-    len1 = len(split_path_1)
-    len2 = len(split_path_2)
-    if len1 < len2:
-        return 1
-    elif len1 > len2:
-        return -1
-    else:
-        return 0
+# 自定义排序 将第一目录下的文件放在最后
+def md_line_sort(md_lines):
+    all_tmp_lines = []
+    all_new_md_line = []
+    for md_line in md_lines:
+        if md_line.Level == 1 and len(md_line.SplitPaths) == 1:
+            all_tmp_lines.append(md_line)
+    # for md_line in tmp_lines:
+    #     print('level      -> ' + str(md_line.Level))
+    #     print('spli paths -> ', end='')
+    #     print(md_line.SplitPaths)
+    #     print()
+    for md_line in md_lines:
+        if md_line.Level == 1 and len(md_line.SplitPaths) == 1:
+            pass
+        else:
+            all_new_md_line.append(md_line)
+    for md_line in all_tmp_lines:
+        all_new_md_line.append(md_line)
+
+    return all_new_md_line
 
 
 # 遍历文件来获取信息
@@ -75,8 +83,6 @@ def get_summary(all_md_line, rootDir, level=1):
             # ['其他', 'Cookie.md']
             split_path = (rootDir + '\\' + file).split('\\')[-level:]
 
-        print(split_path)
-
         md_line = MDLine(level, file, split_path)
         all_md_line.append(md_line)
 
@@ -94,7 +100,6 @@ def get_summary(all_md_line, rootDir, level=1):
 def get_lines_by_md_line(md_lines):
     lines = []
     for md_line in md_lines:
-        # print(md_line.SplitPaths)
         line = ''
         line += ' ' * (md_line.Level - 1) * 4 + '* ' + '[' + md_line.Folder + ']' + '(' + '\\'.join(
             md_line.SplitPaths) + ')'
@@ -120,11 +125,12 @@ def create_summary_md():
     for node_path in all_note_path:
         md_lines = []
         get_summary(md_lines, node_path)
-        md_lines.sort(key=functools.cmp_to_key(md_line_cmp))
-        lines = get_lines_by_md_line(md_lines)
+        new_md_lines = md_line_sort(md_lines)
+        for line in new_md_lines:
+            print(line.Level)
+            print(line.SplitPaths)
+        lines = get_lines_by_md_line(new_md_lines)
         keep_summary(node_path, lines)
-
-# pp.sort(key=functools.cmp_to_key(my_cmp))
 
 
 if __name__ == '__main__':

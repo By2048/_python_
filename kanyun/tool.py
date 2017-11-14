@@ -11,7 +11,6 @@ def get_all_note_path():
     # 所有的笔记本文件路径
     note_paths = []
     paths = os.listdir(note_book_path)
-    print(paths)
     for path in paths:
         # 去除主目录上以 排除的文件夹 README.md 文件
         if path in ignore_folder or path in ignore_file:
