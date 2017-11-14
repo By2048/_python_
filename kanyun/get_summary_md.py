@@ -126,9 +126,6 @@ def create_summary_md():
         md_lines = []
         get_summary(md_lines, node_path)
         new_md_lines = md_line_sort(md_lines)
-        for line in new_md_lines:
-            print(line.Level)
-            print(line.SplitPaths)
         lines = get_lines_by_md_line(new_md_lines)
         keep_summary(node_path, lines)
 
