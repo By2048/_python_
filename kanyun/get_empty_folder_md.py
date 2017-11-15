@@ -34,7 +34,7 @@ def create_empty_folder_md():
             else:
                 # 创建 文件夹.md
                 new_empty_folder_path = os.path.join(root, folder) + '\\' + folder + '.md'
-                print('create [folder].md    ' + new_empty_folder_path)
+                print('create empty folder.md    ' + new_empty_folder_path)
                 new_file = open(new_empty_folder_path, 'w')
                 new_file.close()
 
