@@ -11,11 +11,12 @@ except ImportError:
     from .config import *
 
 
-def mail_image(img_path):
+
+def mail_image(img_path, to_address=to_address,from_title=from_title, to_title=to_title,topic='mail_topic'):
     message = MIMEMultipart()
     mail_body = MIMEText('Test-Image，\n附件的邮件。', 'plain', 'utf-8')
     message.attach(mail_body)
-    message['Subject'] = Header('Sub-Test-Head', 'utf-8')  # 主题
+    message['Subject'] = Header(topic, 'utf-8')  # 主题
     message['From'] = Header(from_title, 'utf-8')
     message['To'] = Header(to_title, 'utf-8')
     baseName = os.path.basename(img_path)
