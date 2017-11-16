@@ -130,7 +130,7 @@ def get_max_page_num():
     return int(num)
 
 
-# 获取开始页面每页的图片的详细连接
+# 获取开始页面每页中所有的图片的详细连接
 def get_meizi_link_in_start_page(page_num):
     page_link = 'http://www.mzitu.com/page/' + str(page_num)
     html = urllib.request.Request(page_link, headers=headers)
@@ -155,7 +155,7 @@ def start_mzitu():
     for page_num in range(max_page_num):
         meizi_links = get_meizi_link_in_start_page(page_num + 1)
     """
-    all_meizi = get_all_meizi()[0:3]
+    all_meizi = get_all_meizi()
     for meizi in all_meizi:
         if meizi.link not in has_down_list:
             printGreen('meizi_index_title :  ' + meizi.title + '\n')
@@ -171,22 +171,21 @@ def start_mzitu():
 
             down_image_list(down_link_list, meizi.title)
 
+            # 以下载信息数据库保存部分
             # insert_sql_has_down(sql_server_con_text,meizi)
             # down_folder_path = keep_path + meizi.title
             # insert_sql_download_file(sql_server_con_text,down_folder_path)
 
-            time.sleep(5)
-            # insert_sql(meizi)
+            time.sleep(7)
+
             keep_has_down_to_txt(meizi)
+            print()
     print('End')
-
-
-def _test_name():
-    all_meizi = get_all_meizi()
-    for meizi in all_meizi:
-        print(meizi.title)
-        create_keep_path(meizi.title)
 
 if __name__ == '__main__':
     # start_mzitu()
-    _test_name()
+    for item in get_all_meizi():
+        print(item.link)
+        print(item.title)
+        create_keep_path(item.title)
+

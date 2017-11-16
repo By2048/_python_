@@ -17,8 +17,6 @@ except ImportError:
     from .tool import *
 
 
-
-
 # 清空数据库
 def clean_image_site(con_text):
     sql_cursor = con_text.cursor()
@@ -31,7 +29,7 @@ def clean_image_site(con_text):
 
 
 # 文件夹信息插入数据库
-def insert_folders(con_text,folder):
+def insert_folders(con_text, folder):
     insert = "insert into [Folders] ([Name],[Path],[CreateDate],[ImgNum],[TotalSize])"
     values = "values ('{0}', '{1}', '{2}', '{3}', '{4}')" \
         .format(folder.Name, folder.Path, folder.CreateDate, folder.ImgNum, folder.TotalSize)
@@ -42,10 +40,11 @@ def insert_folders(con_text,folder):
 
 
 # 图片信息插入数据库
-def insert_images(con_text,img):
+def insert_images(con_text, img):
     insert = "insert into [Images] ([FolderId],[FolderName],[Name],[Path],[Type],[Size],[Width],[Height],[VisitDate],[CreateDate],[ChangeDate])"
     values = "values ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}','{9}','{10}')" \
-        .format(img.FolderId, img.FolderName,img.Name, img.Path, img.Type, img.Size, img.Width, img.Height, img.VisitDate,
+        .format(img.FolderId, img.FolderName, img.Name, img.Path, img.Type, img.Size, img.Width, img.Height,
+                img.VisitDate,
                 img.CreateDate, img.ChangeDate)
     insert_sql = insert + '\n' + values
     sql_cursor = con_text.cursor()
@@ -66,36 +65,34 @@ def add_virtical_directory(con_text):
     con_text.commit()
 
 
-
-
-
 # 数据插入数据库 部分
-def insert_sql_has_down(con_text,meizi):
-    title=meizi.title
-    link=meizi.link
-    category=meizi.category
-    date=meizi.date
+def insert_sql_has_down(con_text, meizi):
+    title = meizi.title
+    link = meizi.link
+    category = meizi.category
+    date = meizi.date
     insert = "insert into [HasDown] ([Title],[Link],[Category],[ReleaseTime])"
-    values = "values ('{0}', '{1}', '{2}', '{3}')" .format(title, link, category, date)
+    values = "values ('{0}', '{1}', '{2}', '{3}')".format(title, link, category, date)
     insert_sql = insert + '\n' + values
     sql_cursor = con_text.cursor()
     sql_cursor.execute(insert_sql)
     con_text.commit()
 
+
 # 下载的文件夹下文件插入数据库
-def insert_sql_download_file(sql_server_con_text,folder_path):
+def insert_sql_download_file(sql_server_con_text, folder_path):
     for root, dirs, files in os.walk(folder_path):
         if len(files) == 0:
             pass
         else:
             folder = get_folder_info(root, files)
-            insert_folders(sql_server_con_text,folder)
+            insert_folders(sql_server_con_text, folder)
             printGreen('folder_name :  ' + folder.Name + '\n')
             cnt = 1
         for file in files:
             path = os.path.join(root, file)
             image = get_image_info(path)
-            insert_images(sql_server_con_text,image)
+            insert_images(sql_server_con_text, image)
             if cnt % 8 != 0:
                 sys.stdout.write(image.Path.split("\\")[-1] + '   ')
             else:
@@ -105,23 +102,24 @@ def insert_sql_download_file(sql_server_con_text,folder_path):
         sys.stdout.write('\r\n')
     print()
 
+
 # 数据插入数据库 全部
-def init_sql(con_text,rootDir):
+def init_sql(con_text, rootDir):
     clean_image_site()
-    cnt=0
+    cnt = 0
     for root, dirs, files in os.walk(rootDir):
         if len(files) == 0:
             pass
         else:
             folder = get_folder_info(root, files)
-            insert_folders(con_text,folder)
+            insert_folders(con_text, folder)
             # sys.stdout.write(folder.Name)
             printGreen('\n' + folder.Name + '\n')
             cnt = 1
         for file in files:
             path = os.path.join(root, file)
             image = get_image_info(path)
-            insert_images(con_text,image)
+            insert_images(con_text, image)
             if cnt % 9 != 0:
                 sys.stdout.write(image.Path.split("\\")[-1] + '   ')
             else:
@@ -132,10 +130,7 @@ def init_sql(con_text,rootDir):
 
 
 if __name__ == "__main__":
-    init_sql(sql_server_con_text,keep_path)
-
-
-
+    init_sql(sql_server_con_text, keep_path)
 
 """
 select * from Folders

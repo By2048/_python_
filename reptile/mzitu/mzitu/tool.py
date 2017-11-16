@@ -53,15 +53,25 @@ def change_coding_type_1(inStr):
         else:
             return outStr
 
+
 # 编码转换 仅去除系统不允许的字符
 def change_coding(in_str):
+    # question_mark (question)(?)
+    # 使用部分中文字符替换英文字符（操作系统限制）
+    in_str = in_str.replace('？', '(qm)') \
+        .replace('?', '(qm)') \
+        .replace(':', '：')
+
     out_str = ""
-    remove_code = ["\\", "/", ":", "*", "?", "\"", "<", " > ", "|", ]
+    # Win系统不允许的文件名 \ / : * ? " < > |
+    remove_code = ["\\", "/", "*", "\"", "<", " > ", "|", ]
     for item in in_str:
         if item in remove_code:
-            out_str+=' '
+            out_str += ' '
         else:
-            out_str+=item
+            out_str += item
+    # 去除末尾可能存在的空格
+    out_str = out_str.strip()
     return out_str
 
 
@@ -108,4 +118,5 @@ def get_image_info(path):
     change_date = str(_mtime[0]) + "-" + str(_mtime[1]) + "-" + str(_mtime[2]) + " " + \
                   str(_mtime[3]) + ":" + str(_mtime[4]) + ":" + str(_mtime[5])
     width, height = PILImage.open(path).size[0], PILImage.open(path).size[1]
-    return ImageInfo(folder_id, folder_name, name, path, type, size, width, height, visit_date, create_date, change_date)
+    return ImageInfo(folder_id, folder_name, name, path, type, size, width, height, visit_date, create_date,
+                     change_date)

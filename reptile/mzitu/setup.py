@@ -1,3 +1,5 @@
+import sys
+
 try:
     from mzitu.mzitu import *
 except ImportError:

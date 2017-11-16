@@ -5,7 +5,6 @@ import requests
 from contextlib import closing
 import progressbar
 
-
 try:
     from color_print import *
     from config import *
@@ -14,13 +13,13 @@ except ImportError:
     from .config import *
 
 
-
-
 # 创建下载文件夹目录文件目录
 def create_keep_path(title):
     folder_path = keep_path + title
     if not os.path.exists(folder_path):
         os.makedirs(folder_path)
+    else:
+        print(title + ' exit --------------------------------------------------------')
 
 
 # 下载图片
@@ -31,6 +30,7 @@ def download_image(link, path):
         pass
         # print("Download_fail "+link+" "+path )
 
+
 # 下载回显
 def call_back(blocknum, blocksize, totalsize):
     # @blocknum: 已经下载的数据块    @blocksize: 数据块的大小    @totalsize: 远程文件的大小
@@ -40,6 +40,7 @@ def call_back(blocknum, blocksize, totalsize):
     if percent >= 100:
         sys.stdout.write("\rDownloading : %.2f%% -> " % 100)
         print('Download_Success ')
+
 
 # 下载一组图片 一个连接下所有图片
 def down_group_img(img_down_list, title):
@@ -52,18 +53,22 @@ def down_group_img(img_down_list, title):
     pool.join()
 
 
-
-# 获取已经下载的连接  has_down.txt -> has_down_list
+# 获取已经下载的图片链接
 def get_has_down_by_txt():
-    file = open(has_down_path, 'r',encoding='utf-8')
+    file = open(has_down_path, 'r', encoding='utf-8')
     has_down = [line.split('<|>')[0].strip() for line in file]
     return has_down
 
 
 # 保存已经下载的链接到
 def keep_has_down_to_txt(meizi):
-    has_down_txt = open(has_down_path, 'a',encoding='utf-8')
-    has_down_txt.write(meizi.link + '\t' + '<|>' + '\t' + meizi.title + '\n')
+    has_down_txt = open(has_down_path, 'a', encoding='utf-8')
+    split_text = '\t' + '<|>' + '\t'
+    has_down_txt.write(
+        meizi.link + split_text +
+        meizi.title + split_text +
+        meizi.category + split_text +
+        meizi.date + '\n')
     has_down_txt.close()
 
 
@@ -82,6 +87,7 @@ def get_header(referer):
         'Referer': '{}'.format(referer),
     }
     return headers
+
 
 # 使用reqursts下载图片
 def down_image_list(down_link_list, title):
