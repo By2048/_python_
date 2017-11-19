@@ -176,7 +176,7 @@ def start_mzitu():
             # down_folder_path = keep_path + meizi.title
             # insert_sql_download_file(sql_server_con_text,down_folder_path)
 
-            time.sleep(7)
+            time.sleep(9)
 
             keep_has_down_to_txt(meizi)
             print()

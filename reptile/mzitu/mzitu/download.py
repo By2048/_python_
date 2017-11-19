@@ -19,7 +19,7 @@ def create_keep_path(title):
     if not os.path.exists(folder_path):
         os.makedirs(folder_path)
     else:
-        print(title + ' exit --------------------------------------------------------')
+        print(title + ' exit ------')
 
 
 # 下载图片
