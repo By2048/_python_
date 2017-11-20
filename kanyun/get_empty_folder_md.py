@@ -16,10 +16,11 @@ def create_empty_folder_md():
         for folder in folders:
             file_path = os.path.join(root, folder)
 
-            # 一级目录忽略
-            if file_path in all_note_path:
-                continue
-            # 忽略ignore文件夹
+            # 忽略一级目录
+            # if file_path in all_note_path:
+            #     continue
+
+            # 忽略忽略列表的文件夹
             if is_exit_ignore_folder(file_path):
                 continue
             # 忽略Yu_writee文件夹
