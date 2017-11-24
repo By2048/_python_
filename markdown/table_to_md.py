@@ -19,7 +19,7 @@ def is_zh_cn(letter):
         return False
 
 def is_zh_code(symbol):
-    codes="└＾＜｜〛＼〾〝〃＇＋〜＃〚〿“「、‘＄）【＆】；％＝’…｛｀｠〘﹏｟。＠〔［，－╚／？＞｝〟〰《–—」〙〕］（”〈〉』！·〞『：＂＿〗┐～╗〖》＊"
+    codes="└＾＜｜〛＼〾〝〃＇＋〜＃〚〿“「、‘＄）【＆】；％＝’…｛｀｠〘﹏｟。＠〔［，－╚／？＞｝〟〰《–—」〙〕］（”〈〉』！·〞『：＂＿〗┐～╗〖》＊↓↑←→"
     if symbol in codes:
          return True
     else:
@@ -48,6 +48,7 @@ def get_word_length(word):
             num+=1
     return num
 
+# 设置每行项目的分割方式 四个空格 或者 \t
 def splite_items(line):
     splite_tab=line.split('\t')
     splite_space=line.split('    ')
@@ -117,7 +118,7 @@ def get_md_lines(input_lines, word_max_lengths, tab_num):
     return lines
 
 
-
+# 解析html文件
 def get_html_lines(soup):
     lines=[]
     first_th=[item.get_text() for item in soup.find('tr').find_all('th')]
@@ -151,7 +152,7 @@ if __name__=='__main__':
     file_size = os.path.getsize(desktop_file_path)
     if file_size!=0:
         print('\n')
-        with open(desktop_file_path, 'r') as file:
+        with open(desktop_file_path, 'r',encoding='utf-8') as file:
             for line in file.readlines():
                 input_lines.append(line.replace('\n',''))
             print("\n".join(input_lines))
