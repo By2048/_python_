@@ -12,28 +12,40 @@
     迅雷，快车，QQ旋风 下载地址转换解密
 
 ## excel
-    excel读写
-
-## notebook
-    在本地写文档时，生成 SUMMARY.md, [看云](https://www.kancloud.cn) 网站
-
+    使用`openpyxl`操作`excel`
+    
 ## markdown
     将将指定html或特殊格式表格转换成 markdown 表格
 
-## bing-bg-image
-    下载Bing每日首页图片
-
-## reptile -> mzitu ,mzt-mmjpg ,dmhy ,douban-book ,bilibili ,pixiv
-    爬取 http://www.mzitu.com 下的图片 并插入数据库
-    爬取 http://www.mmjpg.com/ 下的图片 并插入数据库
-    爬取 https://share.dmhy.org 中磁力链接 (Demo)
-    爬取 豆瓣图书信息 （有坑未填）
-    爬取 bilibili插画区的图片(使用Chrome)
-    P站爬虫，爬去作者下全部图片 (P站已跪...)
+## notebook
+    在本地写文档时，生成 `SUMMARY.md`
 
 ## qqmail
-    QQ发送邮件
+    使用`QQ`邮箱发送文字，图片
+
+
+
+## reptile
+
+#### bilibili
+    爬取B站`http://h.bilibili.com/`下的图片（使用`selenium`控制`chrome`爬取）
+#### bing-image
+    下载Bing每日首页图片
+#### dmhy
+    爬取`share.dmhy.org`下的动漫下载链接        
+#### mzitu
+    爬取`www.mzitu.com`下的图片 
+#### mzt-mmjpg
+    爬取`www.mmjpg.com`下的图片 
+#### pixiv
+    P站爬虫，爬去作者下全部图片 (P站已跪...)
+#### wallpaper
+    爬取`wall.alphacoders.com`的壁纸（使用`API`）   
+
+
+## tool
+    个人的小工具集
     
 ## udisk-copy
-    U盘间谍
+    U盘间谍（使用脚本拷贝U盘的文件）
     
