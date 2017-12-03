@@ -80,7 +80,7 @@ def get_img_link(url):
     html = urllib2.Request(url, headers=headers)
     response = urllib2.urlopen(html).read()
     soup = BeautifulSoup(response, "html.parser", from_encoding="gb2312")
-    for input in soup.find_all('input', type="image"):
+    for input in soup.find_all('input', type="image-test"):
         img = input['src']
         img_link.append(img)
     return img_link

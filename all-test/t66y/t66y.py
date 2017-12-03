@@ -93,7 +93,7 @@ def get_image_down_link(link):
     request = urllib.request.urlopen(html)
     soup = BeautifulSoup(request, "html.parser", from_encoding="GBK")
     try:
-        inputs=soup.find_all('input', type="image")
+        inputs=soup.find_all('input', type="image-test")
         for input in inputs:
             down_link=input['src']
             down_links.append(down_link)

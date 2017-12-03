@@ -37,13 +37,12 @@ def get_max_image_num(soup):
     return int(max_num)
 
 
-# 获取图片下载连接 return List  旧页面 存在一个页面两个图片的情况
+# 获取第一张图片下载的连接
 def get_img_down_link_list(soup):
-    img_down_link = []
+    img_down_link = ''
     try:
-        imgs = soup.find('div', class_='main-image').find_all('img')
-        for img in imgs:
-            img_down_link.append(img['src'])
+        img = soup.find('div', class_='main-image').find('img')
+        img_down_link = img['src']
     except:
         print('Get_img_link_fail')
     finally:
@@ -63,7 +62,7 @@ def get_other_info_in_detail_link(link):
     request = urllib.request.urlopen(html)
     soup = BeautifulSoup(request, "html.parser")
     max_num = get_max_image_num(soup)
-    first_down_link = get_img_down_link_list(soup)[0]
+    first_down_link = get_img_down_link_list(soup)
     category, date = get_categroy_and_date(soup)
     return max_num, first_down_link, category, date
 
@@ -176,11 +175,12 @@ def start_mzitu():
             # down_folder_path = keep_path + meizi.title
             # insert_sql_download_file(sql_server_con_text,down_folder_path)
 
-            time.sleep(9)
+            # time.sleep(9)
 
             keep_has_down_to_txt(meizi)
             print()
     print('End')
+
 
 if __name__ == '__main__':
     # start_mzitu()
@@ -188,4 +188,3 @@ if __name__ == '__main__':
         print(item.link)
         print(item.title)
         create_keep_path(item.title)
-

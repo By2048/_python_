@@ -33,7 +33,7 @@ chrome=None
 
 # 获取的链接进行转换
 def change_down_link(style):
-    css='background-size: cover; background-image: url'
+    css='background-size: cover; background-image-test: url'
     url=style.replace(css,'')[2:-3].split('@')[0]
     return url
 

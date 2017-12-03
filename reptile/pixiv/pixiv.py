@@ -73,7 +73,7 @@ def get_img_in_page(user_id, page_num):
     html = login_session.get(index_link, headers=login_header)
     soup = BeautifulSoup(html.text, 'html.parser')
     ul = soup.find('ul', attrs={'class', '_image-items'})
-    for li in ul.find_all('li', attrs={'class', 'image-item'}):
+    for li in ul.find_all('li', attrs={'class', 'image-test-item'}):
         # img_link_1 = li.find('a', attrs={'class', 'work _work '})['href']
         # img_link_2 = li.find('a', attrs={'class', 'work  _work multiple '})['href']
         img_link = li.find('a')['href']
@@ -85,7 +85,7 @@ def get_one_detail_img(link):
     soup = BeautifulSoup(html.text, 'html.parser')
     div = soup.find('div', attrs={'class', '_illust_modal _hidden ui-modal-close-box'})
     try:
-        image = div.find('img', attrs={'class', 'original-image'})
+        image = div.find('img', attrs={'class', 'original-image-test'})
         img_link = image['data-src']
         img_alt = image['alt']
         img_name = img_link.split('/')[-1]
@@ -102,7 +102,7 @@ def get_more_detail_img(link):
     all_div = soup.find('section', attrs={'class', 'manga'})
     for img_div in all_div:
         try:
-            for img in img_div.find_all('img', attrs={'class', 'image ui-scroll-view'}):
+            for img in img_div.find_all('img', attrs={'class', 'image-test ui-scroll-view'}):
                 img_link = img['data-src']
                 img_name = img_link.split('/')[-1]
                 img_alt = ''
@@ -118,7 +118,7 @@ def get_detail_img(link, img_num):
         soup = BeautifulSoup(html.text, 'html.parser')
         div = soup.find('div', attrs={'class', '_illust_modal _hidden ui-modal-close-box'})
         try:
-            iamge = div.find('img', attrs={'class', 'original-image'})
+            iamge = div.find('img', attrs={'class', 'original-image-test'})
             img_link = iamge['data-src']
             img_alt = iamge['alt']
             img_name = img_link.split('/')[-1]
@@ -131,7 +131,7 @@ def get_detail_img(link, img_num):
         all_div = soup.find('section', attrs={'class', 'manga'})
         for img_div in all_div:
             try:
-                for img in img_div.find_all('img', attrs={'class', 'image ui-scroll-view'}):
+                for img in img_div.find_all('img', attrs={'class', 'image-test ui-scroll-view'}):
                     img_link = img['data-src']
                     img_name = img_link.split('/')[-1]
                     img_alt = ''

@@ -21,7 +21,7 @@ def insert_bili_img(img):
     source=repr(list_to_string(img.source))
     discription=repr(img.discription)
 
-    insert="insert into image(name,down_link,author,detail_link,num,create_date,category,tag,character_name,source,discription)"
+    insert="insert into image-test(name,down_link,author,detail_link,num,create_date,category,tag,character_name,source,discription)"
     values="values ({0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8},{9},{10});"\
         .format(name,down_link,author,detail_link,num,create_date,category,tag,character_name,source,discription)
     insert_sql = insert + values
@@ -36,7 +36,7 @@ def insert_bili_img(img):
 def get_img_id_by_name(name):
     data=None
     try:
-        search_sql = "select id from image where name='{0}'".format(name)
+        search_sql = "select id from image-test where name='{0}'".format(name)
         cursor = db.cursor()
         cursor.execute(search_sql)
         data = cursor.fetchone()

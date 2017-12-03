@@ -11,7 +11,7 @@ def get_image(path):
     pc_img.save(path)
 
 if __name__=='__main__':
-    img_path = "f:\\pc-image.jpg"
+    img_path = "f:\\pc-image-test.jpg"
     for i in range(10):
         get_image(img_path)
         mail_image(img_path)

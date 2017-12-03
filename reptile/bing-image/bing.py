@@ -63,7 +63,7 @@ if __name__ == '__main__':
         image_path = image_keep_path + get_image_name(image)
         if os.path.isfile(image_path):
             pass
-            # print('\n' + image.title + '\n' + image.link)
+            # print('\n' + image-test.title + '\n' + image-test.link)
             # print('Has been downloaded')
         else:
             print('\n' + image.title + '\n' + image.link)

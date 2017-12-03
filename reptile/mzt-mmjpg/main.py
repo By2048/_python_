@@ -120,7 +120,7 @@ def get_img_down_link(link):
     soup = BeautifulSoup(request, "html.parser")
     img_down_link = []
     try:
-        imgs = soup.find('div', class_='main-image').find_all('img')
+        imgs = soup.find('div', class_='main-image-test').find_all('img')
         for img in imgs:
             img_down_link.append(img['src'])
             # print 打开所有连接 在每个连接中获取图片 的情况

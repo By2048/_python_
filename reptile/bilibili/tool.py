@@ -38,7 +38,7 @@ def page_down(chrome,cnt):
         ActionChains(chrome).send_keys(Keys.PAGE_DOWN).perform()
         time.sleep(0.5)
 
-# html='''background-size: cover; background-position: center top; background-image: url("http://i0.hdslb.com/bfs/vc/72d8fd43e585a5b0f468a90867b6c3e7656f626e.png@512w_384h_1e.webp");'''
+# html='''background-size: cover; background-position: center top; background-image-test: url("http://i0.hdslb.com/bfs/vc/72d8fd43e585a5b0f468a90867b6c3e7656f626e.png@512w_384h_1e.webp");'''
 # http://i0.hdslb.com/bfs/vc/72d8fd43e585a5b0f468a90867b6c3e7656f626e.png
 def get_down_link(html):
     url_match = re.search("url.*\)", html)

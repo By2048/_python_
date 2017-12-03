@@ -19,6 +19,6 @@ code='http://jw.usx.edu.cn/CheckCode.aspx'
 
 picture=requests.get(code)
 # 保存验证码到本地
-local = open('image.html', 'wb')
+local = open('image-test.html', 'wb')
 local.write(picture.read)
 

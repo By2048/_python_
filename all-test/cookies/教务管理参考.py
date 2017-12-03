@@ -33,7 +33,7 @@ class HBJJ:
         # 用openr获取验证码pageCode
         picture = self.opener.open(self.CaptchaUrl).read()
         # 保存验证码到本地
-        local = open('image.jpg', 'wb')
+        local = open('image-test.jpg', 'wb')
         local.write(picture)
         local.close()
         # 打开保存的验证码图片 输入
