@@ -12,6 +12,7 @@ copy_list = ['.xlsx', '.xls', '.ppt', '.pptx', '.pdf', '.png', '.jpg', '.txt', '
 
 def get_all_udisk_path():
     udisks = []
+    # 获取到的磁盘信息
     # 124 -> 0b1111100 -> 1111100 -> 0011111 -> ABCDEFG -> 0无 1有
     sign = bin(win32file.GetLogicalDrives())[2:][::-1]
     for i in range(len(sign)):
@@ -25,25 +26,12 @@ def get_udisk_info_by_path(path):
     info=os.popen("dir "+path).readlines()[0:2]
     return info
 
-
-
+# 运行需要执行的CMD命令
 def run_cmd(cmd):
     cmd_return=os.popen(cmd)
     # info = cmd_return.read()
     info = cmd_return.readlines()[1]
     return info
-
-
-
-# def get_file_path():
-#
-#
-#
-# def copy_image():
-#
-# def copy_document():
-#
-# def copy_compressed_file():
 
 
 def get_folder_name(udisk_path):
@@ -54,6 +42,7 @@ def get_folder_name(udisk_path):
     name=match.group()
     return name
 
+# 获取磁盘的信息
 def copy_file_tree(udisk_path):
     name=get_folder_name(udisk_path)
     cmd = 'tree ' + udisk_path + ' /f > ' + keep_path + name+'.txt'
