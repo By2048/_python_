@@ -1,18 +1,20 @@
-# Java编程思想中 对源码进行一些美化
+# Java编程思想中 对源码进行一些修改（去除头部的信息）
 import re
 import os
 
 
-str_1='''/* Added by Eclipse.py */'''
-str_1_1=''
+replace_str_1= '''/* Added by Eclipse.py */'''
+change_str_1= ''
 
-str_2='''//i'''
-str_2_1='''// i'''
+replace_str_2= '''//i'''
+chnage_str_2= '''// i'''
 
-str_3='''} /*'''
-str_3_1='} \n\n/*'
+replace_str_3= '''} /*'''
+change_str_3= '} \n\n/*'
 
+# 源码的路径
 start_path="E:\Desktop\TIJ4-code\src\main\java"
+
 
 matchObj = re.compile('\t \*',re.S)
 
@@ -22,12 +24,12 @@ def replace_file(old_path,new_path):
         lines = file.readlines()
     with open(new_path, 'w') as file:
         for line in lines:
-            if str_1 in line:
-                line = line.replace(str_1, str_1_1)
-            if str_2 in line:
-                line = line.replace(str_2, str_2_1)
-            if str_3 in line:
-                line = line.replace(str_3, str_3_1)
+            if replace_str_1 in line:
+                line = line.replace(replace_str_1, change_str_1)
+            if replace_str_2 in line:
+                line = line.replace(replace_str_2, chnage_str_2)
+            if replace_str_3 in line:
+                line = line.replace(replace_str_3, change_str_3)
             if matchObj.match(line) != None:
                 span_end = matchObj.match(line).span()[1]
                 file.write(' *' + line[span_end:])
@@ -50,4 +52,4 @@ def start_replace():
 
 
 if __name__=='__main__':
-    start_replace();
+    start_replace()
