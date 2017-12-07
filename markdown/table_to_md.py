@@ -5,7 +5,10 @@ import sys
 from bs4 import *
 import re
 import os
-
+try:
+    from .config import *
+except ImportError:
+    from config import *
 
 # test='3.1415926'
 # print(test.center(20)+'werwer')
@@ -147,7 +150,6 @@ if __name__=='__main__':
     input_lines = []
     output_lines = []
     sentinel = '===='  # 输入以 ==== 结束
-    desktop_file_path = r'E:\Desktop\table_to_md_input.txt'
 
     file_size = os.path.getsize(desktop_file_path)
     if file_size!=0:

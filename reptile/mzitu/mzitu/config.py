@@ -15,7 +15,7 @@ keep_path = "F:\\Image\\mzitu\\"
 
 # 已经下载的文件路径
 # 使用绝对目录
-has_down_path=r'E:\Desktop\Python\reptile\mzitu\has_down.txt'
+has_down_path=r'E:\MyGit\Python\reptile\mzitu\has_down.txt'
 
 # 使用mziti.py使用
 # has_down_path = "../has_down.txt"

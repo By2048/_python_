@@ -1,7 +1,7 @@
 import json
 import os
 
-qq_mail_json_path = r'E:\Desktop\qq_mail_config.json'
+qq_mail_json_path = r'E:\Script\qq_mail_config.json'
 
 # 第三方 SMTP 服务
 mail_host = "smtp.qq.com"  # 设置服务器

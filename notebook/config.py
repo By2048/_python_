@@ -1,4 +1,4 @@
-note_book_path = 'E:\\Desktop\\NoteBook'
+note_book_path = 'E:\\MyGit\\NoteBook'
 
 cmd_keep_path = note_book_path + '\\.cmd'
 
