@@ -11,20 +11,14 @@ name_ = [name_0, name_1]
 for name in name_:
     print(re.findall(dytt_title, name))
 
-
-
-
 string = "xxxxxxxxxxxxxxxxxxxxxxxx entry '某某内容' for aaaaaaaaaaaaaaaaaa"
 
 result = re.findall(".*entry(.*)for.*", string)
 for x in result:
     print(x)
-#
-#     # '某某
-    #
-    #
-    # 容'
 
-a=['a','b','c','d']
-print(a)
-print('--'.join(a))
+
+print('-'*88)
+
+
+video_get=r"T:\ffmpeg.exe -f concat -i G:\_Test\Download\17693302\1\video_list.txt -c copy G:\_Test\Video\Python3爬虫实战 课时.flv"

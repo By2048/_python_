@@ -49,8 +49,3 @@ if __name__ == '__main__':
 
     path = find('美洲')
     print(path)
-
-
-# test_list=['帝国的征服与扩展', '希腊罗马古典文化', '欧洲', '奴隶社会']
-# print(test_list)
-# print(test_list[2::-1])

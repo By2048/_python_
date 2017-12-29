@@ -1,11 +1,34 @@
-#md2html.py
 import markdown
+from markdown.extensions.wikilinks import WikiLinkExtension
 
-path_1=r'E:\Desktop\input.md'
+#基本用法
+a = markdown.markdown("*boo!*")
+b = markdown.markdown("**boom!**")
+print(a)
+print(b)
 
-path_2=r'E:\Desktop\output.html'
+#扩展用法
+input_file = open("foo.md", mode="r", encoding="utf-8")
+text = input_file.read()
+html = markdown.markdown(text, output_format='html5', \
+    extensions=['markdown.extensions.toc',\
+    WikiLinkExtension(base_url='https://en.wikipedia.org/wiki/',\
+        end_url='#Hyperlinks_in_wikis'),\
+    'markdown.extensions.sane_lists',\
+    'markdown.extensions.codehilite',\
+    'markdown.extensions.abbr',\
+    'markdown.extensions.attr_list',\
+    'markdown.extensions.def_list',\
+    'markdown.extensions.fenced_code',\
+    'markdown.extensions.footnotes',\
+    'markdown.extensions.smart_strong',\
+    'markdown.extensions.meta',\
+    'markdown.extensions.nl2br',\
+    'markdown.extensions.tables'])
 
-with open(path_1,'r',encoding='utf8') as f:
-    for line in f.readlines():
-        html=markdown.markdown(line)
-        print(html)
+
+output_file = open("foo.html", "w",
+                          encoding="utf-8",
+                          errors="xmlcharrefreplace"
+)
+output_file.write(html)
