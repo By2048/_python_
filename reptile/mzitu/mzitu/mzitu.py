@@ -146,7 +146,7 @@ def get_meizi_link_in_start_page(page_num):
 # 主程序
 def start_mzitu():
     print('\nStart')
-    has_down_list = get_has_down_by_txt()
+    has_down_list = get_has_down_by_sqlite()
     """
     # 使用主页下载图片
     max_page_num=get_max_page_num()
@@ -170,14 +170,8 @@ def start_mzitu():
 
             down_image_list(down_link_list, meizi.title)
 
-            # 以下载信息数据库保存部分
-            # insert_sql_has_down(sql_server_con_text,meizi)
-            # down_folder_path = keep_path + meizi.title
-            # insert_sql_download_file(sql_server_con_text,down_folder_path)
-
-            # time.sleep(9)
-
-            keep_has_down_to_txt(meizi)
+            time.sleep(5)
+            keep_has_down_to_sqlite(meizi)
             print()
     print('End')
 

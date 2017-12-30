@@ -2,6 +2,7 @@ import urllib
 import urllib.request
 import os
 import requests
+import sqlite3
 from contextlib import closing
 import progressbar
 
@@ -53,23 +54,23 @@ def down_group_img(img_down_list, title):
     pool.join()
 
 
-# 获取已经下载的图片链接
-def get_has_down_by_txt():
-    file = open(has_down_path, 'r', encoding='utf-8')
-    has_down = [line.split('<|>')[0].strip() for line in file]
+
+def keep_has_down_to_sqlite(meizi):
+    conn = sqlite3.connect(has_down_sql_path)
+    cur = conn.cursor()
+    cur.execute("INSERT INTO has_down (link,title,category,date)"
+                "VALUES ('{0}','{1}','{2}','{3}')"
+                .format(meizi.link, meizi.title, meizi.category, meizi.date))
+    conn.commit()
+
+def get_has_down_by_sqlite():
+    conn = sqlite3.connect(has_down_sql_path)
+    cur = conn.cursor()
+    cur.execute("SELECT link FROM has_down")
+    has_down=[]
+    for item in cur.fetchall():
+        has_down.append(item[0])
     return has_down
-
-
-# 保存已经下载的链接到
-def keep_has_down_to_txt(meizi):
-    has_down_txt = open(has_down_path, 'a', encoding='utf-8')
-    split_text = '\t' + '<|>' + '\t'
-    has_down_txt.write(
-        meizi.link + split_text +
-        meizi.title + split_text +
-        meizi.category + split_text +
-        meizi.date + '\n')
-    has_down_txt.close()
 
 
 # 设置请求头
