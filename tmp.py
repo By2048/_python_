@@ -8,4 +8,3 @@ def tag(name):
 
 with tag("h1"):
     print("hello")
-    print("world")
