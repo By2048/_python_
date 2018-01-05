@@ -1,14 +1,17 @@
 from urllib import parse
 
+api_code='cbf61fb8197d5fdc054041c1bd2945e9'
+
 index_link = 'https://wall.alphacoders.com/?lang=Chinese'
 
-# 浏览器标识
+
 user_agent = 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36'
 headers = {'User-Agent': user_agent}
 
-all_category = ['抽象', '动物', '动漫', '艺术', 'CGI', '卡通', '名人', '漫画', '黑暗', '自然', '奇幻', '食物', '游戏', '节日', '幽默', '人造', '人',
-                '军事',
-                '综合', '电影', '多屏', '音乐', '素材', '摄影', '产品', '宗教', '科幻', '运动', '电视剧', '技术', '座驾', '电子游戏', '武器', '女性']
+all_category = ['抽象', '动物', '动漫', '艺术', 'CGI', '卡通', '名人', '漫画',
+                '黑暗', '自然', '奇幻', '食物', '游戏', '节日', '幽默', '人造',
+                '人','军事','综合', '电影', '多屏', '音乐', '素材', '摄影', '产品',
+                '宗教', '科幻', '运动', '电视剧', '技术', '座驾', '电子游戏', '武器', '女性']
 
 
 '''
@@ -26,7 +29,6 @@ def get_category_link(id,page=1):
 
 
 
-'''测试'''
 if __name__=='__main__':
     print(get_category_link(1))
 
