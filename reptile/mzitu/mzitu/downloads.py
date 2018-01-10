@@ -4,7 +4,6 @@ import os
 import requests
 import sqlite3
 from contextlib import closing
-import progressbar
 
 try:
     from color_print import *
@@ -15,12 +14,12 @@ except ImportError:
 
 
 # 创建下载文件夹目录文件目录
-def create_keep_path(title):
-    folder_path = keep_path + title
+def create_keep_path(id):
+    folder_path = os.path.join(keep_path, id)
     if not os.path.exists(folder_path):
         os.makedirs(folder_path)
     else:
-        print(title + ' exit ------')
+        print(id + ' has exit')
 
 
 # 下载图片
@@ -54,25 +53,6 @@ def down_group_img(img_down_list, title):
     pool.join()
 
 
-
-def keep_has_down_to_sqlite(meizi):
-    conn = sqlite3.connect(has_down_sql_path)
-    cur = conn.cursor()
-    cur.execute("INSERT INTO has_down (link,title,category,date)"
-                "VALUES ('{0}','{1}','{2}','{3}')"
-                .format(meizi.link, meizi.title, meizi.category, meizi.date))
-    conn.commit()
-
-def get_has_down_by_sqlite():
-    conn = sqlite3.connect(has_down_sql_path)
-    cur = conn.cursor()
-    cur.execute("SELECT link FROM has_down")
-    has_down=[]
-    for item in cur.fetchall():
-        has_down.append(item[0])
-    return has_down
-
-
 # 设置请求头
 def get_header(referer):
     headers = {
@@ -82,8 +62,9 @@ def get_header(referer):
         'Accept-Language': 'zh-CN,zh;q=0.8,en;q=0.6',
         'Cache-Control': 'no-cache',
         'Connection': 'keep-alive',
-        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_5) AppleWebKit/537.36 (KHTML, like Gecko) '
-                      'Chrome/59.0.3071.115 Safari/537.36',
+        'User-Agent': ('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_5) ' +
+                       'AppleWebKit/537.36 (KHTML, like Gecko) ' +
+                       'Chrome/59.0.3071.115 Safari/537.36'),
         'Accept': 'image-test/webp,image-test/apng,image-test/*,*/*;q=0.8',
         'Referer': '{}'.format(referer),
     }
@@ -91,10 +72,15 @@ def get_header(referer):
 
 
 # 使用reqursts下载图片
-def down_image_list(down_link_list, title):
-    create_keep_path(title)
+def down_image_list(down_link_list, id):
+    create_keep_path(id)
     for down_link in down_link_list:
-        down_path = keep_path + title + '\\' + os.path.basename(down_link)
+        file_path = os.path.join(keep_path, id, os.path.basename(down_link))
         print('Download   ' + down_link)
-        with open(down_path, "wb+") as file:
+        with open(file_path, "wb+") as file:
             file.write(requests.get(down_link, headers=get_header(down_link)).content)
+
+
+if __name__ == '__main__':
+    head = get_header('qwe')
+    print(head)
