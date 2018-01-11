@@ -1,8 +1,8 @@
 # Coding=utf-8
 # Author By2048 Time 2017-1-18
 
-import urllib.request
 from bs4 import BeautifulSoup
+import requests
 
 try:
     from .color_print import *
@@ -51,9 +51,8 @@ def get_categroy_date(soup):
 
 # 获取图片的其他信息
 def get_other_info(detail_link):
-    html = urllib.request.Request(detail_link, headers=headers)
-    request = urllib.request.urlopen(html)
-    soup = BeautifulSoup(request, "html.parser")
+    html=requests.get(detail_link,headers=headers)
+    soup = BeautifulSoup(html.text, "html.parser")
     max_num = get_image_num(soup)
     first_down_link = get_first_img_down_link(soup)
     category, date = get_categroy_date(soup)
@@ -83,9 +82,8 @@ def get_down_link_list_by_str(first_down_link, max_num):
 
 # 获取 all_img_page 下所有的信息 title link
 def get_all_meizi():
-    html = urllib.request.Request(all_img_page_link, headers=headers)
-    request = urllib.request.urlopen(html)
-    soup = BeautifulSoup(request, "html.parser")
+    html=requests.get(all_img_page_link,headers=headers)
+    soup = BeautifulSoup(html.text, "html.parser")
 
     all_meizi = []
     for ul in soup.find_all('ul', class_='archives'):
@@ -99,9 +97,8 @@ def get_all_meizi():
 
 # 获取主页的页数
 def get_page_max_num():
-    html = urllib.request.Request(start_page_link, headers=headers)
-    request = urllib.request.urlopen(html)
-    soup = BeautifulSoup(request, "html.parser")
+    html=requests.get(start_page_link,headers=headers)
+    soup = BeautifulSoup(html.text, "html.parser")
     all_link = soup.find('div', class_='nav-links').find_all('a')
     num = all_link[-2]['href'].split('/')[-2]
     return int(num)
@@ -110,9 +107,8 @@ def get_page_max_num():
 # 获取开始页面每页中所有的图片的详细连接
 def get_meizi_link_in_start_page(page_num):
     page_link = 'http://www.mzitu.com/page/' + str(page_num)
-    html = urllib.request.Request(page_link, headers=headers)
-    request = urllib.request.urlopen(html)
-    soup = BeautifulSoup(request, "html.parser")
+    html=requests.get(page_link,headers=headers)
+    soup = BeautifulSoup(html.text, "html.parser")
     meizi_links = []
     for li in soup.find('ul', id='pins').find_all('li'):
         link = li.find('span').find('a')

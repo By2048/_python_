@@ -29,6 +29,13 @@ def init_sql():
     con.commit()
     con.close()
 
+def clear_sql():
+    con = sqlite3.connect(has_down_sql_path)
+    cur = con.cursor()
+    cur.execute('delete from has_down')
+    cur.execute('delete from error_down')
+    con.commit()
+    con.close()
 
 def insert_to_has_down(meizi):
     con = sqlite3.connect(has_down_sql_path)
@@ -63,6 +70,4 @@ def get_all_error_down():
 
 
 if __name__ == '__main__':
-    hd=get_all_has_down()
-    for item in hd:
-        print(item)
+    clear_sql()
