@@ -1,3 +1,4 @@
+import bs4
 import requests
 import time
 from bs4 import BeautifulSoup
@@ -14,6 +15,19 @@ headers = {'User-Agent': user_agent}
 
 
 html_text=requests.get(all_img_page_link,headers=headers).text
+
 soup = BeautifulSoup(html_text, "html.parser")
-print(soup)
+
+def get_all():
+    pass
+
+get_all()
+
+
+
+
+
+
+
+
 

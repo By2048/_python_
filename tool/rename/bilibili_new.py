@@ -8,7 +8,10 @@ def get_name_by_json(json_path):
     with open(json_path, 'r', encoding='utf-8') as json_file:
         json_data = json.load(json_file)
         _title = json_data['title']
-        _name = json_data['page_data']['part']
+        try:
+            _name = json_data['page_data']['part']
+        except:
+            _name = ''
         video_name = _title + '_' + _name
     return video_name
 
@@ -32,7 +35,11 @@ def get_video_list(folder_path):
             old_name = os.path.join(folder_path, file)
             new_name = old_name.replace('.blv', '.flv')
             os.rename(old_name, new_name)
-            file_line.append(new_name)
+
+    for file in os.listdir(folder_path):
+        if file.endswith(('.flv')):
+            file_line.append(os.path.join(folder_path, file))
+    file_line.sort(key=lambda x: int(os.path.basename(x).split('.')[0]),reverse=False)
 
     video_list_path = os.path.join(folder_path, 'video_list.txt')
     with open(video_list_path, 'w+', encoding='utf-8') as file:
@@ -44,9 +51,13 @@ def get_video_list(folder_path):
 
 
 if __name__ == '__main__':
-    start_path = r'G:\_Test\Download\17693302'
-    end_path = r'G:\_Test\Video'
-    ffmpeg_path = r'T:\ffmpeg.exe'
+    # start_path = r'G:\_Test\Download\17693302'
+    # end_path = r'G:\_Test\Video'
+    # ffmpeg_path = r'T:\ffmpeg.exe'
+
+    start_path = 'T:\\4736'
+    end_path = 'T:\\'
+    ffmpeg_path = 'T:\\ffmpeg.exe'
 
     # 处理文件
     for file in os.listdir(start_path):
