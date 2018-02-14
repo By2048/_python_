@@ -100,8 +100,8 @@ def blv_to_flv():
 
 # 在每个视频文件夹路径下获取 video_list.txt
 def get_video_list():
-    file_line = []
     for video in all_bvideo:
+        file_line = []
         for file in os.listdir(video.path):
             if file.endswith(('.flv')):
                 file_line.append(os.path.join(video.path, file))
