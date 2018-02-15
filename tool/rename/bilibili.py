@@ -12,11 +12,10 @@ from hanziconv import HanziConv
 # └─19051909
 #     └─1
 download_path = 'T:\\download'
-new_path = 'T:\\tmp'
+new_path = 'F:\\Video\\_BillBill'
 ffmpeg_path = os.path.abspath('..\\lib\\ffmpeg.exe')
 
 all_bvideo = []
-
 
 class BVideo():
     def __init__(self, path, num, name):
@@ -129,7 +128,9 @@ def change_name(old_name):
         .replace('？', '') \
         .replace('| ', '') \
         .replace('*', '')\
-        .replace(' ','_')
+        .replace(' ','_')\
+        .replace('\\','_')\
+        .replace('/','_')
 # .replace('【', '[') \
 # .replace('】', ']')
 # .replace('《','')\
