@@ -11,11 +11,12 @@ from hanziconv import HanziConv
 # │  └─1
 # └─19051909
 #     └─1
-download_path = 'T:\\download'
+download_path = 'F:\\_Test'
 new_path = 'F:\\Video\\_BillBill'
 ffmpeg_path = os.path.abspath('..\\lib\\ffmpeg.exe')
 
 all_bvideo = []
+
 
 class BVideo():
     def __init__(self, path, num, name):
@@ -31,6 +32,7 @@ class BVideo():
 
 
 def get_video_name(_path, _num):
+    video_name = ''
     json_path = os.path.join(_path, 'entry.json')
     with open(json_path, 'r', encoding='utf-8') as json_file:
         json_data = json.load(json_file)
@@ -42,7 +44,7 @@ def get_video_name(_path, _num):
                 else:
                     page_data = '_' + json_data['page_data']['part']
                 video_name = title + page_data
-                video_name=change_name(video_name)
+                video_name = change_name(video_name)
                 return video_name
         except KeyError:
             if json_data['ep'] != None:
@@ -60,7 +62,7 @@ def get_video_name(_path, _num):
                         video_name = title + '_' + index
                     else:
                         video_name = title + '_' + index + '_' + index_title
-            video_name=change_name(video_name)
+            video_name = change_name(video_name)
             return video_name
 
 
@@ -127,17 +129,18 @@ def change_name(old_name):
         .replace('?', '') \
         .replace('？', '') \
         .replace('| ', '') \
-        .replace('*', '')\
-        .replace(' ','_')\
-        .replace('\\','_')\
-        .replace('/','_')
-# .replace('【', '[') \
-# .replace('】', ']')
-# .replace('《','')\
-# .replace('》','')\
-# .replace('，','')\
+        .replace('*', '') \
+        .replace(' ', '_') \
+        .replace('\\', '_') \
+        .replace('/', '_')
+    # .replace('【', '[') \
+    # .replace('】', ']')
+    # .replace('《','')\
+    # .replace('》','')\
+    # .replace('，','')\
     new_name = HanziConv.toSimplified(new_name)
     return new_name
+
 
 def _test():
     _path = '..\\lib\\ffmpeg.exe'
@@ -145,11 +148,20 @@ def _test():
     print(os.getcwd())
 
 
-if __name__ == '__main__':
+def setup():
     get_all_bvideo()
     move_blv()
     blv_to_flv()
     get_video_list()
     get_sum_video()
 
+
+if __name__ == '__main__':
+    print()
+    print('ffmpeg_path      ' + ffmpeg_path)
+    print('download_path    ' + download_path)
+    print('new_path         ' + new_path)
+    print()
+
+    setup()
     # _test()

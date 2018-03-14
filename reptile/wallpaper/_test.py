@@ -1,14 +1,20 @@
-import json
 import requests
-try:
-    from .config import *
-except ImportError:
-    from config import *
+import json
 
 
-test_link='https://wall.alphacoders.com/api2.0/get.php?auth={}&method=category&id=10&page=10&info_level=2'.format(api_code)
+api_code='cbf61fb8197d5fdc054041c1bd2945e9'
+link='https://wall.alphacoders.com/api2.0/get.php?auth=cbf61fb8197d5fdc054041c1bd2945e9&method=tag&id=218&page=10&info_level=2'
 
-json_data=requests.get(test_link)
 
-print(json_data.json())
+html_data=(requests.get(link).text)
+
+
+json_data=json.loads(html_data)
+print(json_data)
+#
+# # print['url_image'])
+#
+for item in json_data['wallpapers']:
+    print(item)
+
 

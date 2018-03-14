@@ -1,10 +1,8 @@
 import sqlite3
 import os
 
-try:
-    from .config import *
-except ImportError:
-    from config import *
+
+from config import *
 
 
 def init_sql():
@@ -70,8 +68,10 @@ def insert_to_error_down(meizi):
 def get_all_error_down():
     pass
 
-
-if __name__ == '__main__':
+def test():
     has_down = get_all_has_down()
     error_down = get_all_error_down()
-    # clear_sql()
+
+
+if __name__ == '__main__':
+    init_sql()
