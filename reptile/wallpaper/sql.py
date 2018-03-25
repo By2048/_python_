@@ -1,45 +1,54 @@
 import sqlite3
+import os
 
 sql_path = 'T:\\_tmp\\image.db'
 
+
 # sql_path = '/home/python/wallpaper/image.db'
 
-
+# ['id', 'width', 'height', 'file_type', 'file_size', 'url_image', 'url_thumb', 'url_page'])
 
 def init_sql():
+    if os.path.isfile(sql_path):
+        os.remove(sql_path)
+
     create_category = """create table category
     (
-        id     integer   not null,
-        name   text      not null,
-        count  integer   
+        id     text,
+        name   text
     );"""
 
     create_image = """create table image
     (
-        image_id        integer   ,
-        image_name      text      ,
-        category_id     integer   ,
-        image_url       text      ,
-        image_url_thumb text      ,
-        width           integer   ,
-        height          integer   ,
-        file_type       text      ,
-        file_size       integer   ,
+        id              text,
+        width           text,
+        height          text,
+        file_type       text,
+        file_size       text,
+        url_image       text,
+        url_thumb       text,
+        url_page        text,
+        name            text,
+        category        text,
+        category_id     text,
+        sub_category    text,
+        sub_category_id text,
+        user_name       text,
+        user_id         text,      
         tags            text      
     );"""
 
     create_tag = """create table tag
     (
-        id      integer   not null,
-        name    text      not null,
-        count   integer   
+        id      text,
+        name    text
     );"""
 
     con = sqlite3.connect(sql_path)
     cur = con.cursor()
     cur.execute(create_category)
-    cur.execute(create_tag)
     cur.execute(create_image)
+    cur.execute(create_tag)
     con.commit()
     con.close()
 
@@ -48,8 +57,8 @@ def insert_category(categorys):
     con = sqlite3.connect(sql_path)
     cur = con.cursor()
     for item in categorys:
-        insert_sql = "insert into category(id,name) values('{0}','{1}')" \
-            .format(item.id, item.name)
+        insert_sql = "insert into category(id,name) values('{id}','{name}')" \
+            .format(id=item.id, name=item.name)
         cur.execute(insert_sql)
         print(insert_sql)
     con.commit()
@@ -57,13 +66,14 @@ def insert_category(categorys):
 
 
 def insert_tag(tags):
+    print(tags)
     con = sqlite3.connect(sql_path)
     cur = con.cursor()
-    for item in tags:
+    for tag in tags:
         insert_sql = "insert into tag(id,name) " \
-                     "select '{0}','{1}' " \
-                     "where not exists (select id from tag where id='{0}')" \
-            .format(item['id'], item['name'])
+                     "select '{id}','{name}' " \
+                     "where not exists (select id from tag where id='{id}')" \
+            .format(id=tag['id'], name=tag['name'])
         cur.execute(insert_sql)
         print(insert_sql)
     con.commit()
@@ -73,33 +83,40 @@ def insert_tag(tags):
 def insert_base_info(images):
     con = sqlite3.connect(sql_path)
     cur = con.cursor()
-    for item in images:
-        insert_sql = "insert into image(image_id,category_id,image_url,image_url_thumb) values('{0}','{1}','{2}','{3}')" \
-            .format(item.image_id, item.category_id, item.image_url, item.image_url_thumb)
-        cur.execute(insert_sql)
+    for img in images:
+        insert_sql = "insert into image(id,width,height,file_type,file_size,url_image, url_thumb, url_page) " \
+                     "values('{id}','{width}','{height}','{file_type}','{file_size}','{url_image}','{url_thumb}','{url_page}')" \
+            .format(id=img.id, width=img.width, height=img.height, file_type=img.file_type, file_size=img.file_size,
+                    url_image=img.url_image, url_thumb=img.url_thumb, url_page=img.url_page)
         print(insert_sql)
+        cur.execute(insert_sql)
     con.commit()
     con.close()
 
 
-def insert_other_info(image_info):
+def insert_other_info(image):
     con = sqlite3.connect(sql_path)
     cur = con.cursor()
-    insert_tag(image_info.tags)
-    tag_id = ','.join([item['id'] for item in image_info.tags])
+    insert_tag(image.tags)
     update_sql = "update image " \
-                 "set image_name='{0}',width='{1}',height='{2}',file_type='{3}',file_size='{4}',tags='{5}'" \
-                 "where image_id='{6}'".format(image_info.name, image_info.width, image_info.height,
-                                               image_info.file_type, image_info.file_size,
-                                               tag_id, image_info.image_id)
+                 "set name='{0}',category='{1}',category_id='{2}',sub_category='{3}',sub_category_id='{4}',user_name='{5}',user_id='{6}',tags=\"{7}\"" \
+                 " where id='{8}'" \
+        .format(image.name, image.category, image.category_id, image.sub_category, image.sub_category_id,
+                image.user_name, image.user_id, image.tags, image.id)
     print(update_sql)
     cur.execute(update_sql)
     con.commit()
     con.close()
 
 
-def _test():
-    init_sql()
+def get_image_id():
+    con = sqlite3.connect(sql_path)
+    cur = con.cursor()
+    cur.execute("SELECT * FROM image WHERE category IS NULL")
+    all_image_id = [item[0] for item in cur.fetchall()]
+    return all_image_id
 
-if __name__=='__main__':
-    _test()
+
+
+if __name__ == '__main__':
+    init_sql()

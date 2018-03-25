@@ -2,7 +2,7 @@ import os
 import time
 import datetime
 from PIL import Image as PILImage
-import pyodbc
+# import pyodbc
 import sys
 import re
 
