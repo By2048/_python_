@@ -1,6 +1,29 @@
+from collections import deque
 
-pp=[item for item in range(80005)]
+all_image = deque()
 
-for i in range(0,len(pp),100):
-    b=pp[i:i+100]
-    print(b)
+all_image.append('a')
+all_image.append('b')
+all_image.append('c')
+
+all_image.appendleft('1')
+all_image.appendleft('2')
+all_image.appendleft('3')
+
+print(all_image)
+# deque(['3', '2', '1', 'a', 'b', 'c'])
+
+
+while all_image:
+    img = all_image.pop()
+    print(img)
+# c
+# b
+# a
+# 1
+# 2
+# 3
+
+
+print(all_image)
+# deque([])

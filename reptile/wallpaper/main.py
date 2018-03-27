@@ -10,7 +10,7 @@ api_code = 'cbf61fb8197d5fdc054041c1bd2945e9'
 
 sql_path = 'T:\\_tmp\\image.db'
 
-all_category_img = deque()
+# sql_path = '/home/python/wallpaper/image.db'
 
 
 class image_base_info(object):
@@ -62,16 +62,20 @@ class image_other_info(object):
         self.user_id = user_id
         self.tags = tags
 
+    def __str__(self):
+        return "{0:<9} {1:<15} {2:<3} {3:<15} {4}".format(self.id, repr(self.name), self.category_id, self.category,
+                                                          self.tags)
+
 
 def get_image_id() -> list:
     """
-    获取数据库中所有未添加图片具体信息的图片的ID  即 category=''
+    获取数据库中所有未添加图片具体信息的图片的ID  即 tags=''
     :return:
-        所有图片的ID
+        所有未添加具体信息图片的ID
     """
     con = sqlite3.connect(sql_path)
     cur = con.cursor()
-    cur.execute("SELECT * FROM image WHERE category = ''")
+    cur.execute("SELECT * FROM image WHERE tags = ''")
     all_image_id = [item[0] for item in cur.fetchall()]
     return all_image_id
 
@@ -150,6 +154,7 @@ def insert_tag(tags: str):
     :return:
     """
 
+    tags = json.loads(tags)
     con = sqlite3.connect(sql_path)
     cur = con.cursor()
     for tag in tags:
@@ -163,22 +168,22 @@ def insert_tag(tags: str):
     con.close()
 
 
-def insert_other_info(image: image_other_info):
+def update_other_info(images: list):
     """
     图片的其他信息插入到数据库
-    :param image:
+    :param image lsit:
     :return:
     """
     con = sqlite3.connect(sql_path)
     cur = con.cursor()
-    insert_tag(image.tags)
-    update_sql = "update image " \
-                 "set name='{0}',category='{1}',category_id='{2}',sub_category='{3}',sub_category_id='{4}',user_name='{5}',user_id='{6}',tags=\"{7}\"" \
-                 " where id='{8}'" \
-        .format(image.name, image.category, image.category_id, image.sub_category, image.sub_category_id,
-                image.user_name, image.user_id, image.tags, image.id)
-    print(update_sql)
-    cur.execute(update_sql)
+    for image in images:
+        update_sql = "update image " \
+                     "set name='{0}',category='{1}',category_id='{2}',sub_category='{3}',sub_category_id='{4}',user_name='{5}',user_id='{6}',tags=\"{7}\" " \
+                     "where id='{8}'".format(image.name, image.category, image.category_id, image.sub_category,
+                                             image.sub_category_id, image.user_name, image.user_id, image.tags,
+                                             image.id)
+        print(update_sql)
+        cur.execute(update_sql)
     con.commit()
     con.close()
 
@@ -263,10 +268,7 @@ def get_img_other_info(image_id: int) -> image_other_info:
     json_data = json.loads(requests.get(api_link).text)
 
     id = str(image_id)
-    if json_data['wallpaper']['name'] != None:
-        name = json_data['wallpaper']['name']
-    else:
-        name = ''
+    name = json_data['wallpaper']['name']
     category = json_data['wallpaper']['category']
     category_id = json_data['wallpaper']['category_id']
     sub_category = json_data['wallpaper']['sub_category']
@@ -274,6 +276,16 @@ def get_img_other_info(image_id: int) -> image_other_info:
     user_name = json_data['wallpaper']['user_name']
     user_id = json_data['wallpaper']['user_id']
     tags = str(json_data['tags'])
+
+    # name = '' if name == None else name
+    # category = '' if category == '' else category
+    # category_id = '0' if category_id == '' else category_id
+    # category_id = '0' if category_id == '' else category_id
+    # sub_category = '' if sub_category == '' else sub_category
+    # sub_category_id = '0' if sub_category_id == '' else sub_category_id
+    # user_name = '' if user_name == '' else user_name
+    # user_id = '0' if user_id == '' else user_id
+    # tags = '' if tags == '' else tags
 
     return image_other_info(id, name, category, category_id, sub_category, sub_category_id, user_name, user_id, tags)
 
@@ -339,28 +351,26 @@ def init_image_other_info():
     在获取图片基础信息的基础上获取图片的其他信息
     :return:
     """
-    con = sqlite3.connect(sql_path)
-    cur = con.cursor()
-    all_image_id = get_image_id()[:50]
 
-    for i in range(0, len(all_image_id), 100):
-        pool = multiprocessing.Pool(processes=100)
+    all_image_id = get_image_id()
+
+    max_pool_num = multiprocessing.cpu_count()
+    for i in range(0, len(all_image_id), max_pool_num):
+        pool = multiprocessing.Pool(processes=max_pool_num)
         return_image = []
-        image_ids = all_image_id[i:i + 100]
+        image_ids = all_image_id[i:i + max_pool_num]
         for image_id in image_ids:
             return_image.append(pool.apply_async(get_img_other_info, (image_id,)))
         pool.close()
         pool.join()
-        insert_list = []
+        update_list = []
         for image in return_image:
             img = image.get()
-            insert_list.append((img.name, img.category, img.category_id, img.sub_category, img.sub_category_id,
-                                img.user_name, img.user_id, img.tags, img.id,))
-        cur.executemany(
-            "UPDATE image SET name=?,category=?,category_id=?,sub_category=?,sub_category_id=?,"
-            "user_name=?,user_id=?,tags=? WHERE id=?", insert_list)
-    con.commit()
-    con.close()
+            update_list.append(img)
+        update_other_info(update_list)
+        # cur.executemany(
+        #     "UPDATE image SET name=?,category=?,category_id=?,sub_category=?,sub_category_id=?,"
+        #     "user_name=?,user_id=?,tags=? WHERE id=?", insert_list)
 
 
 def init_category():
@@ -375,4 +385,4 @@ def init_category():
 if __name__ == '__main__':
     get_api_count()
     # init_image_base_info()
-    # init_image_other_info()
+    init_image_other_info()
