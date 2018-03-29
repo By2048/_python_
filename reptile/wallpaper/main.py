@@ -3,12 +3,14 @@ import sqlite3
 import requests
 from collections import namedtuple
 import multiprocessing
-from collections import deque
 import os
+import time
+from collections import deque
 
 api_code = 'cbf61fb8197d5fdc054041c1bd2945e9'
 
 sql_path = 'T:\\_tmp\\image.db'
+
 
 # sql_path = '/home/python/wallpaper/image.db'
 
@@ -258,7 +260,9 @@ def get_category_img(category_id: int, page: int) -> list:
 
 def get_img_other_info(image_id: int) -> image_other_info:
     """
-    获取图片的其他信息
+    获取图片的其他信息 一些情况下请求的数据有误，此时设置 id=0 other_info='' 并直接返回
+    update image set name='',category='',category_id='',sub_category='',sub_category_id='',user_name='',user_id='',tags="" where id='0'
+    此时并不会更新到到数据库中
     :param image_id:图片的ID
     :return: 图片的其他信息
     """
@@ -268,26 +272,26 @@ def get_img_other_info(image_id: int) -> image_other_info:
     json_data = json.loads(requests.get(api_link).text)
 
     id = str(image_id)
-    name = json_data['wallpaper']['name']
-    category = json_data['wallpaper']['category']
-    category_id = json_data['wallpaper']['category_id']
-    sub_category = json_data['wallpaper']['sub_category']
-    sub_category_id = json_data['wallpaper']['sub_category_id']
-    user_name = json_data['wallpaper']['user_name']
-    user_id = json_data['wallpaper']['user_id']
-    tags = str(json_data['tags'])
+    try:
+        name = str(json_data['wallpaper']['name'])
+        category = json_data['wallpaper']['category']
+        category_id = json_data['wallpaper']['category_id']
+        sub_category = json_data['wallpaper']['sub_category']
+        sub_category_id = json_data['wallpaper']['sub_category_id']
+        user_name = json_data['wallpaper']['user_name']
+        user_id = json_data['wallpaper']['user_id']
+        tags = str(json_data['tags']).replace('\"', '\'')
+    except TypeError:
+        return image_other_info('0', '', '', '', '', '', '', '', '')
 
-    # name = '' if name == None else name
-    # category = '' if category == '' else category
-    # category_id = '0' if category_id == '' else category_id
-    # category_id = '0' if category_id == '' else category_id
-    # sub_category = '' if sub_category == '' else sub_category
-    # sub_category_id = '0' if sub_category_id == '' else sub_category_id
-    # user_name = '' if user_name == '' else user_name
-    # user_id = '0' if user_id == '' else user_id
-    # tags = '' if tags == '' else tags
+    name = str(name).replace('\'', '\'\'')
+    sub_category = str(sub_category).replace('\'', '\'\'')
+    user_name = str(user_name).replace('\'', '\'\'')
+    tags = tags.replace('\"', '\'')
 
-    return image_other_info(id, name, category, category_id, sub_category, sub_category_id, user_name, user_id, tags)
+    item = image_other_info(id, name, category, category_id, sub_category, sub_category_id, user_name, user_id, tags)
+
+    return item
 
 
 def get_api_count() -> json:
@@ -354,7 +358,7 @@ def init_image_other_info():
 
     all_image_id = get_image_id()
 
-    max_pool_num = multiprocessing.cpu_count()
+    max_pool_num = multiprocessing.cpu_count() * 3
     for i in range(0, len(all_image_id), max_pool_num):
         pool = multiprocessing.Pool(processes=max_pool_num)
         return_image = []
@@ -368,6 +372,7 @@ def init_image_other_info():
             img = image.get()
             update_list.append(img)
         update_other_info(update_list)
+        time.sleep(9)
         # cur.executemany(
         #     "UPDATE image SET name=?,category=?,category_id=?,sub_category=?,sub_category_id=?,"
         #     "user_name=?,user_id=?,tags=? WHERE id=?", insert_list)

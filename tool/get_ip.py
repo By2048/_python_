@@ -30,5 +30,5 @@ if __name__ == '__main__':
     print(ip_address)
     print('\n')
 
-    mail_txt(ip_address,to_address='1247079575@qq.com',from_title='am-pc ip',to_title='am-phone',topic=ip_address)
+    mail_txt(ip_address, to_address='1247079575@qq.com', from_title='am-pc ip', to_title='am-phone', topic=ip_address)
     print('\n')
