@@ -1,6 +1,7 @@
 import json
 
-from adodbapi.is64bit import os
+# from adodbapi.is64bit
+import os
 
 
 class boy:

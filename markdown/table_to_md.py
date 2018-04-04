@@ -2,7 +2,7 @@ import re
 from numpy import *
 import numpy as np
 import sys
-from bs4 import *
+from bs4 import BeautifulSoup
 import re
 import os
 try:
@@ -154,7 +154,7 @@ if __name__=='__main__':
     file_size = os.path.getsize(desktop_file_path)
     if file_size!=0:
         print('\n')
-        with open(desktop_file_path, 'r',encoding='utf-8') as file:
+        with open(desktop_file_path, 'r',encoding='gbk') as file:
             for line in file.readlines():
                 input_lines.append(line.replace('\n',''))
             print("\n".join(input_lines))
