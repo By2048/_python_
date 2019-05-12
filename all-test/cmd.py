@@ -3,7 +3,6 @@ import sys
 import subprocess
 import command
 
-
 # def run_cmd(cmd):
 #     lines=[]
 #     # for line in os.popen(cmd).readlines():
@@ -14,9 +13,16 @@ import command
 #     #     print(repr(line))
 
 
-if __name__=='__main__':
+import subprocess
 
-    cmd_sr='node E:\\Desktop\\MarkDownToHtml\\make.js'
+p = subprocess.Popen('dir', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+for line in p.stdout.readlines():
+    print(line, )
+retval = p.wait()
+print(retval)
+
+if __name__ == '__main__':
+    cmd_sr = 'node E:\\Desktop\\MarkDownToHtml\\make.js'
     # out_put=os.system(cmd_sr)
 
     # output = os.popen('cat /proc/cpuinfo')
@@ -37,6 +43,6 @@ if __name__=='__main__':
     # p = os.popen("node E:\\Desktop\\MarkDownToHtml\\make.js", 'r')
     # print(p.read())
 
-    pp=subprocess.check_output(cmd_sr)
-    with open(file_path,'wb') as file:
+    pp = subprocess.check_output(cmd_sr)
+    with open(file_path, 'wb') as file:
         file.write(pp)

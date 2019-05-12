@@ -3,6 +3,7 @@ from threading import Thread
 # Also we use the sleep function to make the thread "sleep"
 from time import sleep
 
+
 # To create a thread in Python you'll want to make your class work as a thread.
 # For this, you should subclass your class from the Thread class
 class CookBook(Thread):
@@ -23,6 +24,7 @@ class CookBook(Thread):
             sleep(2)
             x += 1
         print("Thread Ended\n")
+
 
 # start the main process
 print("Process Started")
