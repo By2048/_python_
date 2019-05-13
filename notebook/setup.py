@@ -25,9 +25,9 @@ if __name__ == '__main__':
     print('------------------------  create_empty_folder_md  ------------------------\n')
 
 
-    print('\n------------------------  create summary.md  ------------------------')
+    print('\n------------------------  update summary.md  ------------------------')
     create_summary_md()
-    print('------------------------  create summary.md  ------------------------\n')
+    print('------------------------  update summary.md  ------------------------\n')
 
 
     # create_push_bat()

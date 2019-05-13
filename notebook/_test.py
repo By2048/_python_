@@ -1,8 +1,6 @@
 import os
 import functools
 
-lk = r'E:\Desktop\NoteBook\Web\JavaScript\_code\Beginning JavaScript 5E downloads'
-
 
 def my_cmp(item1, item2):
     len1 = len(item1)
