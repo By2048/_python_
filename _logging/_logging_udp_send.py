@@ -9,3 +9,4 @@ while True:
     logging.debug("This shouldn't show up")
     logging.info("This should show up")
     time.sleep(3)
+
