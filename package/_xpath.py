@@ -5,7 +5,7 @@ result = etree.tostring(html, pretty_print=True)
 print(result)
 
 print('-' * 88)
-# 获取所有的 <li> 标签
+# 获取所有的 <li> 标签ox
 print(type(html))
 result = html.xpath('//li')
 print(result)

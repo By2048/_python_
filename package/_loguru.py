@@ -9,12 +9,12 @@ logger.debug("That's it, beautiful and simple logging!")
 # https://github.com/Delgan/loguru
 
 
-# @logger.catch(level='INFO')
-# def my_function(x, y, z):
-#     return 1 / (x + y + z)
-#
-#
-# my_function(0, 0, 0)
+@logger.catch(level='INFO')
+def my_function(x, y, z):
+    return 1 / (x + y + z)
+
+
+my_function(0, 0, 0)
 
 
 # logger.opt(record=True).info("Current line is: {record[line]}")

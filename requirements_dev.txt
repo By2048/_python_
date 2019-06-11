@@ -2,16 +2,17 @@ pymongo
 redis
 pymysql
 
+twisted
 requests
 tornado
 django
 
-
 serial
 paho-mqtt
 pysnooper
+stackprinter
+loguru
 VeryPrettyTable
-
 
 beautifulsoup4
 Pillow
@@ -20,3 +21,5 @@ requests
 PyMongo
 redis
 
+
+jieba

@@ -1,3 +1,5 @@
+import time
+
 from collections import deque
 
 import pysnooper
