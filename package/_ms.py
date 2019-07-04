@@ -1,8 +1,7 @@
 import time
 
-A = (i for i in range(1_000_000))
-B = [i for i in range(1_000_000)]
-C=[i for i in range('ABCDE')]
+A, B = (i for i in range(1_000_000)), [i for i in range(1_000_000)]
+
 
 def time_function(fun):
     def weapper():
@@ -34,7 +33,6 @@ def test_c():
     return data
 
 
-if __name__ == '__main__':
-    test_a()
-    test_b()
-    test_c()
+test_a()
+test_b()
+test_c()
