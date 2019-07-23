@@ -2,8 +2,6 @@ import logging
 
 import conf
 
-my_alphabet = ['a', 'b', 'c']
-
 
 def test_1():
     def length(item):
