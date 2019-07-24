@@ -5,19 +5,10 @@ from pprint import pprint, pformat
 from pymongo import MongoClient
 from pymongo import ReturnDocument
 
-logging.basicConfig(
-    level=logging.INFO,
-    format='[%(levelname)1.1s %(asctime)s.%(msecs)d %(module)9s:%(lineno)3d] %(message)s',
-    datefmt='%H:%M:%S'
-)
+import _conf
 
-HOST = '192.168.0.99'
-PORT = 27017
-USER = 'root'
-PWD = "123456"
-
+HOST, PORT, USER, PWD = '192.168.0.27', 27017, 'root', "123456"
 MONGODB = f"mongodb://{USER}:{PWD}@{HOST}:{PORT}"
-logging.info(f'MONGODB : {MONGODB}')
 client = MongoClient(MONGODB)
 
 
@@ -32,7 +23,8 @@ def find():
 
 
 class CRUD(object):
-    def insert(self):
+    @staticmethod
+    def insert():
         data = {'name': 111}
         logging.info(data)
         client.demo.test.insert_one(data)
@@ -41,7 +33,8 @@ class CRUD(object):
         logging.info(data)
         client.demo.test.insert_many([data])
 
-    def delete(self):
+    @staticmethod
+    def delete():
         result = client.demo.test.delete_one({'name': 111})
         logging.info(result.deleted_count)
         logging.info(result.raw_result)
@@ -50,7 +43,8 @@ class CRUD(object):
         logging.info(result.deleted_count)
         logging.info(result.raw_result)
 
-    def auto_increase_id(self):
+    @staticmethod
+    def auto_increase_id():
         # client.demo.test.insert_one({'name': 'max_id', 'value': 1})
         result = client.demo.test.find_one_and_update(
             {"name": "max_id"},
@@ -64,10 +58,24 @@ class CRUD(object):
         # find_one_and_replace()
         # find_one_and_update()
 
+    def updata(self):
+        # mongo.ebdb_smartsys.ebc_devices_cookbook.update(
+        #     {'_id': ObjectId(_id)},
+        #     {
+        #         '$set': {
+        #             'standard_parameter': parameter,
+        #             'standard_parameter_device_name': rule['name']
+        #         },
+        #         '$unset': {'device_name': ''}
+        #     }
+        # )
+        pass
+
 
 class Other(object):
 
-    def index(self):
+    @staticmethod
+    def index():
         index_info = client.demo.test.index_information()
         logging.info(index_info)
 
@@ -76,7 +84,8 @@ class Other(object):
 
         # client.demo.test.drop_index('name_index')
 
-    def collection(self):
+    @staticmethod
+    def collection():
         names = client.demo.list_collection_names()
         breakpoint()
         logging.info(names)
@@ -89,9 +98,9 @@ def test():
 if __name__ == '__main__':
     test()
 
-    # CRUD().insert()
-    # CRUD().delete()
-    # CRUD().auto_increase_id()
+    CRUD.insert()
+    CRUD.delete()
+    CRUD.auto_increase_id()
 
-    # Other().index()
-    Other().collection()
+    Other.index()
+    Other.collection()

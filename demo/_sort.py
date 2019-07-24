@@ -1,6 +1,6 @@
 import logging
 
-import conf
+import _conf
 
 
 def test_1():
@@ -45,6 +45,6 @@ def test_4():
 
 
 test_1()
-test_2()
-test_3()
-test_4()
+# test_2()
+# test_3()
+# test_4()
