@@ -1,52 +1,37 @@
 import json
-
-import redis
 import logging
 
-logging.basicConfig(
-    level=logging.INFO,
-    format='[%(levelname)1.1s %(asctime)s.%(msecs)3d %(module)9s:%(lineno)3d] %(message)s',
-    datefmt='%H:%M:%S'
-)
+from _conf.server import redis_conn_pool
 
-HOST, PORT, PWD, DB, MAX = '192.168.0.99', 6379, "123456", 9, 100
-logging.info(f'host:{HOST}    port:{PORT}    pwd:{PWD}    db:{DB}')
+import redis
 
-pool = redis.ConnectionPool(max_connections=MAX, host=HOST, port=PORT, db=DB, password=PWD)
-db = redis.Redis(connection_pool=pool, decode_responses=True)
-
-
-# db = redis.Redis(host=HOST, port=PORT, db=DB, password=PWD, decode_responses=True)
+db = redis.Redis(connection_pool=redis_conn_pool, decode_responses=True)
 
 
 def _set():
-    db.set('name', 'qwer1234', ex=None, px=None, nx=False, xx=False)
-    db.setex('name', 100, 'qwer1234')
+    db.set('key1', 'qwer1234', ex=None, px=None, nx=False, xx=False)
+    db.expire('key1', 100)
+    db.setex('key2', 100, 'qwer1234')
 
 
 def _get():
-    logging.info(db.get('name'))
+    logging.info(db.get('key1'))
 
-    logging.info(db.keys('*'))
-    for key in db.keys('key:*'):
-        logging.info(key.decode() + ' -> ' + db.get(key.decode()).decode())
+    for key in db.keys('key*'):
+        key = key.decode() if isinstance(key, bytes) else key
+        value = db.get(key)
+        logging.info(f"{key} -> {value}")
 
 
 def _list():
-    db.delete('test_list')
-    db.rpush('test_list', 1)
-    db.rpush('test_list', 2, 3, json.dumps([1, 2, 3]))
-    # db.expire('test_list', None)
-    logging.info(db.lrange('test_list', 0, -1))
+    db.delete('key3')
+    db.rpush('key3', 1)
+    db.rpush('key3', 2, 3, json.dumps([1, 2, 3]))
 
-
-def test():
-    pass
+    logging.info(db.lrange('key3', 0, -1))
 
 
 if __name__ == '__main__':
-    # set()
-    # get()
-    # test()
-    # _list()
-    pass
+    # _set()
+    # _get()
+    _list()
