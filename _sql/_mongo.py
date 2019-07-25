@@ -2,24 +2,9 @@ import logging
 from datetime import datetime
 from pprint import pprint, pformat
 
-from pymongo import MongoClient
 from pymongo import ReturnDocument
 
-import _conf
-
-HOST, PORT, USER, PWD = '192.168.0.27', 27017, 'root', "123456"
-MONGODB = f"mongodb://{USER}:{PWD}@{HOST}:{PORT}"
-client = MongoClient(MONGODB)
-
-
-def other():
-    # 显示所有表
-    logging.info(client.test.list_collection_names())
-
-
-def find():
-    for item in client.test.device.find({}):
-        logging.info(item)
+from _conf.server import mongo_client as client
 
 
 class CRUD(object):
@@ -90,14 +75,18 @@ class Other(object):
         breakpoint()
         logging.info(names)
 
+    @staticmethod
+    def all_collection():
+        # 显示所有表
+        logging.info(client.test.list_collection_names())
 
-def test():
-    pass
+    @staticmethod
+    def find_all():
+        for item in client.test.device.find({}):
+            logging.info(item)
 
 
 if __name__ == '__main__':
-    test()
-
     CRUD.insert()
     CRUD.delete()
     CRUD.updata()

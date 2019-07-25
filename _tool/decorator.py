@@ -2,8 +2,6 @@ import functools
 import logging
 import time
 
-import _conf
-
 
 def run_time(function):
     @functools.wraps(function)

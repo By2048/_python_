@@ -1,7 +1,6 @@
-import logging
 import random
-import functools
 
+import _conf
 from _tool.decorator import run_time
 
 MAX_LEN = 100_000
