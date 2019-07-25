@@ -58,7 +58,8 @@ class CRUD(object):
         # find_one_and_replace()
         # find_one_and_update()
 
-    def updata(self):
+    @staticmethod
+    def updata():
         # mongo.ebdb_smartsys.ebc_devices_cookbook.update(
         #     {'_id': ObjectId(_id)},
         #     {
@@ -73,7 +74,6 @@ class CRUD(object):
 
 
 class Other(object):
-
     @staticmethod
     def index():
         index_info = client.demo.test.index_information()
@@ -100,6 +100,7 @@ if __name__ == '__main__':
 
     CRUD.insert()
     CRUD.delete()
+    CRUD.updata()
     CRUD.auto_increase_id()
 
     Other.index()
