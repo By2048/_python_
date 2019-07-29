@@ -17,7 +17,7 @@ if __name__ == '__main__':
     # pool = multiprocessing.Pool(5)
     # list=[]
     # tmp=[]
-    # tmp.append(pool.apply_async(fun,(0,)))
+    # tmp.append(pool.apply_async(function,(0,)))
     # # tmp.start()
     # for i in tmp:
     #     for j in i.get():

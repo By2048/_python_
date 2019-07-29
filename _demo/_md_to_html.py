@@ -86,7 +86,7 @@ def process_quote(text: str):
 
     def rep(match):
         content = match.group(3)
-        return "<{tag}>{content}</{tag}>".format(tag='blockquote',content=content)
+        return "<{tag}>{content}</{tag}>".format(tag='blockquote', content=content)
 
     return pat.sub(repl=rep, string=text)
 
@@ -106,7 +106,7 @@ print(do("""## 李健
 2. 香蕉
 3. 栗子"""))
 
-x=process_quote("""> hello
+x = process_quote("""> hello
 asda
 lijian haha
 """)

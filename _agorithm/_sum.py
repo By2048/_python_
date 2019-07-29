@@ -3,10 +3,10 @@ import time
 A, B = (i for i in range(1_000_000)), [i for i in range(1_000_000)]
 
 
-def time_function(fun):
+def time_function(function):
     def weapper():
         time_start = time.time()
-        data = fun()
+        data = function()
         time_end = time.time()
         print(time_end - time_start, data)
 
@@ -33,6 +33,7 @@ def test_c():
     return data
 
 
-test_a()
-test_b()
-test_c()
+if __name__ == '__main__':
+    test_a()
+    test_b()
+    test_c()
