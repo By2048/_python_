@@ -14,10 +14,6 @@
 #
 
 
-
-
-
-
 # import sqlite3
 # sqlite_connect = sqlite3.connect(download_sql_path)
 # sqlite_cursor = sqlite_connect.cursor()

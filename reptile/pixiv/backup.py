@@ -25,7 +25,6 @@ user_agent_list = [
 agent = random.choice(user_agent_list)
 
 
-
 def get_ip_list():
     ip_list = []
     html = requests.get("http://haoip.cc/tiqu.htm")
@@ -35,6 +34,7 @@ def get_ip_list():
         tmp_ip = re.sub('\n', '', ip)
         ip_list.append(tmp_ip.strip())
     return ip_list
+
 
 def get_detail_img_num(link):
     num = '1'
