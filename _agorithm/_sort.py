@@ -2,7 +2,10 @@ import logging
 
 import _conf
 
+from _tool.decorator import run_time
 
+
+@run_time
 def test_1():
     def length(item):
         return len(item)
@@ -13,6 +16,7 @@ def test_1():
     logging.info(data)
 
 
+@run_time
 def test_2():
     data = [('a', 3), ('b', 2), ('c', 1)]
     logging.info(data)
@@ -20,6 +24,7 @@ def test_2():
     logging.info(data)
 
 
+@run_time
 def test_3():
     # False=0 < True=1
     data = [True, False]
@@ -28,6 +33,7 @@ def test_3():
     logging.info(data)
 
 
+@run_time
 def test_4():
     def cmp(item: str):
         if not item.isdigit():
@@ -45,6 +51,6 @@ def test_4():
 
 
 test_1()
-# test_2()
-# test_3()
-# test_4()
+test_2()
+test_3()
+test_4()
