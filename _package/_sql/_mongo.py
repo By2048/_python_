@@ -12,7 +12,8 @@ class CRUD(object):
     def insert():
         data = {'name': 111}
         logging.info(data)
-        client.demo.test.insert_one(data)
+        result = client.demo.test.insert_one(data)
+        print(result)
 
         data = {'name': 222}
         logging.info(data)
