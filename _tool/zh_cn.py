@@ -1,39 +1,27 @@
-def is_zh_cn(letter):
-    if '\u4e00' <= letter <= '\u9fff':
-        return True
-    else:
-        return False
+import string
 
 
-def is_zh_code(symbol):
-    codes = "└＾＜｜〛＼〾〝〃＇＋〜＃〚〿“「、‘＄）【＆】；％＝’…｛｀｠〘﹏｟。＠〔［，－╚／？＞｝〟〰《–—」〙〕］（”〈〉』！·〞『：＂＿〗┐～╗〖》＊↓↑←→"
-    if symbol in codes:
-        return True
-    else:
-        return False
+def is_zh_cn(item):
+    return '\u4e00' <= item <= '\u9fff'
 
 
-def get_zh_cn_num(word):
+def is_zh_code(item):
+    return item in "└＾＜｜〛＼〾〝〃＇＋〜＃〚〿“「、‘＄）【＆】；％＝’…｛｀｠〘﹏｟。＠〔" \
+                   "［，－╚／？＞｝〟〰《–—」〙〕］（”〈〉』！·〞『：＂＿〗┐～╗〖》＊↓↑←→"
+
+
+def is_en(item):
+    return item in string.ascii_letters + '1234567890'
+
+
+def get_length(data):
     num = 0
-    for letter in word:
-        if is_zh_cn(letter):
-            num += 1
-    return num
-
-
-def get_zh_code_num(word):
-    num = 0
-    for letter in word:
-        if is_zh_code(letter):
-            num += 1
-    return num
-
-
-def get_word_length(word):
-    num = 0
-    for letter in word:
-        if is_zh_cn(letter) or is_zh_code(letter):
+    for item in data:
+        if is_zh_cn(item) or is_zh_code(item):
             num += 2
-        else:
+            continue
+        if is_en(item):
             num += 1
+            continue
+        print(item)
     return num
