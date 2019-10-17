@@ -1,7 +1,3 @@
-pymongo
-redis
-pymysql
-
 twisted
 requests
 tornado
@@ -14,12 +10,11 @@ stackprinter
 loguru
 VeryPrettyTable
 
+jieba
 beautifulsoup4
+
 Pillow
 PyMySQL
 requests
 PyMongo
 redis
-
-
-jieba
