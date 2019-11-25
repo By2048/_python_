@@ -3,21 +3,29 @@
 import os
 import sys
 
-if len(sys.argv) == 1:
+arg = sys.argv[1] if len(sys.argv) >= 2 else None
+
+
+def _help_():
     print('update|更新配置 / reset|还原配置')
-    sys.exit()
 
-arg = sys.argv[1]
 
-if arg == 'update':
-    command = 'cp /root/backup/oh-my-zsh/robbyrussell.zsh-theme ~/.oh-my-zsh/themes/robbyrussell.zsh-theme'
+def _update_():
+    command = 'cp /root/backup/oh-my-zsh/robbyrussell.zsh-theme /root/.oh-my-zsh/themes/robbyrussell.zsh-theme'
     os.system(command)
+    os.system('exec $SHELL')
 
-if arg == 'reset':
-    command = 'cp /root/backup/oh-my-zsh/robbyrussell.zsh-theme.bk ~/.oh-my-zsh/themes/robbyrussell.zsh-theme'
+
+def _reset_():
+    command = 'cp /root/backup/oh-my-zsh/robbyrussell.zsh-theme.bk /root/.oh-my-zsh/themes/robbyrussell.zsh-theme'
     os.system(command)
+    os.system('exec $SHELL')
 
-print(123)
 
-command = 'exec $SHELL'
-os.system(command)
+data = {
+    None: _help_,
+    'help': _help_,
+    'update': _update_,
+    'reset': _reset_,
+}
+data.get(arg)()

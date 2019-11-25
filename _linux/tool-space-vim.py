@@ -7,9 +7,6 @@ import shutil
 install = r'/root/.SpaceVim'
 backup = r'/root/backup/SpaceVim'
 
-if not os.path.exists(backup):
-    os.makedirs(backup)
-
 files = [
     {'path': f"{install}/autoload/SpaceVim/layers/ui.vim", 'replace': ('<F2>', '<F3>')},
     {'path': f"{install}/config/plugins/vim-startify.vim", 'replace': ('<F2>', '<F3>')},
@@ -19,13 +16,17 @@ files = [
     {'path': f"{install}/config/plugins_before/vimfiler.vim", 'replace': ('<F3>', '<F2>')}
 ]
 
-if len(sys.argv) == 1:
+arg = sys.argv[1] if len(sys.argv) >= 2 else None
+
+if not os.path.exists(backup):
+    os.makedirs(backup)
+
+
+def _help_():
     print("replace|快捷键替换 \ reset|快捷键还原")
-    sys.exit()
 
-arg = sys.argv[1]
 
-if arg == 'replace':
+def _replace_():
     for file in files:
         print(f"{file['path']}    {file['replace'][0]} -> {file['replace'][1]}")
 
@@ -43,7 +44,8 @@ if arg == 'replace':
                 for item in backup_data:
                     origin_data.write(item)
 
-if arg == 'reset':
+
+def _reset_():
     for item in os.listdir(backup):
         backup_path = os.path.join(backup, item)
         for file in files:
@@ -51,3 +53,12 @@ if arg == 'reset':
                 print(f"{backup_path} -> {file['path']}")
                 shutil.move(backup_path, file['path'])
                 break
+
+
+data = {
+    None: _help_,
+    'help': _help_,
+    'replace': _replace_,
+    'reset': _reset_
+}
+data.get(arg)()
