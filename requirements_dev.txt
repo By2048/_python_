@@ -14,7 +14,9 @@ jieba
 beautifulsoup4
 
 Pillow
-PyMySQL
 requests
+
+DBUtils
+PyMySQL
 PyMongo
 redis
