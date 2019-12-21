@@ -3,7 +3,7 @@ import json
 import logging
 
 import _conf.config as config
-
+ 
 logging.basicConfig(
     level=logging.DEBUG,
     format='[%(levelname)s %(asctime)s.%(msecs)3d %(module)s/%(funcName)s:%(lineno)d] %(message)s',
