@@ -4,6 +4,8 @@ import time
 
 
 def run_time(function):
+    """" 函数运行时间 """
+
     @functools.wraps(function)
     def wrapper(*args, **kwargs):
         _start = time.time()

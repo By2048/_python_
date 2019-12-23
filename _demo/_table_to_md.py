@@ -14,7 +14,7 @@ except ImportError:
 desktop_file_path = r'E:\Script\table_to_md_input.txt'
 
 
-from _tool.zh_cn import get_word_length, get_zh_cn_num, get_zh_code_num
+from _tool._zh_cn import get_word_length, get_zh_cn_num, get_zh_code_num
 
 
 # test='3.1415926'
