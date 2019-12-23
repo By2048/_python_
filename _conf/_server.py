@@ -4,9 +4,9 @@ import pymysql
 from DBUtils.PooledDB import PooledDB
 from pymongo import MongoClient
 
-from _conf.config import MYSQL_HOST, MYSQL_PORT, MYSQL_USER, MYSQL_PWD, MYSQL_CHARSET
-from _conf.config import MONGO_HOST, MONGO_PORT, MONGO_USER, MONGO_PWD
-from _conf.config import REDIS_HOST, REDIS_PORT, REDIS_PWD, REDIS_DB, REDIS_MAX_CONN
+from _conf._config import MYSQL_HOST, MYSQL_PORT, MYSQL_USER, MYSQL_PWD, MYSQL_CHARSET
+from _conf._config import MONGO_HOST, MONGO_PORT, MONGO_USER, MONGO_PWD
+from _conf._config import REDIS_HOST, REDIS_PORT, REDIS_PWD, REDIS_DB, REDIS_MAX_CONN
 
 redis_conn_pool = redis.ConnectionPool(
     max_connections=REDIS_MAX_CONN, decode_responses=True,
