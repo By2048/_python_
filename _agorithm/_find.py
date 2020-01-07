@@ -1,7 +1,7 @@
 import random
 
 import _conf
-from _tool.decorator import run_time
+from _tool._decorator import run_time
 
 MAX_LEN = 100_000
 MAX_RANDOM = 100_000

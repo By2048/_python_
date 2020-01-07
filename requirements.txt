@@ -20,3 +20,5 @@ DBUtils
 PyMySQL
 PyMongo
 redis
+
+selenium
