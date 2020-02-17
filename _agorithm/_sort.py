@@ -2,7 +2,7 @@ import logging
 
 import _conf
 
-from _tool._decorator import run_time
+from _tool_._decorator_ import run_time
 
 
 @run_time

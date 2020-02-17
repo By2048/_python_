@@ -4,7 +4,7 @@ import random
 import redis
 
 import _conf
-from _tool._decorator import run_time
+from _tool_._decorator_ import run_time
 
 HOST = '192.168.0.27'
 PASSWORD = '123456'

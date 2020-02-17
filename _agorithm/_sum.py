@@ -1,33 +1,22 @@
-import time
+from _tool_._decorator_ import run_time
 
-A, B = (i for i in range(1_000_000)), [i for i in range(1_000_000)]
-
-
-def time_function(function):
-    def weapper():
-        time_start = time.time()
-        data = function()
-        time_end = time.time()
-        print(time_end - time_start, data)
-
-    return weapper
+A = (i for i in range(1_000_000))
+B = [i for i in range(1_000_000)]
 
 
+@run_time
 def test_a():
-    time_start = time.time()
     data = sum(A)
-    time_end = time.time()
-    print(time_end - time_start, data)
+    return data
 
 
+@run_time
 def test_b():
-    time_start = time.time()
     data = sum(B)
-    time_end = time.time()
-    print(time_end - time_start, data)
+    return data
 
 
-@time_function
+@run_time
 def test_c():
     data = sum(B)
     return data
