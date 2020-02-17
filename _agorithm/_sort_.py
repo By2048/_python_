@@ -1,39 +1,33 @@
 import logging
 
-import _conf
+from _tool_ import _logging_
 
-from _tool_._decorator_ import run_time
+_logging_.init_base()
 
 
-@run_time
 def test_1():
-    def length(item):
-        return len(item)
-
     data = ['a', 'aaa', 'aa']
     logging.info(data)
-    data.sort(key=length)
+    data.sort(key=len)
     logging.info(data)
+    print(123123)
 
 
-@run_time
 def test_2():
     data = [('a', 3), ('b', 2), ('c', 1)]
     logging.info(data)
     data = sorted(data, key=lambda x: x[1])
     logging.info(data)
+    print(123123)
 
 
-@run_time
 def test_3():
-    # False=0 < True=1
     data = [True, False]
     logging.info(data)
     data = sorted(data)
     logging.info(data)
 
 
-@run_time
 def test_4():
     def cmp(item: str):
         if not item.isdigit():
@@ -44,7 +38,7 @@ def test_4():
         else:
             return 1
 
-    data = list('qwerQWER1234')
+    data = list('QWERqwer1234')
     logging.info(data)
     data.sort(key=cmp)
     logging.info(data)

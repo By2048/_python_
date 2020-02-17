@@ -2,16 +2,20 @@ import functools
 import logging
 import time
 
+from _tool_ import _logging_
+
+_logging_.init_mini()
+
 
 def run_time(function):
-    """" 函数运行时间 """
+    """ function run time """
 
     @functools.wraps(function)
     def wrapper(*args, **kwargs):
-        _start = time.time()
+        start = time.time()
         result = function(*args, **kwargs)
-        _end = time.time()
-        logging.info(f"name:{function.__name__:<15} time:{_end - _start}")
+        end = time.time()
+        logging.info(f"𝙁:{function.__name__} -> 𝙏:{end - start}")
         return result
 
     return wrapper

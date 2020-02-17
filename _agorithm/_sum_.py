@@ -6,23 +6,19 @@ B = [i for i in range(1_000_000)]
 
 @run_time
 def test_a():
-    data = sum(A)
-    return data
+    return sum(A)
 
 
 @run_time
 def test_b():
-    data = sum(B)
-    return data
+    return sum(B)
 
 
 @run_time
 def test_c():
-    data = sum(B)
-    return data
+    return sum(B)
 
 
-if __name__ == '__main__':
-    test_a()
-    test_b()
-    test_c()
+test_a()
+test_b()
+test_c()
