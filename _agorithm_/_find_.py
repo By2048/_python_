@@ -1,6 +1,6 @@
 import random
 
-import _conf
+import _conf_
 from _tool_._decorator_ import run_time
 
 MAX_LEN = 100_000

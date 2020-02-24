@@ -4,7 +4,7 @@ from pprint import pprint, pformat
 
 from pymongo import ReturnDocument
 
-from _conf._server import mongo_client as client
+from _conf_._server_ import mongo_client as client
 
 
 class CRUD(object):

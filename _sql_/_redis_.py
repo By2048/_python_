@@ -1,7 +1,7 @@
 import json
 import logging
 
-from _conf._server import redis_conn_pool
+from _conf_._server_ import redis_conn_pool
 
 import redis
 

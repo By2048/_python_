@@ -3,7 +3,7 @@ import random
 
 import redis
 
-import _conf
+import _conf_
 from _tool_._decorator_ import run_time
 
 HOST = '192.168.0.27'

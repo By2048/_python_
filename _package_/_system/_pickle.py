@@ -1,7 +1,7 @@
 import pickle
 import logging
 
-import _conf
+import _conf_
 
 
 class Student(object):

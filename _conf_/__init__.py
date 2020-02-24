@@ -2,7 +2,7 @@ import os
 import json
 import logging
 
-import _conf._config as config
+import _conf_._config_ as config
  
 logging.basicConfig(
     level=logging.DEBUG,
