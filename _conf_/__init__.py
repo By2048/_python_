@@ -27,12 +27,12 @@ def init_config():
 
     config.REDIS_HOST = data.get(env).get('redis').get('host')
     config.REDIS_PORT = data.get(env).get('redis').get('port')
-    config.REDIS_PWD = data.get(env).get('redis').get('pwd')
+    config.REDIS_PASSWORD = data.get(env).get('redis').get('password')
 
     config.MYSQL_HOST = data.get(env).get('mysql').get('host')
     config.MYSQL_PORT = data.get(env).get('mysql').get('port')
     config.MYSQL_USER = data.get(env).get('mysql').get('user')
-    config.MYSQL_PWD = data.get(env).get('mysql').get('pwd')
+    config.MYSQL_PASSWORD = data.get(env).get('mysql').get('password')
 
 
 init_config()

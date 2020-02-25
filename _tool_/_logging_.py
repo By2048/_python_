@@ -1,7 +1,7 @@
 import logging
 
 
-def init_mini():
+def init_logging_mini():
     logging.basicConfig(
         level=logging.DEBUG,
         format='%(message)s',
@@ -9,7 +9,7 @@ def init_mini():
     )
 
 
-def init_base():
+def init_logging_base():
     logging.basicConfig(
         level=logging.DEBUG,
         format='%(funcName)11s:%(lineno)3d | %(message)s',
@@ -17,7 +17,7 @@ def init_base():
     )
 
 
-def init_detail():
+def init_logging_detail():
     logging.basicConfig(
         level=logging.DEBUG,
         format='[%(levelname)s %(asctime)s.%(msecs)3d %(module)s/%(funcName)s:%(lineno)d] %(message)s',

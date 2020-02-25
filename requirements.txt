@@ -20,6 +20,7 @@ DBUtils
 PyMySQL
 PyMongo
 redis
+redis-py-cluster
 
 selenium
 

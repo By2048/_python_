@@ -2,7 +2,7 @@ import logging
 
 from _tool_ import _logging_
 
-_logging_.init_base()
+_logging_.init_logging_base()
 
 
 def test_1():

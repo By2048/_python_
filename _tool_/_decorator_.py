@@ -4,7 +4,7 @@ import time
 
 from _tool_ import _logging_
 
-_logging_.init_mini()
+_logging_.init_logging_mini()
 
 
 def run_time(function):
