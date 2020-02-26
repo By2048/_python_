@@ -6,18 +6,6 @@ import time
 from kazoo.client import KazooClient
 
 
-def run_time(function):
-    @functools.wraps(function)
-    def wrapper(*args, **kwargs):
-        time_start = time.time()
-        result = function(*args, **kwargs)
-        time_end = time.time()
-        print(f"name:{function.__name__}    time:{time_end - time_start}")
-        return result
-
-    return wrapper
-
-
 # @zk.add_listener
 # def listener(state):
 #     print(f"state:{state}")
@@ -28,7 +16,6 @@ def run_time(function):
 #             print("Read/Write mode!")
 
 
-@run_time
 def get_data():
     path = os.path.abspath(__file__)
     path = os.path.dirname(path)
@@ -42,7 +29,6 @@ def get_data():
     return data
 
 
-@run_time
 def main():
     data = get_data()
 
@@ -74,7 +60,6 @@ def main():
     zk.close()
 
 
-@run_time
 def version():
     zk = KazooClient('s50.53iq.com:21811,s50.53iq.com:21812,s50.53iq.com:21813')
     zk.start()
@@ -86,7 +71,6 @@ def version():
     zk.close()
 
 
-@run_time
 def clear():
     zk = KazooClient('s50.53iq.com:21811,s50.53iq.com:21812,s50.53iq.com:21813')
     zk.start()
