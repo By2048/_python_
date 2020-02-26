@@ -16,12 +16,21 @@ beautifulsoup4
 
 Pillow
 
+fabric
+
+numpy
+
 DBUtils
 PyMySQL
 PyMongo
 redis
 redis-py-cluster
 
+
+lxml
+
 selenium
+
+shortuuid
 
 twisted
