@@ -1,15 +1,36 @@
-# AND 从左到右扫描，返回第一个为假的表达式值，无假值则返回最后一个表达式值。
-print('a' and 'b')
-print({} and 'b')
-print('a' and 'b' and 'c')
-print()
+import pysnooper
 
-# OR 从左到右扫描，返回第一个为真的表达式值，无真值则返回最后一个表达式值。
-print('a' or 'b')
-print('' or 'b')
-print('' or [] or {})
-print()
 
-# and or搭配
-print(1 and 'a' or 'b')
-print(0 and 'a' or 'b')
+@pysnooper.snoop()
+def _and_():
+    # 从左到右
+    # 返回第一个False，
+    # 无False返回最后一个
+    _1 = 'a' and 'b'  # 'b'
+    _2 = {} and 'b'  # {}
+    _3 = 'a' and 'b' and 'c'  # 'c'
+
+
+@pysnooper.snoop()
+def _or_():
+    # 从左到右
+    # 返回第一个为True
+    # 无True返回最后一个
+    _1 = 'a' or 'b'  # 'a'
+    _2 = '' or 'b'  # 'b'
+    _3 = '' or [] or {}  # {}
+
+
+@pysnooper.snoop()
+def _and_or_():
+    _1 = 1 and 'a' or 'b'  # 'a'
+    _2 = 0 and 'a' or 'b'  # 'b'
+
+
+assert False == 0
+assert True == 1
+
+if __name__ == '__main__':
+    _and_()
+    _or_()
+    _and_or_()
