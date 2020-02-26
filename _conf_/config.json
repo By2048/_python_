@@ -1,0 +1,24 @@
+{
+    "qq_mail": {
+        "user": "",
+        "pwd": ""
+    },
+    "redis": {
+        "host": "",
+        "port": 0,
+        "password": ""
+    },
+    "mysql": {
+        "host": "",
+        "user": "",
+        "port": 0,
+        "password": ""
+    },
+    "ssh": {
+        "host": "",
+        "user": "",
+        "port": 0,
+        "rsa": "",
+        "password": ""
+    }
+}

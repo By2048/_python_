@@ -10,8 +10,6 @@ logging.basicConfig(
     datefmt='%H:%M:%S'
 )
 
-env = os.environ.get('env') or 'aly'
-
 
 def init_config():
     if not os.path.exists(config.path):
@@ -25,14 +23,20 @@ def init_config():
     if not data:
         return
 
-    config.REDIS_HOST = data.get(env).get('redis').get('host')
-    config.REDIS_PORT = data.get(env).get('redis').get('port')
-    config.REDIS_PASSWORD = data.get(env).get('redis').get('password')
+    config.REDIS_HOST = data.get('redis').get('host')
+    config.REDIS_PORT = data.get('redis').get('port')
+    config.REDIS_PASSWORD = data.get('redis').get('password')
 
-    config.MYSQL_HOST = data.get(env).get('mysql').get('host')
-    config.MYSQL_PORT = data.get(env).get('mysql').get('port')
-    config.MYSQL_USER = data.get(env).get('mysql').get('user')
-    config.MYSQL_PASSWORD = data.get(env).get('mysql').get('password')
+    config.MYSQL_HOST = data.get('mysql').get('host')
+    config.MYSQL_PORT = data.get('mysql').get('port')
+    config.MYSQL_USER = data.get('mysql').get('user')
+    config.MYSQL_PASSWORD = data.get('mysql').get('password')
+
+    config.SSH_HOST = data.get('ssh').get('host')
+    config.SSH_USER = data.get('ssh').get('user')
+    config.SSH_PORT = data.get('ssh').get('port')
+    config.SSH_RSA = data.get('ssh').get('rsa')
+    config.SSH_PASSWORD = data.get('ssh').get('password')
 
 
 init_config()

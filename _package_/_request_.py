@@ -1,11 +1,10 @@
 import time
-from datetime import datetime
-import logging
 import json
+from datetime import datetime
 
 import requests
 
 data = requests.get('http://www.baidu.com').text
-logging.info(data)
+data = data.strip()
 
-
+print(data)

@@ -40,4 +40,6 @@ def test_table_format():
 
 if __name__ == '__main__':
     test_table_print()
-    print(test_table_format())
+
+    data = test_table_format()
+    print(data)

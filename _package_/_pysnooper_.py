@@ -14,9 +14,6 @@ def number_to_bits(number):
         return [0]
 
 
-number_to_bits(6)
-
-
 def large(l):
     return isinstance(l, list) and len(l) > 5
 
@@ -33,7 +30,13 @@ def print_ndarray(a):
 def sum_to_x(x):
     l = list(range(x))
     a = numpy.zeros((10, 10))
+
     return sum(l)
 
 
-sum_to_x(10000)
+if __name__ == '__main__':
+    number_to_bits(6)
+
+    print('-------------------------')
+
+    sum_to_x(10000)
