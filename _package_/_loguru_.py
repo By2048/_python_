@@ -1,35 +1,40 @@
+import math
+
 from loguru import logger
-
-logger.debug("That's it, beautiful and simple logging!")
-
 
 # https://github.com/Delgan/loguru
 
 
-@logger.catch(level='INFO')
-def my_function(x, y, z):
+logger.info('message')
+logger.error('message')
+logger.debug('message')
+logger.warning('message')
+logger.opt(record=True).info("current line is: {record[line]}")
+logger.opt(lazy=True).debug("If sink <= DEBUG: {x}", x=lambda: math.factorial(2 ** 5))
+# logger.add("output.log", backtrace=True, diagnose=True)
+
+logger.info(f"\n{'=' * 999}")
+
+
+@logger.catch()
+def test(x, y, z):
     return 1 / (x + y + z)
 
 
-my_function(0, 0, 0)
+test(0, 0, 0)
+
+logger.info(f"\n{'=' * 999}")
 
 
-# logger.opt(record=True).info("Current line is: {record[line]}")
-# logger.opt(lazy=True).debug("If sink <= DEBUG: {x}", x=lambda: math.factorial(2 ** 5))
-
-
-# logger.add("output.log", backtrace=True, diagnose=True)  # Set 'False' to not leak sensitive data in prod
-
-
-def func(a, b):
+def test_1(a, b):
     return a / b
 
 
-def nested(c):
+def test_2(a, b):
     try:
-        func(5, c)
-    except ZeroDivisionError:
-        logger.exception("What?!")
+        test_1(a, b)
+    except Exception as e:
+        logger.exception(f"What? {e}")
 
 
-nested(0)
+test_2(1, 0)

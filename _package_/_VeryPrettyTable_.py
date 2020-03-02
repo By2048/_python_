@@ -4,8 +4,8 @@ from veryprettytable import VeryPrettyTable
 def test_table_print():
     table = VeryPrettyTable(["City name", "Area", "Population", "Annual Rainfall"])
 
-    table.align["City name"] = "l"  # Left align city names
-    table.padding_width = 2  # One space between column edges and contents (default)
+    table.align["City name"] = "l"
+    table.padding_width = 3
 
     table.add_row(["Adelaide", 1295, 1158259, 600.5])
     table.add_row(["Brisbane", 5905, 1857594, 1146.4])
@@ -40,6 +40,4 @@ def test_table_format():
 
 if __name__ == '__main__':
     test_table_print()
-
-    data = test_table_format()
-    print(data)
+    print(test_table_format())
