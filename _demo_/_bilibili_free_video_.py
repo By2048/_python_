@@ -9,7 +9,7 @@ url = 'https://api.bilibili.com/pgc/season/index/result' \
       '&season_month=-1' \
       '&year=-1' \
       '&style_id=-1' \
-      '&order=2' \
+      '&order=1' \
       '&st=1' \
       '&sort=0' \
       '&page={}' \
@@ -17,11 +17,20 @@ url = 'https://api.bilibili.com/pgc/season/index/result' \
       '&pagesize=50' \
       '&type=1'
 
-for page in range(1, 999):
+# order
+# 0 更新时间
+# 1 无
+# 2 播放数量
+# 3 追番人数
+# 4 最高评分
+# 5 开播时间
+
+for page in range(1, 99):
     response = requests.get(url.format(page))
     response = response.json()
     data = response.get('data')
     if not data.get('has_next'):
+        print(f'\n max page {page} \n')
         break
     for video in data.get('list'):
         badge = video.get('badge')
