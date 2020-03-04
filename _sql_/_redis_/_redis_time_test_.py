@@ -60,7 +60,6 @@ def test_4():
 def flush_db():
     db = redis.Redis(host=HOST, password=PASSWORD)
     db.flushdb()
-    db.close()
 
 
 if __name__ == '__main__':
