@@ -1,12 +1,16 @@
 #!/root/.pyenv/versions/shell/bin/python
 
-import os
 import shutil
+import os
 import sys
+from enum import Enum
 
-arg = sys.argv[1] if len(sys.argv) >= 2 else None
 
-backup = r'/root/backup/oh-my-zsh'
+class Args(Enum):
+    upgrade = '更新ZSH'
+    update_themes = '更新主题'
+    reset_themes = '还原主题'
+
 
 files = [
     {
@@ -14,16 +18,20 @@ files = [
         'replace': ('%c', '$PWD')
     }
 ]
-
-if not os.path.exists(backup):
-    os.makedirs(backup)
+backup = r'/root/backup/oh-my-zsh'
 
 
-def _help_():
-    print('update|更新配置 / reset|还原配置')
+def init():
+    if not os.path.exists(backup):
+        os.makedirs(backup)
 
 
-def _update_():
+def help():
+    for arg in Args:
+        print(f"{arg.name:>15} - {arg.value}")
+
+
+def update_themes():
     for file in files:
         print(f"{file['path']}    {file['replace'][0]} -> {file['replace'][1]}")
         origin_file = file['path']
@@ -39,11 +47,10 @@ def _update_():
         with open(origin_file, 'w+', encoding='utf-8') as origin_data:
             for item in backup_data:
                 origin_data.write(item)
-
     os.system('exec $SHELL')
 
 
-def _reset_():
+def reset_themes():
     for item in os.listdir(backup):
         backup_path = os.path.join(backup, item)
         for file in files:
@@ -54,10 +61,23 @@ def _reset_():
     os.system('exec $SHELL')
 
 
-data = {
-    None: _help_,
-    'help': _help_,
-    'update': _update_,
-    'reset': _reset_,
-}
-data.get(arg)()
+def upgrade():
+    reset_themes()
+    os.system('upgrade_oh_my_zsh')
+    update_themes()
+
+
+init()
+
+if __name__ == '__main__':
+    arg = sys.argv[1] if len(sys.argv) >= 2 else None
+
+    data = {
+        None: help,
+        'help': help,
+        'update-themes': update_themes,
+        'reset-themes': reset_themes,
+        'upgrade': upgrade
+    }
+
+    data.get(arg)()
