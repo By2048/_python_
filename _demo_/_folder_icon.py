@@ -2,36 +2,36 @@ import os
 
 
 def init():
-    pass
+    """ 设置Win系统中文件夹显示的图标 """
 
+    path_folders = "D:\\"
+    path_icons = "D:\\Icon"
+    desktop_ini_data = "[.ShellClassInfo]\nIconResource = D:\Icon\{}, 0"
 
-def replace():
-    """ 替换Win系统中文件夹显示的图标 """
-    path = "d:\\"
+    for folder in os.listdir(path_folders):
+        folder_path = os.path.join(path_folders, folder)
+        for icon in os.listdir(path_icons):
+            icon_path = os.path.join(path_icons, icon)
 
-    for folder in os.listdir(path):
-        folder = os.path.join(path, folder)
-        desktop = os.path.join(folder, 'desktop.ini')
-        if os.path.isfile(desktop):
-            with open(desktop) as file:
-                data = file.read()
-                data = data.replace(r'E:\Sync\Software\Icon', r'D:\Icon')
+            if folder == icon.split('.')[0]:
+                desktop_ini = os.path.join(folder_path, 'desktop.ini')
 
-                print(desktop)
+                print(f"{folder_path:>30} -> {icon_path}")
 
-                command = f"attrib -s -h {desktop}"
-                os.system(command)
+                if os.path.isfile(desktop_ini):
+                    os.system(f"attrib -s -h {desktop_ini}")
 
                 try:
-                    with open(desktop, 'w') as _file_:
-                        _file_.write(data)
+                    with open(desktop_ini, 'w') as file:
+                        file.write(desktop_ini_data.format(icon))
                 except Exception as e:
-                    print('----------    ', desktop, '    ----------')
+                    print(f'---------- {folder_path} - {icon_path} ----------')
                     print(e)
 
-                command = f"attrib +s +h {desktop}"
-                os.system(command)
+                os.system(f"attrib +s +h {desktop_ini}")
+
+                break
 
 
 if __name__ == '__main__':
-    pass
+    init()
