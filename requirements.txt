@@ -4,6 +4,8 @@ requests
 tornado
 django
 
+flask
+
 serial
 paho-mqtt
 pysnooper
@@ -34,3 +36,6 @@ selenium
 shortuuid
 
 twisted
+
+
+scalene
