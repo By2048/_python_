@@ -1,40 +1,34 @@
-jupyter
-jupyterlab
-
-
 requests
+
 tornado
 django
-
 flask
 
 serial
 paho-mqtt
-pysnooper
-stackprinter
-loguru # 日志输出
-VeryPrettyTable # 表格输出数据
+pysnooper          # 程序运行中数追踪
+stackprinter       # 错误追踪
+loguru             # 日志输出
+VeryPrettyTable    # 表格输出数据
+jieba              # 分词
+beautifulsoup4     # 网页解析
+lxml               # 网页解析
+Pillow             # 图像处理
+fabric             # 远程部署
+numpy              # 数据处理
 
-jieba
-beautifulsoup4
-
-Pillow
-
-fabric # 远程部署
-
-numpy
-
-DBUtils
-PyMySQL
-PyMongo
-redis
-
+DBUtils            # 数据库连接池
+PyMySQL            # MySQL数据库
+PyMongo            # MongoDB数据库
+redis              # Redis数据库
 # redis-py-cluster # Redis集群
 
+#### Linux ####
+# jupyter            # 笔记本
+# jupyterlab         # 笔记本
+# celery[redis]      # 异步任务 定时任务
+# twisted            # 网络编程
 
-lxml
-selenium # 控制浏览器
-shortuuid # 短UID
-twisted # 网络编程
-scalene # 内存分析
-celery[redis] # 异步任务 定时任务
+selenium           # 控制浏览器
+shortuuid          # 短UID
+scalene            # 内存分析
