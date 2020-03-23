@@ -32,3 +32,4 @@ redis              # Redis数据库
 selenium           # 控制浏览器
 shortuuid          # 短UID
 scalene            # 内存分析
+pympler            # 内存资源统计
