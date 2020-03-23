@@ -12,15 +12,15 @@ serial
 paho-mqtt
 pysnooper
 stackprinter
-loguru
-VeryPrettyTable
+loguru # 日志输出
+VeryPrettyTable # 表格输出数据
 
 jieba
 beautifulsoup4
 
 Pillow
 
-fabric
+fabric # 远程部署
 
 numpy
 
@@ -28,16 +28,13 @@ DBUtils
 PyMySQL
 PyMongo
 redis
-redis-py-cluster
+
+# redis-py-cluster # Redis集群
 
 
 lxml
-
-selenium
-
-shortuuid
-
-twisted
-
-
-scalene
+selenium # 控制浏览器
+shortuuid # 短UID
+twisted # 网络编程
+scalene # 内存分析
+celery[redis] # 异步任务 定时任务
