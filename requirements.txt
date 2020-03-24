@@ -17,6 +17,9 @@ Pillow             # 图像处理
 fabric             # 远程部署
 numpy              # 数据处理
 
+click              # 命令行脚本
+fire               # 命令行脚本
+
 DBUtils            # 数据库连接池
 PyMySQL            # MySQL数据库
 PyMongo            # MongoDB数据库
