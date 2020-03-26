@@ -3,8 +3,8 @@ from pprint import pprint
 
 from pymongo import MongoClient
 
-db = MongoClient("mongodb://smartsys:smartsys.com@s71.53iq.com:30000")
-mongo = db["ebdb_smartsys"]
+db = MongoClient("mongodb://{user}:{password}@{host}:{port}")
+mongo = db['{collection_name}']
 result = []
 collections = mongo.list_collection_names()
 for i in collections:
