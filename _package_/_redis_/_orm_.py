@@ -1,31 +1,16 @@
-import json
 import os
+import json
 import importlib
-from enum import Enum
-from typing import Union
 
 import redis
 
-connection_pool = redis.ConnectionPool(
-    host='47.244.37.52', port=6379, password="redis-password-1100", db=0,
-    decode_responses=True,
-)
+try:
+    from _conf_._server_ import redis_connection_pool as connection_pool
+except ImportError:
+    raise Exception('redis connection pool error')
 
 
-class RK(object):
-
-    def __init__(self, name, ex=None):
-        self.name: str = name
-        self.ex: Union[None, int] = ex
-
-    def __bool__(self):
-        return bool(self.name)
-
-    def __str__(self):
-        return self.name
-
-    def init(self, **kwargs):
-        return self.name.format(**kwargs)
+# Redis伪ORM实现
 
 
 class RQuery(object):
@@ -84,7 +69,6 @@ class RModel(object):
 
 
 class User(RModel):
-    # objects = RQuery()
 
     def __init__(self, data=None):
         self.id: int = 0
@@ -107,15 +91,9 @@ class User(RModel):
     def to_json(self, ):
         return {'id': self.id, 'name': self.name, 'age': self.age}
 
-    def get(self) -> 'User':
-        print(123)
-        return self
-
     package = __file__.replace('/', '\\').replace(os.getcwd(), '') \
         .lstrip('/').lstrip('\\').rstrip('.py') \
         .replace('/', '.').replace('\\', '.')
-
-    _class_ = importlib.import_module(package, __qualname__)
 
     objects = RQuery(Meta, package=package, model=__qualname__)
 
