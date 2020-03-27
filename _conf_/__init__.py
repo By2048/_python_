@@ -1,6 +1,8 @@
+import inspect
 import os
 import json
 import logging
+import re
 
 import _conf_._config_ as config
 
@@ -11,11 +13,13 @@ logging.basicConfig(
 )
 
 
+
+
 def init_config():
-    if not os.path.exists(config.path):
+    if not os.path.exists(config.config_path):
         return
 
-    with open(config.path, 'r') as file:
+    with open(config.config_path, 'r') as file:
         data = file.readlines()
         data = ''.join(data)
         data = json.loads(data)
@@ -23,20 +27,23 @@ def init_config():
     if not data:
         return
 
-    config.REDIS_HOST = data.get('redis').get('host')
-    config.REDIS_PORT = data.get('redis').get('port')
-    config.REDIS_PASSWORD = data.get('redis').get('password')
+    configs = []
+    for name, obj in inspect.getmembers(config):
+        if re.match('[A-Z][A-Z0-9_]*[A-Z]', name):
+            configs.append(name)
 
-    config.MYSQL_HOST = data.get('mysql').get('host')
-    config.MYSQL_PORT = data.get('mysql').get('port')
-    config.MYSQL_USER = data.get('mysql').get('user')
-    config.MYSQL_PASSWORD = data.get('mysql').get('password')
+    for conf in configs:
+        keys = [item.lower() for item in conf.split("_")]
 
-    config.SSH_HOST = data.get('ssh').get('host')
-    config.SSH_USER = data.get('ssh').get('user')
-    config.SSH_PORT = data.get('ssh').get('port')
-    config.SSH_RSA = data.get('ssh').get('rsa')
-    config.SSH_PASSWORD = data.get('ssh').get('password')
+        val = None
+        for key in keys:
+            if not val:
+                val = data.get(key)
+            else:
+                val = val.get(key)
+
+        if val:
+            setattr(config, conf, val)
 
 
 init_config()

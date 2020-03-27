@@ -1,9 +1,14 @@
 {
-    "qq_mail": {
+    "qqmail": {
         "user": "",
         "pwd": ""
     },
     "redis": {
+        "host": "",
+        "port": 0,
+        "password": ""
+    },
+    "mongodb": {
         "host": "",
         "port": 0,
         "password": ""
@@ -18,7 +23,6 @@
         "host": "",
         "user": "",
         "port": 0,
-        "rsa": "",
-        "password": ""
+        "rsa": ""
     }
 }
