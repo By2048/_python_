@@ -1,11 +1,5 @@
-requests
-
-tornado
-django
-flask
-
-serial
-paho-mqtt
+serial             # 串口变成
+paho-mqtt          # MQTT库
 pysnooper          # 程序运行中数追踪
 stackprinter       # 错误追踪
 loguru             # 日志输出
@@ -24,15 +18,23 @@ DBUtils            # 数据库连接池
 PyMySQL            # MySQL数据库
 PyMongo            # MongoDB数据库
 redis              # Redis数据库
-# redis-py-cluster # Redis集群
-
-#### Linux ####
-# jupyter            # 笔记本
-# jupyterlab         # 笔记本
-# celery[redis]      # 异步任务 定时任务
-# twisted            # 网络编程
 
 selenium           # 控制浏览器
 shortuuid          # 短UID
 scalene            # 内存分析
 pympler            # 内存资源统计
+
+#### API接口开发 ####
+requests
+tornado
+django
+flask
+
+#### 仅Linux系统 ####
+# jupyter            # 笔记本
+# jupyterlab         # 笔记本
+# celery[redis]      # 异步任务 定时任务
+# twisted            # 网络编程
+
+#### 兼容性问题 ####
+# redis-py-cluster   # Redis集群 与最新版Redis库不兼容
