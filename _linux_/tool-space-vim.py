@@ -1,8 +1,9 @@
-#!/root/.pyenv/versions/shell/bin/python
+#!/root/.pyenv/versions/_python_/bin/python
 
 import os
-import sys
 import shutil
+
+import fire
 
 install = r'/root/.SpaceVim'
 backup = r'/root/backup/SpaceVim'
@@ -16,17 +17,16 @@ files = [
     {'path': f"{install}/config/plugins_before/vimfiler.vim", 'replace': ('<F3>', '<F2>')}
 ]
 
-arg = sys.argv[1] if len(sys.argv) >= 2 else None
-
 if not os.path.exists(backup):
     os.makedirs(backup)
 
 
-def _help_():
-    print("replace|快捷键替换 \ reset|快捷键还原")
+def help():
+    print("replace | 快捷键替换")
+    print("  reset | 快捷键还原")
 
 
-def _replace_():
+def replace():
     for file in files:
         print(f"{file['path']}    {file['replace'][0]} -> {file['replace'][1]}")
 
@@ -45,7 +45,7 @@ def _replace_():
                     origin_data.write(item)
 
 
-def _reset_():
+def reset():
     for item in os.listdir(backup):
         backup_path = os.path.join(backup, item)
         for file in files:
@@ -55,10 +55,5 @@ def _reset_():
                 break
 
 
-data = {
-    None: _help_,
-    'help': _help_,
-    'replace': _replace_,
-    'reset': _reset_
-}
-data.get(arg)()
+if __name__ == '__main__':
+    fire.Fire()

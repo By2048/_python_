@@ -1,15 +1,23 @@
-#!/root/.pyenv/versions/shell/bin/python
+#!/root/.pyenv/versions/_python_/bin/python
 
 import shutil
 import os
 import sys
 from enum import Enum
 
+import fire
+
 
 class Args(Enum):
     upgrade = '更新ZSH'
     update_themes = '更新主题'
     reset_themes = '还原主题'
+
+
+def help():
+    print('      upgrade | 更新ZSH')
+    print('update_themes | 更新主题')
+    print(' reset_themes | 还原主题')
 
 
 files = [
@@ -20,15 +28,8 @@ files = [
 ]
 backup = r'/root/backup/oh-my-zsh'
 
-
-def init():
-    if not os.path.exists(backup):
-        os.makedirs(backup)
-
-
-def help():
-    for arg in Args:
-        print(f"{arg.name:>15} - {arg.value}")
+if not os.path.exists(backup):
+    os.makedirs(backup)
 
 
 def update_themes():
@@ -67,17 +68,5 @@ def upgrade():
     update_themes()
 
 
-init()
-
 if __name__ == '__main__':
-    arg = sys.argv[1] if len(sys.argv) >= 2 else None
-
-    data = {
-        None: help,
-        'help': help,
-        'update-themes': update_themes,
-        'reset-themes': reset_themes,
-        'upgrade': upgrade
-    }
-
-    data.get(arg)()
+    fire.Fire()

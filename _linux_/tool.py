@@ -1,4 +1,4 @@
-#!/root/.pyenv/versions/shell/bin/python
+#!/root/.pyenv/versions/_python_/bin/python
 
 import os
 import shutil

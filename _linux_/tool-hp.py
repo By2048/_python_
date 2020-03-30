@@ -1,23 +1,18 @@
-#!/root/.pyenv/versions/shell/bin/python
+#!/root/.pyenv/versions/_python_/bin/python
 
 import os
-import sys
 
-arg = sys.argv[1] if len(sys.argv) >= 2 else None
+import fire
 
 
-def _help_():
+def help():
     print("update|更新脚本")
 
 
-def _update_():
+def update():
     os.system('curl https://cht.sh/:cht.sh > /root/bin/hp')
     os.system('chmod +x /root/bin/hp')
 
 
-data = {
-    None: _help_,
-    'help': _help_,
-    'update': _update_
-}
-data.get(arg)()
+if __name__ == '__main__':
+    fire.Fire()
