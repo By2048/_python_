@@ -1,18 +1,12 @@
+import os
+import smtplib
 from email.header import Header
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from email.mime.application import MIMEApplication
-import smtplib
-import os
-
-try:
-    from config import *
-except ImportError:
-    from .config import *
 
 
-
-def mail_image(img_path, to_address=to_address,from_title=from_title, to_title=to_title,topic='mail_topic'):
+def mail_image(img_path, to_address=to_address, from_title=from_title, to_title=to_title, topic='mail_topic'):
     message = MIMEMultipart()
     mail_body = MIMEText('Test-Image，\n附件的邮件。', 'plain', 'utf-8')
     message.attach(mail_body)
@@ -34,5 +28,4 @@ def mail_image(img_path, to_address=to_address,from_title=from_title, to_title=t
 
 
 if __name__ == '__main__':
-    img_path = '_image/test_image.png'
-    mail_image(img_path)
+    mail_image('image.png')
