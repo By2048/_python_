@@ -4,7 +4,6 @@
 import requests
 import fire
 from veryprettytable import VeryPrettyTable
-from tqdm import tqdm
 
 
 def free():
