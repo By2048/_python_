@@ -45,3 +45,10 @@ SSH_PORT = 22
 SSH_RSA = "rsa_file_path"
 
 # ----------------------------------------------------- #
+
+QQMAIL_HOST = "smtp.qq.com"
+QQMAIL_PORT = 465
+QQMAIL_USER = "124xxxx575@qq.com"
+QQMAIL_PASSWORD = "pmbyxxxxxxxxifig"
+
+# ----------------------------------------------------- #

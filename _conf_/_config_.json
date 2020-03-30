@@ -1,7 +1,9 @@
 {
     "qqmail": {
+        "host": "",
+        "port": 0,
         "user": "",
-        "pwd": ""
+        "password": ""
     },
     "redis": {
         "host": "",
