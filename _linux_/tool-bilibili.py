@@ -33,7 +33,6 @@ def free():
     # 5 开播时间
 
     page = 1
-    # table = VeryPrettyTable(["Name", "Url"])
     table = VeryPrettyTable(["Name", "Url"])
     table.align["Name"] = "r"
     table.align["Url"] = "l"
