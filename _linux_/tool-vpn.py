@@ -7,8 +7,8 @@ import fire
 
 
 def help():
-    print("         show | 显示当前端口")
-    print("change {port} | 修改端口")
+    print("                show | 显示当前端口")
+    print("change --port={port} | 修改端口")
 
 
 def show():
@@ -21,6 +21,8 @@ def show():
 def change(port):
     command = 'docker stop vpn && docker rm vpn'
     os.popen(command).read()
+
+    os.system('docker pull oddrationale/docker-shadowsocks')
 
     command = f"docker run -d --name vpn --restart=always -p {port}:2048 " \
               f"oddrationale/docker-shadowsocks " \
