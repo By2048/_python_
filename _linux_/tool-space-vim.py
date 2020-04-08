@@ -9,12 +9,14 @@ install = r'/root/.SpaceVim'
 backup = r'/root/backup/SpaceVim'
 
 files = [
-    {'path': f"{install}/autoload/SpaceVim/layers/ui.vim", 'replace': ('<F2>', '<F3>')},
-    {'path': f"{install}/config/plugins/vim-startify.vim", 'replace': ('<F2>', '<F3>')},
-
-    {'path': f"{install}/autoload/SpaceVim/layers/core.vim", 'replace': ('<F3>', '<F2>')},
-    {'path': f"{install}/config/plugins_before/defx.vim", 'replace': ('<F3>', '<F2>')},
-    {'path': f"{install}/config/plugins_before/vimfiler.vim", 'replace': ('<F3>', '<F2>')}
+    {
+        'path': f"{install}/autoload/SpaceVim/layers/ui.vim",
+        'replace': ('<F2>', '<F3>')
+    },
+    {
+        'path': f"{install}/autoload/SpaceVim/layers/core.vim",
+        'replace': ('<F3>', '<F2>')
+    },
 ]
 
 if not os.path.exists(backup):
@@ -28,7 +30,7 @@ def help():
 
 def replace():
     for file in files:
-        print(f"{file['path']}    {file['replace'][0]} -> {file['replace'][1]}")
+        print(f" {file['path']}    {'->'.join(file['replace'])} ")
 
         origin_file = file['path']
         backup_file = f"{backup}/{os.path.basename(origin_file)}"
