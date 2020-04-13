@@ -1,7 +1,7 @@
 import re
 import os
 
-path = r"T:\理科生坠入情网，故尝试证明。"
+path = r"T:\BiliBIli\异度侵入 IDINVADED"
 
 videos = []
 
@@ -20,8 +20,9 @@ def main():
 
 
 def test():
-    print(re.split(r'\([avAVpP,\d]+\)', '1.使徒、袭来(Av14925009,P1).mp4'))
-    videos = sorted(videos, key=lambda x: int(x[0:2]))
+    pass
+    # print(re.split(r'\([avAVpP,\d]+\)', '1.使徒、袭来(Av14925009,P1).mp4'))
+    # videos = sorted(videos, key=lambda x: int(x[0:2]))
 
     # data = re.match(r'([\d]+)(\.)([\s\S]+)(^\(.*\)$)', name)
     # data = re.match(r'([\d]+)(\.)([\s\S]+)', name)
