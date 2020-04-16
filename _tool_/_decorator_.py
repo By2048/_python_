@@ -1,8 +1,11 @@
-import functools
-import logging
 import time
+import logging
+import functools
 
-from _tool_ import _logging_
+try:
+    from _tool_ import _logging_
+except ImportError:
+    from . import _logging_
 
 _logging_.init_logging_mini()
 
