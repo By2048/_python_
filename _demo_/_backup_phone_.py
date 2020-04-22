@@ -5,8 +5,13 @@ import subprocess
 adb_path = r'D:\Android\Adb\adb.exe'
 adb_connect = '3.1.1.3:5555'
 aapt_path = r'D:\Android\aapt.exe'
-backup_path = r't:\phone'
+backup_path = r'T:\phone'
 phone_folder = '/storage/emulated/0/'
+
+
+def init():
+    if not os.path.exists(backup_path):
+        os.makedirs(backup_path)
 
 
 def connect_adb():
@@ -31,7 +36,7 @@ def get_app_path(app_package):
 
 
 def backup_app(app_path):
-    command = f"{adb_path} pull {app_path} {backup_path}\\base.apk"
+    command = f"{adb_path} pull {app_path} {os.path.join(backup_path, 'base.apk')}"
     os.system(command)
 
 
@@ -75,6 +80,7 @@ def test():
 
 
 def main():
+    init()
     # connect_adb()
     app_packages = get_all_app_package()
     for app_package in app_packages:
