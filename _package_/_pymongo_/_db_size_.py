@@ -13,3 +13,13 @@ for i in collections:
 result = sorted(result, key=lambda x: x['size'], reverse=True)
 
 pprint(result)
+
+
+
+
+def get_size():
+    db = mongo_client.ebdb_smartsys
+
+    data = db.command("collstats", "ebc_devices_cookbook")
+    pprint(data)
+
