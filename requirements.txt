@@ -10,6 +10,9 @@ lxml               # 网页解析
 Pillow             # 图像处理
 fabric             # 远程部署
 numpy              # 数据处理
+pyecharts          # 数据生成图表
+
+
 
 click              # 命令行脚本
 fire               # 命令行脚本
