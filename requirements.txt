@@ -11,7 +11,7 @@ Pillow             # 图像处理
 fabric             # 远程部署
 numpy              # 数据处理
 pyecharts          # 数据生成图表
-
+python-docx        # Word文档
 
 
 click              # 命令行脚本
