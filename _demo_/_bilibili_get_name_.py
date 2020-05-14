@@ -1,9 +1,9 @@
-from collections import namedtuple
 import functools
+from collections import namedtuple
 
 from bs4 import BeautifulSoup
 
-path = 'T:\\bilibili.html'
+path = './___/bilibili.html'
 
 Video = namedtuple('video', ['index', 'title'])
 
@@ -21,10 +21,16 @@ def compare(v1, v2):
     return 0
 
 
-with open(path, 'r', encoding='utf-8') as file:
-    data = ''.join(file.readlines())
-    data = BeautifulSoup(data, 'lxml')
-    count = 0
+def info(videos):
+    print()
+    for item in videos:
+        print(f"{item.index} {item.title}")
+
+
+def main():
+    with open(path, 'r', encoding='utf-8') as file:
+        data = ''.join(file.readlines())
+        data = BeautifulSoup(data, 'lxml')
 
     result = []
     for item in data.find_all('li'):
@@ -36,5 +42,12 @@ with open(path, 'r', encoding='utf-8') as file:
 
     result = sorted(result, key=functools.cmp_to_key(compare))
 
-    for item in result:
-        print(f"{item.index} {item.title}")
+    info(result)
+
+
+def test():
+    pass
+
+
+if __name__ == '__main__':
+    main()
