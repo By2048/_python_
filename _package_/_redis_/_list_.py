@@ -1,13 +1,13 @@
 import json
 import logging
 
-try:
-    from ._config_ import connection_pool
-except ImportError:
-    from _config_ import connection_pool
-from _tool_._logging_ import init_logging_base
-
 import redis
+
+try:
+    from .___ import connection_pool
+except ImportError:
+    from ___ import connection_pool
+from _tool_._logging_ import init_logging_base
 
 init_logging_base()
 
