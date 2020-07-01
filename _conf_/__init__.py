@@ -13,8 +13,6 @@ logging.basicConfig(
 )
 
 
-
-
 def init_config():
     if not os.path.exists(config.config_path):
         return
