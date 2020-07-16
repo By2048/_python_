@@ -20,29 +20,36 @@ def info():
     print(table)
 
 
-def main():
+def init():
     print("\n粘贴文件夹路径\n")
     global path
     path = input()
     for item in os.listdir(path):
         old = item
         item = item.split('.')
-        index, name, file_type = item[0].zfill(2), item[1], item[2]
+        try:
+            index, name, file_type = item[0].zfill(2), item[1], item[2]
+        except Exception as e:
+            print(f'\n文件名解析错误 {old}\n')
+            return False
         name = ''.join(re.split(r'\([avAVpP,\d]+\)', name))  # 去除(Avxxxxxx,Pxxxxx)
         new = f"{index} {name}.{file_type}"
         videos.append([old, new])
+    return True
 
 
 def rename():
     print('\n确认重命名\n')
     check = input()
-    if check not in ('1', 'true', 'y', True):
+    if check not in ('1', 'true', 'y', True) or not check:
         return
     for video in videos:
+        if not video[0] or not video[1]:
+            print(f'获取文件名错误 {video}')
+            return
         old = os.path.join(path, video[0])
         new = os.path.join(path, video[1])
         os.rename(old, new)
-        print(old, new)
 
 
 def test():
@@ -55,6 +62,6 @@ def test():
 
 
 if __name__ == '__main__':
-    main()
-    info()
-    rename()
+    if init():
+        info()
+        rename()
