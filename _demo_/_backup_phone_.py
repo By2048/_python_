@@ -75,6 +75,10 @@ def rename_base_apk():
     os.rename(old_name, new_name)
 
 
+def clear():
+    os.remove(os.path.join(backup_path, 'base.apk'))
+
+
 def test():
     pass
 
@@ -88,6 +92,7 @@ def main():
         backup_app(app_path)
         rename_base_apk()
     print()
+    clear()
     # disconnect_adb()
 
 
