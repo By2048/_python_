@@ -42,6 +42,9 @@ def free():
     # 4 最高评分
     # 5 开播时间
 
+    global bilibili_old
+    global bilibili_new
+
     page = 1
     table = VeryPrettyTable(["Name", "Url"])
     table.header = False
