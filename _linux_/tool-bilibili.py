@@ -1,9 +1,19 @@
 #!/root/.pyenv/versions/_python_/bin/python
 
+import json
+import os
+import sys
 
 import requests
-import fire
 from veryprettytable import VeryPrettyTable
+import fire
+
+bilibili_old = {}  # 上一次获取的数据
+bilibili_new = {}  # 本次获取的数据
+
+path = '/tmp/bilibili.json'
+if sys.platform == 'win32':
+    path = 't:\\bilibili.json'
 
 
 def free():
@@ -34,6 +44,7 @@ def free():
 
     page = 1
     table = VeryPrettyTable(["Name", "Url"])
+    table.header = False
     table.align["Name"] = "r"
     table.align["Url"] = "l"
     print()
@@ -46,12 +57,37 @@ def free():
             badge = video.get('badge')
             if badge in ['限时免费']:
                 table.add_row([video['title'], video['link']])
+                bilibili_new[video['media_id']] = {
+                    'title': video['title'], 'link': video['link']}
         page += 1
         if not data.get('has_next') or page > 99:
             break
-    table.header = False
+
     print()
     print(table)
+
+    # 与上一次获取的数据进行比较，输出有差异的数据
+    if os.path.exists(path):
+        with open(path, encoding='utf-8') as file:
+            bilibili_old = json.load(file)
+
+    table.clear_rows()
+
+    check = False
+    for new_id in bilibili_new:
+        if str(new_id) not in bilibili_old:
+            check = True
+            table.add_row([
+                bilibili_new[new_id]['title'],
+                bilibili_new[new_id]['link']
+            ])
+    if check:
+        print()
+        print(table)
+
+    # 存储本次获取的数据
+    with open(path, 'w+', encoding='utf-8') as file:
+        json.dump(bilibili_new, file)
 
 
 def help():
