@@ -1,8 +1,8 @@
 import re
 import os
 
-path = ''
-videos = []
+path = ''  # 文件夹路径
+videos = []  # 视频文件名
 
 
 def info():
@@ -24,16 +24,29 @@ def init():
     print("\n粘贴文件夹路径\n")
     global path
     path = input()
-    for item in os.listdir(path):
-        old = item
-        item = item.split('.')
+    path = path.strip('"')
+
+    def get_name(old_name):
+        item = old_name.split('.')
         try:
             index, name, file_type = item[0].zfill(2), item[1], item[2]
         except Exception as e:
-            print(f'\n文件名解析错误 {old}\n')
+            print(f'\n文件名解析错误 {old_name}\n')
             return False
-        name = ''.join(re.split(r'\([avAVpP,\d]+\)', name))  # 去除(Avxxxxxx,Pxxxxx)
-        new = f"{index} {name}.{file_type}"
+        video_title = ''.join(re.split(r'\([avAVpP,\d]+\)', name))  # 去除(Avxxxxxx,Pxxxxx)
+        new_name = f"{index} {video_title}.{file_type}"
+        return new_name
+
+    if os.path.isfile(path):
+        old = os.path.basename(path)
+        path = os.path.dirname(path)
+        new = get_name(old)
+        videos.append([old, new])
+        return True
+
+    for item in os.listdir(path):
+        old = item
+        new = get_name(old)
         videos.append([old, new])
     return True
 
@@ -41,8 +54,10 @@ def init():
 def rename():
     print('\n确认重命名\n')
     check = input()
+
     if check not in ('1', 'true', 'y', True) or not check:
         return
+
     for video in videos:
         if not video[0] or not video[1]:
             print(f'获取文件名错误 {video}')
