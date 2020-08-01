@@ -2,16 +2,28 @@ from loguru import logger
 
 
 class Node(object):
-
-    def __init__(self, item):
+    def __init__(self, item=None):
         self.item = item
         self.next = None
 
+    def __bool__(self):
+        return self.item is not None
 
+    def __str__(self):
+        return str(self.item)
+
+
+class BNode(Node):
+    def __init__(self, item=None):
+        self.previous = None
+        super().__init__(item)
+
+
+# 单向链表
 class SingleLinkNode(object):
     def __init__(self):
-        self.head = None
-        self.next = None
+        self.head: Node = Node()
+        self.next: Node = Node()
 
     def __bool__(self):
         return self.head is None
@@ -84,7 +96,217 @@ class SingleLinkNode(object):
                 current = current.next
 
 
-def test():
+# 循环链表
+class SingleCycleLinkList(object):
+    def __init__(self):
+        self.head: Node = Node()
+        self.next: Node = Node()
+
+    def __bool__(self):
+        return bool(self.head)
+
+    def __len__(self):
+        if not self:
+            return 0
+        count = 1
+        current = self.head
+        while current.next != self.head:
+            count += 1
+            current = current.next
+        return count
+
+    def __iter__(self):
+        if not self:
+            return
+        current = self.head
+        while current.next != self.head:
+            yield current.item
+            current = current.next
+        yield current.item
+
+    def __contains__(self, item):
+        for _ in self:
+            if item == _:
+                return True
+        return False
+
+    def __str__(self):
+        data = [str(item) for item in self]
+        return ' '.join(data)
+
+    def add(self, item):
+        node = Node(item)
+        if not self:
+            self.head = node
+            node.next = self.head
+        else:
+            node.next = self.head
+            current = self.head
+            while current.next != self.head:
+                current = current.next
+            current.next = node
+        self.head = node
+
+    def append(self, item):
+        node = Node(item)
+        if not self:
+            self.head = node
+            node.next = self.head
+        else:
+            current = self.head
+            while current.next != self.head:
+                current = current.next
+            current.next = node
+            node.next = self.head
+
+    def insert(self, index, item):
+        if index <= 0:
+            self.add(item)
+        if index > len(self) - 1:
+            self.append(item)
+        else:
+            node = Node(item)
+            current = self.head
+            for i in range(index - 1):
+                current = current.next
+            node.next = current.next
+            current.next = node
+
+    def remove(self, item):
+        if not self:
+            return
+        current = self.head
+        previous: Node = Node()
+
+        if current.item == item:
+            if current.next != self.head:
+                while current.next != self.head:
+                    current = current.next
+                current.next = self.head.next
+                self.head = self.head.next
+            else:
+                self.head = None
+        else:
+            previous = self.head
+            while current.next != self.head:
+                if current.item != item:
+                    previous = current
+                    current = current.next
+                else:
+                    previous.next = current.next
+                    return True
+        if current.item == item:
+            previous.next = self.head
+            return True
+
+
+# 双向链表
+class BilateralLinkList(object):
+    def __init__(self, item=None):
+        self.head = item
+        self.previous = None
+        self.next = None
+
+    def __bool__(self):
+        return bool(self.head)
+
+    def __contains__(self, item):
+        for _ in self:
+            if item == _:
+                return True
+        return False
+
+    def __len__(self):
+        count = 0
+        current = self.head
+        while current:
+            count += 1
+            current = current.next
+        return count
+
+    def __str__(self):
+        data = [str(item) for item in self]
+        return ' '.join(data)
+
+    def __iter__(self):
+        current = self.head
+        while current:
+            yield current.item
+            current = current.next
+
+    def add(self, item):
+        node = BNode(item)
+        if not self:
+            self.head = node
+        else:
+            node.next = self.head
+            self.head.previous = node
+            self.head = node
+
+    def append(self, item):
+        node = BNode(item)
+        if not self:
+            self.head = node
+        else:
+            current = self.head
+            while current.next:
+                current = current.next
+            node.previous = current
+            current.next = node
+
+    def insert(self, index, item):
+        if index <= 0:
+            self.add(item)
+        elif index > len(self) - 1:
+            self.append(item)
+        else:
+            node = BNode(item)
+            current = self.head
+            for i in range(index):
+                current = current.next
+            node.next = current
+            node.previous = current.previous
+            current.previous.next = node
+            current.previous = node
+
+    def remove(self, item):
+        if not self:
+            return
+
+        current = self.head
+        if current.item == item:
+            if not current.next:
+                self.head = BNode()
+                return True
+            else:
+                self.head = current.next
+                current.next.previous = BNode()
+                return True
+
+        while current.next:
+            if current.item == item:
+                current.previous.next = current.next
+                current.next.previous = current.previous
+                return True
+            current = current.next
+
+        if current.item == item:
+            current.previous.next = BNode()
+            return True
+
+
+def test_node():
+    node = Node()
+    node1 = Node(1)
+
+    logger.info(node)
+    logger.info(node1)
+
+    logger.info(bool(node))
+    logger.info(bool(node1))
+
+
+def test_single_link_node():
     data = SingleLinkNode()
 
     data.add(1)
@@ -99,11 +321,65 @@ def test():
     logger.info(5 in data)
 
     data.insert(2, -1)
+
     logger.info(data)
 
     data.remove(4)
     logger.info(data)
+    print()
+
+
+def test_single_cycle_link_list():
+    data = SingleCycleLinkList()
+
+    logger.info(bool(data))
+
+    for i in range(5):
+        data.add(i)
+    logger.info(data)
+
+    data.append(6)
+    logger.info(data)
+
+    data.insert(3, 7)
+    logger.info(data)
+
+    data.remove(3)
+    logger.info(data)
+
+    logger.info(2 in data)
+    logger.info(22 in data)
+
+
+def test_bilateral_link_list():
+    data = BilateralLinkList()
+
+    logger.info(bool(data))
+
+    for _ in range(5):
+        data.add(_)
+    logger.info(data)
+
+    data.add(5)
+    logger.info(data)
+
+    data.append(6)
+    logger.info(data)
+
+    data.insert(3, 33)
+    logger.info(data)
+
+    data.remove(3)
+    logger.info(data)
+
+    logger.info(2 in data)
+    logger.info(22 in data)
 
 
 if __name__ == '__main__':
-    test()
+    pass
+    # test_node()
+    # test_single_link_node()
+    # test_single_cycle_link_list()
+    # test_single_cycle_link_list()
+    # test_bilateral_link_list()
