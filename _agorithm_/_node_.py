@@ -1,6 +1,7 @@
 from loguru import logger
 
 
+# 单链表节点
 class Node(object):
     def __init__(self, item=None):
         self.item = item
@@ -10,9 +11,10 @@ class Node(object):
         return self.item is not None
 
     def __str__(self):
-        return str(self.item)
+        return str(self.item).ljust(3)
 
 
+# 双向链表节点
 class BNode(Node):
     def __init__(self, item=None):
         self.previous = None
@@ -26,7 +28,7 @@ class SingleLinkNode(object):
         self.next: Node = Node()
 
     def __bool__(self):
-        return self.head is None
+        return bool(self.head)
 
     def __iter__(self):
         node = self.head
@@ -41,6 +43,8 @@ class SingleLinkNode(object):
         return False
 
     def __len__(self):
+        if not self:
+            return 0
         node = self.head
         count = 0
         while node is not None:
@@ -53,17 +57,19 @@ class SingleLinkNode(object):
         return ' '.join(data)
 
     def add(self, item):
+        # 头部添加
         node = Node(item)
         node.next = self.head
         self.head = node
 
     def append(self, item):
+        # 尾部添加
         node = Node(item)
-        if self:
+        if not self:
             self.head = node
         else:
             current = self.head
-            while current.next is not None:
+            while current.next:
                 current = current.next
             current.next = node
 
@@ -75,7 +81,7 @@ class SingleLinkNode(object):
         else:
             node = Node(item)
             current = self.head
-            for i in range(index - 1):
+            for _ in range(index - 1):
                 current = current.next
             node.next = current.next
             current.next = node
@@ -83,15 +89,14 @@ class SingleLinkNode(object):
     def remove(self, item):
         current = self.head
         previous = None
-
-        while current is not None:
+        while current:
             if current.item == item:
-                if not previous:
+                if not previous:  # 是第一个节点
                     self.head = current.next
                 else:
                     previous.next = current.next
                 return True
-            else:
+            else:  # 标记为移动
                 previous = current
                 current = current.next
 
@@ -307,26 +312,42 @@ def test_node():
 
 
 def test_single_link_node():
-    data = SingleLinkNode()
+    #
+    def test_1():
+        node1 = Node(1)
+        node2 = Node(2)
+        logger.info(node1)
+        logger.info(node2)
 
-    data.add(1)
-    data.add(2)
-    data.append(3)
-    data.append(4)
+        data = SingleLinkNode()
+        data.head = node1
+        node1.next = node2
+        logger.info(data.head.item)
+        logger.info(data.head.next.item)
 
-    logger.info(data)
-    logger.info(len(data))
+    def test_2():
+        data = SingleLinkNode()
 
-    logger.info(4 in data)
-    logger.info(5 in data)
+        data.add(1)
+        data.add(2)
+        data.append(3)
+        data.append(4)
 
-    data.insert(2, -1)
+        logger.info(data)
+        logger.info(len(data))
 
-    logger.info(data)
+        logger.info(4 in data)
+        logger.info(5 in data)
 
-    data.remove(4)
-    logger.info(data)
-    print()
+        data.insert(2, -1)
+
+        logger.info(data)
+
+        data.remove(4)
+        logger.info(data)
+
+    test_1()
+    test_2()
 
 
 def test_single_cycle_link_list():
