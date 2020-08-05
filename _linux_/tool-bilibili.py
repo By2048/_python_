@@ -13,7 +13,7 @@ bilibili_new = {}  # 本次获取的数据
 
 path = '/tmp/bilibili.json'
 if sys.platform == 'win32':
-    path = 't:\\bilibili.json'
+    path = 'D:\\Temp\\bilibili.json'
 
 
 def free():
