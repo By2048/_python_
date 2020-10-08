@@ -9,13 +9,29 @@ class File(object):
         self.old_name = old_name
         self.new_name = new_name
 
+    @property
+    def _name_(self):
+        return os.path.splitext(self.old_name)[0]
+
+    @property
+    def _type_(self):
+        return os.path.splitext(self.old_name)[-1].lstrip(".")
+
+    @property
+    def old_full_path(self):
+        return os.path.join(self.folder, self.old_name)
+
+    @property
+    def new_full_path(self):
+        return os.path.join(self.folder, self.new_name)
+
     def __str__(self):
         return f"{self.old_name} \t {self.new_name}"
 
 
 def init_files_info(files: List[File], function):
     for file in files:
-        file.new_name = function(file.old_name)
+        file.new_name = function(file)
 
 
 def print_files_info(files: List[File]):
@@ -33,12 +49,13 @@ def print_files_info(files: List[File]):
     print(table)
 
 
-def rename_files(files: List[File]):
-    print('\n确认重命名\n')
-    check = input()
-
-    if check not in ('1', 'true', 'y', True) or not check:
-        return
+def rename_files(files: List[File], check=True):
+    #
+    if check:
+        print('\n确认重命名\n')
+        check = input()
+        if check not in ('1', 'true', 'y', True) or not check:
+            return
 
     for file in files:
         if not file.old_name or not file.new_name:

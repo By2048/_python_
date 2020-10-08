@@ -18,8 +18,8 @@ def init():
         videos.append(file)
 
 
-def get_name(name):
-    name = name.lstrip('[BD影视分享bd-film.cc]')
+def get_name(file: File):
+    name = file.old_name.lstrip('[BD影视分享bd-film.cc]')
     name = name.strip()
     name = name.replace(':', ' ')
     name = name.replace('：', ' ')
