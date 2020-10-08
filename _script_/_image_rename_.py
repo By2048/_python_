@@ -14,6 +14,10 @@ images = []
 
 def init():
     for item in os.listdir(path):
+        if len(item) == 36:
+            # 已经重命名为文件的MD5
+            # xx_md5_xxx.jpg 长度(36)
+            continue
         old = item
         file = File(folder=path, old_name=old)
         images.append(file)
