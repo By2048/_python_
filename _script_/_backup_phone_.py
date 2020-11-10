@@ -2,10 +2,10 @@ import os
 import re
 import subprocess
 
-adb_path = r'D:\Android\Adb\adb.exe'
 adb_connect = '3.1.1.3:5555'
-aapt_path = r'D:\Android\aapt.exe'
-backup_path = r'T:\phone'
+adb_path = 'D:\\Android\\Adb\\adb.exe'
+aapt_path = 'D:\\Android\\aapt.exe'
+backup_path = 'T:\\Phone\\'
 phone_folder = '/storage/emulated/0/'
 
 

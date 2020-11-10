@@ -3,7 +3,7 @@ from collections import namedtuple
 
 from bs4 import BeautifulSoup
 
-path = './___/bilibili.html'
+path = '../_/bilibili.html'
 
 Video = namedtuple('video', ['index', 'title'])
 
