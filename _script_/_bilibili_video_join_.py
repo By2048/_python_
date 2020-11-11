@@ -9,6 +9,7 @@ logging.basicConfig(
     datefmt='%H:%M:%S'
 )
 
+base_folder = "T:\\com.bilibili.app.in\\"
 ffmpeg_path = "D:\\FFmpeg\\bin\\ffmpeg.exe"
 download_path = "T:\\com.bilibili.app.in\\download\\"
 keep_path = "T:\\"
@@ -21,11 +22,11 @@ keep_path = "T:\\"
 # │  └─1
 
 
-logging.info("\n")
+logging.info('-' * 66)
 logging.info(f'ffmpeg_path      {ffmpeg_path}')
 logging.info(f'download_path    {download_path}')
 logging.info(f'keep_path        {keep_path}')
-logging.info("\n")
+logging.info('-' * 66)
 
 
 class Video(object):
@@ -35,6 +36,12 @@ class Video(object):
         self.part = part
         self.title = title
 
+    def __str__(self):
+        result = f"{'video_index'.rjust(20)} {self.index}\n"
+        result += f"{' video_part'.rjust(28)} {self.part}\n"
+        result += f"{'video_title'.rjust(28)} {self.title}"
+        return result
+
 
 class Collection(object):
     def __init__(self, folder):
@@ -42,15 +49,11 @@ class Collection(object):
         self.videos: [Video] = []
 
     @property
-    def parts_count(self):
+    def count(self):
         return len(os.listdir(self.folder))
 
-    def __repr__(self):
-        result = f"  collection_path {self.folder} \n\n"
-        for video in self.videos:
-            result += f"      video_index {video.index}\n" \
-                      f"       video_part {video.part}\n" \
-                      f"      video_title {video.title}\n\n"
+    def __str__(self):
+        result = f"{'collection_path'.rjust(20)} {self.folder}"
         return result
 
 
@@ -66,6 +69,7 @@ def init_collections():
             video = Video(folder=video_folder_path, index=int(video_folder))
             videos.append(video)
         collection.videos = videos
+        logging.info(collection)
         collections.append(collection)
 
     return collections
@@ -109,6 +113,7 @@ def init_collection_videos(collection: Collection):
             title = change_name(title)
             video.part = part
             video.title = title
+        logging.info(video)
 
     # if data.get('ep', ''):
     #     index = data['ep']['index']
@@ -121,6 +126,7 @@ def init_collection_videos(collection: Collection):
 
 
 def move_m4s(video: Video):
+    logging.info('-' * 66)
     for root, dirs, files in os.walk(video.folder):
         for file in files:
             if file.endswith(".m4s"):
@@ -128,37 +134,58 @@ def move_m4s(video: Video):
                 _2_ = video.folder
                 try:
                     shutil.move(os.path.join(root, file), video.folder)
-                    logging.info(f"  {_1_} \n        ->{_2_}")
+                    logging.info(f"mv {_1_} \n        -> {_2_}")
                 except shutil.Error:
-                    logging.error(f"  {_1_} \n        ->{_2_}")
+                    logging.error(f"mv {_1_} \n        -> {_2_}")
 
 
 def get_collection_video(collection: Collection, video: Video):
     # 使用 ffmpeg 拼接视频
+    logging.info('-' * 66)
     video_m4s = os.path.join(video.folder, "video.m4s")
     audio_m4s = os.path.join(video.folder, "audio.m4s")
-    if len(collection.videos) > 1:
-        video_output = os.path.join(keep_path, f"{video.index} {video.title} {video.part}")
-    else:
-        video_output = os.path.join(keep_path, f"{video.title} {video.part}")
 
+    names = {
+        "1": f"{video.title}",
+        "2": f"{video.part}",
+        "3": f"{video.title} {video.part}",
+        "4": f"{video.index} {video.title} {video.part}"
+    }
+
+    data = "#选项# "
+    for key, value in names.items():
+        data += f"[#{key}] {value} \t"
+    logging.info(data)
+
+    check = input(" #选择# ".rjust(13))
+    if check not in names.keys():
+        return
+
+    name = names.get(check)
+    if not name:
+        return
+
+    video_output = os.path.join(keep_path, name)
+
+    logging.info('-' * 66)
     cmd = f" {ffmpeg_path} " \
           f" -i {video_m4s} -i {audio_m4s} " \
           f" -c:v copy " \
           f" -strict experimental " \
           f" \"{video_output}.mp4\" "
     logging.info(cmd)
+    logging.info('-' * 66)
     os.system(cmd)
 
 
+def clear():
+    check = input(" #删除# ".rjust(13))
+    if check in ['1', 'y']:
+        shutil.rmtree(base_folder)
+
+
 def test():
-    collections = init_collections()
-    for collection in collections:
-        init_collection_videos(collection)
-        for video in collection.videos:
-            move_m4s(video)
-            get_collection_video(collection, video)
-        print(collection)
+    pass
 
 
 def setup():
@@ -168,9 +195,8 @@ def setup():
         for video in collection.videos:
             move_m4s(video)
             get_collection_video(collection, video)
-        print(collection)
+    clear()
 
 
 if __name__ == '__main__':
-    # test()
     setup()
