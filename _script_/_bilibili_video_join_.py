@@ -152,9 +152,10 @@ def get_collection_video(collection: Collection, video: Video):
         "4": f"{video.index} {video.title} {video.part}"
     }
 
-    data = "#选项# "
+    data = "#选项# \n"
     for key, value in names.items():
-        data += f"[#{key}] {value} \t"
+        data += f"\t\t[#{key}] {value}\n"
+    data = data.rstrip("\n")
     logging.info(data)
 
     check = input(" #选择# ".rjust(13))
