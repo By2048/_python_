@@ -159,6 +159,7 @@ def get_collection_video(collection: Collection, video: Video):
     logging.info(data)
 
     check = input(" #选择# ".rjust(13))
+    check = "1" if check == "\\" else check
     if check not in names.keys():
         return
 
@@ -181,7 +182,7 @@ def get_collection_video(collection: Collection, video: Video):
 
 def clear():
     check = input(" #删除# ".rjust(13))
-    if check in ['1', 'y']:
+    if check in ['1', 'y', '\\']:
         shutil.rmtree(base_folder)
 
 
