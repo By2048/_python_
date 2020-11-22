@@ -191,12 +191,17 @@ def test():
 
 
 def setup():
+    if not os.path.exists(base_folder):
+        logging.error(f"不存在路径 {base_folder}")
+        return
+
     collections = init_collections()
     for collection in collections:
         init_collection_videos(collection)
         for video in collection.videos:
             move_m4s(video)
             get_collection_video(collection, video)
+
     clear()
 
 
