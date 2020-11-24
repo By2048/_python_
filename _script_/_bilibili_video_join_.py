@@ -2,6 +2,7 @@ import logging
 import os
 import json
 import shutil
+from datetime import datetime
 
 logging.basicConfig(
     level=logging.INFO,
@@ -149,7 +150,8 @@ def get_collection_video(collection: Collection, video: Video):
         "1": f"{video.title}",
         "2": f"{video.part}",
         "3": f"{video.title} {video.part}",
-        "4": f"{video.index} {video.title} {video.part}"
+        "4": f"{video.index} {video.title} {video.part}",
+        "5": f"{datetime.now().strftime('%Y-%m-%d')} {video.title}",
     }
 
     data = "#选项# \n"
