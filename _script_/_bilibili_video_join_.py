@@ -2,6 +2,7 @@ import logging
 import os
 import json
 import shutil
+import subprocess
 from datetime import datetime
 
 logging.basicConfig(
@@ -15,14 +16,27 @@ ffmpeg_path = "D:\\FFmpeg\\bin\\ffmpeg.exe"
 download_path = "T:\\com.bilibili.app.in\\download\\"
 keep_path = "T:\\"
 
-# bilibili (download_path)
-# ├─xxxxxxxx (Collection)
-# │  ├─1 (video1)
-# │  └─2 (video2)
-# ├─xxxxxxxx
-# │  └─1
+"""
+bilibili (download_path)
+├─xxxxxxxx (Collection)
+│  ├─1 (video1)
+|  |  |-80
+|  |  |  audio.m4s
+│  |  |  index.json
+│  |  |  video.m4s
+|  |  |-64
+|  |  |  audio.m4s
+│  |  |  index.json
+│  |  |  video.m4s
+│  |  danmaku.xml
+│  │  entry.json
 
+80 64 指不同分辨率
+一般来说只保留一个 越大越好
+处理时如果存在多个删除小的
+"""
 
+logging.info('')
 logging.info('-' * 66)
 logging.info(f'ffmpeg_path      {ffmpeg_path}')
 logging.info(f'download_path    {download_path}')
@@ -36,9 +50,10 @@ class Video(object):
         self.index = index
         self.part = part
         self.title = title
+        self.files = []
 
     def __str__(self):
-        result = f"{'video_index'.rjust(20)} {self.index}\n"
+        result = f"{'-> video_index'.rjust(20)} {self.index}\n"
         result += f"{' video_part'.rjust(28)} {self.part}\n"
         result += f"{'video_title'.rjust(28)} {self.title}"
         return result
@@ -73,6 +88,10 @@ def init_collections():
         logging.info(collection)
         collections.append(collection)
 
+    logging.info('-' * 66)
+    logging.info('')
+    logging.info('')
+
     return collections
 
 
@@ -94,8 +113,8 @@ def change_name(name):
     for item in codes:
         name = name.replace(item[0], item[1])
     try:
-        from hanziconv import HanziConv
         # https://pypi.org/project/hanziconv/  简繁体转换
+        from hanziconv import HanziConv
         name = HanziConv.toSimplified(name)
     except ImportError:
         pass
@@ -104,8 +123,25 @@ def change_name(name):
 
 def init_collection_videos(collection: Collection):
     for video in collection.videos:
-        # 1 / 2 / xx
-        json_file_path = os.path.join(video.folder, 'entry.json')
+        json_file_path = os.path.join(video.folder, 'entry.json')  # 视频信息
+
+        # 删除较小分辨率的视频
+        video_resolution_items = os.listdir(video.folder)
+        video_resolution_items.remove('danmaku.xml')
+        video_resolution_items.remove('entry.json')
+        if len(video_resolution_items) > 1:
+            _item_ = sorted(video_resolution_items, key=lambda x: int(x))
+            video_resolution_min = os.path.join(video.folder, _item_[0])
+            shutil.rmtree(video_resolution_min)
+
+        # 初始化视频文件
+        video_file_folder = video_resolution_items[-1]
+        video_file_folder = os.path.join(video.folder, video_file_folder)
+        for video_file in os.listdir(video_file_folder):
+            if video_file.endswith('.json'):
+                continue
+            video.files.append(os.path.join(video_file_folder, video_file))
+
         with open(json_file_path, 'r', encoding='utf-8') as file:
             data = json.load(file)
             part = data['page_data']['part']
@@ -114,7 +150,7 @@ def init_collection_videos(collection: Collection):
             title = change_name(title)
             video.part = part
             video.title = title
-        logging.info(video)
+        # logging.info(video)
 
     # if data.get('ep', ''):
     #     index = data['ep']['index']
@@ -126,25 +162,28 @@ def init_collection_videos(collection: Collection):
     #     return video_name
 
 
-def move_m4s(video: Video):
-    logging.info('-' * 66)
-    for root, dirs, files in os.walk(video.folder):
-        for file in files:
-            if file.endswith(".m4s"):
-                _1_ = os.path.join(root, file)
-                _2_ = video.folder
-                try:
-                    shutil.move(os.path.join(root, file), video.folder)
-                    logging.info(f"mv {_1_} \n        -> {_2_}")
-                except shutil.Error:
-                    logging.error(f"mv {_1_} \n        -> {_2_}")
-
-
-def get_collection_video(collection: Collection, video: Video):
+def join_video(video: Video):
     # 使用 ffmpeg 拼接视频
+
+    if len(video.files) < 2:
+        logging.error('')
+        logging.error('')
+        logging.info('-' * 66)
+        logging.error(f"下载文件缺失")
+        logging.error(f"\t{video.title}")
+        logging.error(f"\t{video.folder}")
+        logging.error(f"\t{str(video.files)}")
+        logging.info('-' * 66)
+        logging.error('')
+        logging.error('')
+        return
+
     logging.info('-' * 66)
-    video_m4s = os.path.join(video.folder, "video.m4s")
-    audio_m4s = os.path.join(video.folder, "audio.m4s")
+
+    video_m4s = video.files[0]
+    audio_m4s = video.files[1]
+    if "video" not in video_m4s or "audio" not in audio_m4s:
+        video_m4s, audio_m4s = audio_m4s, video_m4s
 
     names = {
         "1": f"{video.title}",
@@ -160,7 +199,12 @@ def get_collection_video(collection: Collection, video: Video):
     data = data.rstrip("\n")
     logging.info(data)
 
-    check = input(" #选择# ".rjust(13))
+    check = None
+    while True:
+        check = input(" #选择# ".rjust(13))
+        if check:
+            break
+
     check = "1" if check == "\\" else check
     if check not in names.keys():
         return
@@ -171,21 +215,24 @@ def get_collection_video(collection: Collection, video: Video):
 
     video_output = os.path.join(keep_path, name)
 
-    logging.info('-' * 66)
     cmd = f" {ffmpeg_path} " \
           f" -i {video_m4s} -i {audio_m4s} " \
           f" -c:v copy " \
           f" -strict experimental " \
           f" \"{video_output}.mp4\" "
+    logging.info('-' * 66)
     logging.info(cmd)
     logging.info('-' * 66)
     os.system(cmd)
+    # subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
 
 
 def clear():
-    check = input(" #删除# ".rjust(13))
+    check = input("\n\n\n #删除下载文件夹# \n\n\n \t\t\t")
     if check in ['1', 'y', '\\']:
         shutil.rmtree(base_folder)
+    print()
+    print()
 
 
 def test():
@@ -201,11 +248,11 @@ def setup():
     for collection in collections:
         init_collection_videos(collection)
         for video in collection.videos:
-            move_m4s(video)
-            get_collection_video(collection, video)
+            join_video(video)
 
     clear()
 
 
 if __name__ == '__main__':
     setup()
+    # test()
