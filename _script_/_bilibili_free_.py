@@ -1,4 +1,4 @@
-#!/root/.pyenv/versions/_python_/bin/python
+#! /root/.pyenv/versions/_python_/bin/python/
 
 import json
 import os
@@ -11,9 +11,8 @@ import fire
 bilibili_old = {}  # 上一次获取的数据
 bilibili_new = {}  # 本次获取的数据
 
-path = '/tmp/bilibili.json'
-if sys.platform == 'win32':
-    path = 'D:\\Temp\\bilibili.json'
+path = 'D:\\Temp\\' if sys.platform == 'win32' else '/tmp/'
+path = os.path.join(path, "bilibili.json")
 
 
 def free():
