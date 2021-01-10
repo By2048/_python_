@@ -1,68 +1,63 @@
 import os
 
-from typing import List
+from typing import List, Callable
 
 
 class File(object):
-    def __init__(self, folder='', old_name='', new_name=''):
-        self.folder = folder
+    def __init__(self, old_name='', new_name=''):
         self.old_name = old_name
         self.new_name = new_name
-
-    @property
-    def _name_(self):
-        return os.path.splitext(self.old_name)[0]
 
     @property
     def _type_(self):
         return os.path.splitext(self.old_name)[-1].lstrip(".")
 
-    @property
-    def old_full_path(self):
-        return os.path.join(self.folder, self.old_name)
-
-    @property
-    def new_full_path(self):
-        return os.path.join(self.folder, self.new_name)
-
     def __str__(self):
         return f"{self.old_name} \t {self.new_name}"
 
 
-def init_files_info(files: List[File], function):
-    for file in files:
-        file.new_name = function(file)
+class Rename(object):
+    def __init__(self):
+        self.folder: str = ""
+        self.files: List[File] = []
+        self.function_need_rename = None
+        self.function_get_name = None
+        self.show_title = True
 
+    def __str__(self):
+        return self.info()
 
-def print_files_info(files: List[File]):
-    try:
-        from veryprettytable import VeryPrettyTable
-    except ImportError:
-        for file in files:
-            print(file)
-        return
-    table = VeryPrettyTable(['old_name', 'new_name'])
-    table.align['old_name'] = 'l'
-    table.align['new_name'] = 'l'
-    for file in files:
-        table.add_row([file.old_name, file.new_name])
-    print(table)
-
-
-def rename_files(files: List[File], check=True):
-    #
-    if check:
-        print('\n确认重命名\n')
-        check = input()
-        if check not in ('1', 'true', 'y', True) or not check:
+    def info(self):
+        try:
+            from veryprettytable import VeryPrettyTable
+        except ImportError:
+            for file in self.files:
+                print(file)
             return
+        table = VeryPrettyTable(['old_name', 'new_name'])
+        if self.show_title:
+            table.title = self.folder
+        table.align['old_name'] = 'l'
+        table.align['new_name'] = 'l'
+        for file in self.files:
+            table.add_row([file.old_name, file.new_name])
+        return table.get_string()
 
-    for file in files:
-        if not file.old_name or not file.new_name:
-            print(f'获取文件名错误\n{file}')
-            return
+    def init(self):
+        for item in os.listdir(self.folder):
+            if not self.function_need_rename(item):
+                continue
+            file = File(old_name=item)
+            file.new_name = self.function_get_name(item)
+            self.files.append(file)
 
-    for file in files:
-        old = os.path.join(file.folder, file.old_name)
-        new = os.path.join(file.folder, file.new_name)
-        os.rename(old, new)
+    def start(self, check=True):
+        if check:
+            print('\n确认重命名\n')
+            check = input()
+            if check not in ('1', 'true', 'y', True) or not check:
+                return
+        for file in self.files:
+            old = os.path.join(self.folder, file.old_name)
+            new = os.path.join(self.folder, file.new_name)
+            os.rename(old, new)

@@ -1,25 +1,16 @@
-import os
-
-path = 'T:\\'
-videos = []
-
 try:
-    from ._rename_ import File, init_files_info, print_files_info, rename_files
+    from ._rename_ import Rename
 except ImportError:
-    from _rename_ import File, init_files_info, print_files_info, rename_files
+    from _rename_ import Rename
 
 
-def init():
-    for item in os.listdir(path):
-        if 'bd-film.cc' not in item:
-            continue
-        old = item
-        file = File(folder=path, old_name=old)
-        videos.append(file)
+def need_rename(item):
+    result = 'bd-film.cc' in item
+    return result
 
 
-def get_name(file: File):
-    name = file.old_name.lstrip('[BD影视分享bd-film.cc]')
+def get_name(item):
+    name = item.lstrip('[BD影视分享bd-film.cc]')
     name = name.strip()
     name = name.replace(':', ' ')
     name = name.replace('：', ' ')
@@ -28,7 +19,11 @@ def get_name(file: File):
 
 
 if __name__ == '__main__':
-    init()
-    init_files_info(videos, get_name)
-    print_files_info(videos)
-    rename_files(videos)
+    rename = Rename()
+    rename.folder = "T:\\"
+    rename.function_need_rename = need_rename
+    rename.function_get_name = get_name
+    rename.show_title = False
+    rename.init()
+    print(rename)
+    rename.start()
