@@ -1,4 +1,5 @@
 import time
+import os
 
 from bs4 import BeautifulSoup
 from veryprettytable import VeryPrettyTable
@@ -36,7 +37,10 @@ chrome_options.add_argument(f'--window-size={w},{h}')
 chrome_options.add_argument(f'--window-position={x},{y}')
 
 executable_path = r"C:\Program Files (x86)\Google\Chrome\Application\chromedriver.exe"
-chrome: WebDriver = webdriver.Chrome(executable_path=executable_path, chrome_options=chrome_options)
+chrome: WebDriver = webdriver.Chrome(
+    executable_path=executable_path, chrome_options=chrome_options,
+    service_log_path=os.devnull
+)
 chrome.minimize_window()
 
 chrome.get(url)
@@ -58,5 +62,7 @@ for hot_item in data.find_all("a", class_="HotList-item"):
     metrics = hot_item.find("div", class_="HotList-itemMetrics").get_text()
     metrics = metrics.replace(" ", "").replace("万热度", "")
     table.add_row([str(index).zfill(2), tittle, metrics])
+
+print(table.get_string())
 
 chrome.close()
