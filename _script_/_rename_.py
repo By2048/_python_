@@ -1,6 +1,6 @@
 import os
 
-from typing import List, Callable
+from typing import List
 
 
 class File(object):
@@ -8,21 +8,17 @@ class File(object):
         self.old_name = old_name
         self.new_name = new_name
 
-    @property
-    def _type_(self):
-        return os.path.splitext(self.old_name)[-1].lstrip(".")
-
     def __str__(self):
         return f"{self.old_name} \t {self.new_name}"
 
 
 class Rename(object):
     def __init__(self):
-        self.folder: str = ""
-        self.files: List[File] = []
-        self.function_need_rename = None
-        self.function_get_name = None
-        self.show_title = True
+        self.folder: str = ""  # 重命名文件夹目录
+        self.files: List[File] = []  # 需要重命名的文件 新名字-旧名字
+        self.function_need_rename = None  # 筛选需要重命名的文件
+        self.function_get_name = None  # 重命名函数
+        self.show_title = True  # 显示表格Title
 
     def __str__(self):
         return self.info()
