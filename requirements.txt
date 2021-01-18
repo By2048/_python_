@@ -1,4 +1,4 @@
-serial             # 串口变成
+serial             # 串口
 paho-mqtt          # MQTT库
 pysnooper          # 程序运行中数追踪
 stackprinter       # 错误追踪
