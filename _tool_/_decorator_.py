@@ -18,7 +18,23 @@ def run_time(function):
         start = time.time()
         result = function(*args, **kwargs)
         end = time.time()
-        logging.info(f"𝙁:{function.__name__} -> 𝙏:{end - start}")
+        logging.info(f"F:{function.__name__} -> T:{end - start}")
+        return result
+
+    return wrapper
+
+
+def log(function):
+    """ 输出一些特殊变量 """
+
+    @functools.wraps(function)
+    def wrapper(*args, **kwargs):
+        start = time.time()
+        result = function(*args, **kwargs)
+        end = time.time()
+        for key, value in locals().items():
+            if key.startswith(("data", "result")):
+                print(f"F:{function.__name__} | K:{key} V:{value}")
         return result
 
     return wrapper
