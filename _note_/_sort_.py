@@ -1,7 +1,8 @@
 from random import shuffle
 from functools import cmp_to_key
 
-from _tool_._decorator_ import log, run_all_test
+from _tool_._decorator_ import log
+from _tool_._other_ import run_all_test
 
 
 def key(item):
