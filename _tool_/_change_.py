@@ -94,7 +94,7 @@ def json_from_json(data: dict, copy_it: bool = False):
     def check_datetime(item: str) -> bool:
         """ 验证文本时间格式是否正确 """
         try:
-            datetime.strptime(item, DATETIME_FORMAT)
+            datetime.strptime(item, '%Y-%m-%d %H:%M:%S')
         except ValueError:
             return False
         return True
