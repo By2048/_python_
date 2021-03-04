@@ -1,6 +1,13 @@
+import json
 import time
 import logging
 import functools
+import inspect
+from json import JSONDecodeError
+from pprint import pprint
+
+import redis
+from flask import jsonify, request
 
 try:
     from _tool_ import _logging_
@@ -24,17 +31,83 @@ def run_time(function):
     return wrapper
 
 
-def log(function):
-    """ 输出一些特殊变量 """
-
+def log_test(function):
     @functools.wraps(function)
-    def wrapper(*args, **kwargs):
-        start = time.time()
-        result = function(*args, **kwargs)
-        end = time.time()
+    def wrapper():
+        _start_ = time.time()
+        _result_ = function()
+        _end_ = time.time()
         for key, value in locals().items():
+            if key.startswith("_") and key.endswith("_"):
+                continue
             if key.startswith(("data", "result")):
                 print(f"F:{function.__name__} | K:{key} V:{value}")
-        return result
+        return _result_
 
     return wrapper
+
+
+def cache(key: str = "", ex: int = 60):
+    def decorator(function):
+        @functools.wraps(function)
+        def inner(*args, **kwargs):
+            db = redis.Redis(connection_pool=redis_conn_pool)
+            data = db.get(key)
+
+            if data:
+                try:
+                    data = json.loads(data)
+                except JSONDecodeError as e:
+                    logging.exception(e)
+
+            if data:
+                return data
+
+            result = function(*args, **kwargs)
+            value = json.dumps(result, ensure_ascii=False)
+            db.set(key, value, ex)
+
+            return result
+
+        return inner
+
+    return decorator
+
+
+def cache_request(ex: int = 60):
+    def decorator(function):
+        @functools.wraps(function)
+        def inner(*args, **kwargs):
+
+            if not request:
+                raise Exception('not flask request')
+
+            _url = request.path.strip('/')
+            _get = ['='.join(item) for item in request.args]
+            _post = ['='.join(item) for item in request.args]
+            _get = '&'.join(sorted(_get))
+            _post = '&'.join(sorted(_post))
+            key = f"{_url}:{_get}:{_post}"
+
+            db = redis.Redis(connection_pool=redis_conn_pool)
+            data = db.get(key)
+
+            if data:
+                try:
+                    data = json.loads(data)
+                except JSONDecodeError as e:
+                    logging.exception(e)
+
+            if data and isinstance(data, dict):
+                return jsonify(data)
+
+            result = function(*args, **kwargs)
+            value = result.json
+            value = json.dumps(value, ensure_ascii=False)
+            db.set(key, value, ex)
+
+            return result
+
+        return inner
+
+    return decorator

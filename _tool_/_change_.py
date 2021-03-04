@@ -123,6 +123,20 @@ def json_from_json(data: dict, copy_it: bool = False):
     return data
 
 
+def json_remove_value(data):
+    for key in list(data):
+        value = data[key]
+        if isinstance(value, (str, int)):
+            data[key] = type(value)()
+        if isinstance(value, list):
+            for _value_ in value:
+                if isinstance(_value_, dict):
+                    json_remove_value(_value_)
+        if isinstance(value, dict):
+            json_remove_value(value)
+    return data
+
+
 def make_password(data: str):
     md5 = hashlib.md5()
     md5.update(data.encode())
