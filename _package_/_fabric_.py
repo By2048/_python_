@@ -1,6 +1,6 @@
 from fabric import Connection
 
-from _conf_._config_ import SSH_HOST, SSH_PORT, SSH_USER, SSH_PASSWORD, SSH_RSA
+from _._config_ import SSH_HOST, SSH_PORT, SSH_USER, SSH_RSA
 
 
 # https://fabric-chs.readthedocs.io/zh_CN/chs/tutorial.html

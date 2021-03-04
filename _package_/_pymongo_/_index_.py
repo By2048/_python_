@@ -1,6 +1,4 @@
-from datetime import datetime
-
-from _conf_._server_ import mongo_client
+from _._server_ import mongo_client
 
 from pymongo.collection import Collection
 from pymongo.helpers import _gen_index_name

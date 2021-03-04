@@ -5,7 +5,7 @@ import importlib
 import redis
 
 try:
-    from _conf_._server_ import redis_connection_pool as connection_pool
+    from _._server_ import redis_connection_pool as connection_pool
 except ImportError:
     raise Exception('redis connection pool error')
 

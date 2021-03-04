@@ -1,6 +1,6 @@
 import redis
 
-from _conf_._config_ import \
+from _._config_ import \
     REDIS_HOST, \
     REDIS_PORT, \
     REDIS_DB, \

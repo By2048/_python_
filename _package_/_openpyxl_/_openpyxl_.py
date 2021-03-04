@@ -1,7 +1,5 @@
 import logging
 
-import base
-
 from openpyxl import load_workbook
 from openpyxl import Workbook
 

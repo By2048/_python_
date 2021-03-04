@@ -1,10 +1,8 @@
 import logging
-from datetime import datetime
-from pprint import pprint, pformat
 
 from pymongo import ReturnDocument
 
-from _conf_._server_ import mongo_client as client
+from _._server_ import mongo_client as client
 
 
 class CRUD(object):
