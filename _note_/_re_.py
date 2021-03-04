@@ -1,52 +1,65 @@
 import re
 
-item = re.split(r'\W+', 'runoob, runoob, runoob.')
-print(item)
-# ['runoob', 'runoob', 'runoob', '']
-
-item = re.split(r'(\W+)', ' runoob, runoob, runoob.')
-print(item)
-# ['', ' ', 'runoob', ', ', 'runoob', ', ', 'runoob', '.', '']
-
-item = re.split(r'\W+', ' runoob, runoob, runoob.', 1)
-# ['', 'runoob, runoob, runoob.']
-print(item)
-
-item = re.split(r'a*', 'hello world')  # 对于一个找不到匹配的字符串而言，split 不会对其作出分割
-print(item)
-# FutureWarning: split() requires a non-empty pattern match.
-# return _compile(pattern, flags).split(string, maxsplit)
-# ['hello world']
+from _tool_._other_ import run_all_test, log
+from _tool_._decorator_ import run_time, log_test
 
 
-
-# coding=utf-8
-import re
-import os
-
-lines = []
-print(os.getcwd())
-
-_file = None
-with open('main.lua', encoding='utf-8') as file:
-    _file = "".join(file.readlines())
-
-
-def replace_config(file, config_name, new_config):
-    rule = "(-- start {0} config)([\s\S]+)(-- end {0} config)".format(config_name)
-    # print(re.search(rule, file, re.M).groups())
-    file = re.sub(rule, new_config, file, re.M)
-    return file
+@log_test
+def test_1():
+    item_1 = re.split(r'\W+', 'runoob, runoob, runoob.')
+    item_2 = re.split(r'(\W+)', 'runoob, runoob, runoob.')
+    item_3 = re.split(r'\W+', 'runoob, runoob, runoob.', 1)
+    # 对于一个找不到匹配的字符串而言，split 不会对其作出分割
+    """    
+    def split(pattern, string, maxsplit=0, flags=0):
+        return _compile(pattern, flags).split(string, maxsplit)
+    """
+    item_4 = re.split(r'a*', 'hello world')
+    # log(locals())
 
 
-new_file = replace_config(_file, 'product_key', 'local product_key="123456"')
+# def test_2():
+# file = ""
+# rule = "(-- start {0} config)([\s\S]+)(-- end {0} config)".format("config name")
+# item = re.search(rule, file, re.M).groups()
+# file = re.sub(rule, "new_config", file, re.M)
+# pass
 
-with open('main.lua.new', 'w+', encoding='eutf-8') as file:
-    print(type(file))
-    # file.write(new_file)
 
-# pattern : 一个字符串形式的正则表达式
+if __name__ == '__main__':
+    # print(test_1.__code__)
+    run_all_test(globals())
+
+# num=re.findall(r'\d',old_str)
+# print(num)
 #
+# is_num = re.compile('\d{1,4}')
+# print(is_num.findall(old_str))
+#
+# new_str=re.sub(r'\d{1,2}', '', old_str)
+# print(new_str)
+
+# [0 - 9]
+# print(re.match([0-9]),str)
+
+# print(re.match('www', 'www.runoob.com').span())  # 在起始位置匹配
+# print(re.match('com', 'www.runoob.com'))  # 不在起始位置匹配
+#
+# print(re.search('www', 'www.runoob.com').span())  # 在起始位置匹配
+# print(re.search('com', 'www.runoob.com').span())  # 不在起始位置匹配
+
+# phone = "2004-959-559 # 这是一个电话号码"
+#
+# # 删除注释
+# num = re.sub(r'#.*$', "", phone)
+# print("电话号码 : ", num)
+#
+# # 移除非数字的内容
+# num = re.sub(r'\d', "", phone)
+# print("电话号码 : ", num)
+
+
+# pattern : 一个字符串形式的正则表达式#
 # flags : 可选，表示匹配模式，比如忽略大小写，多行模式等，具体参数为：
 #
 # re.I 忽略大小写
@@ -56,18 +69,6 @@ with open('main.lua.new', 'w+', encoding='eutf-8') as file:
 # re.U 表示特殊字符集 \w, \W, \b, \B, \d, \D, \s, \S 依赖于 Unicode 字符属性数据库
 # re.X 为了增加可读性，忽略空格和 # 后面的注释
 
-"""
-
-在讲 re.compile() 函数时，曾说到该函数还接受可选的第二个参数，用以设置匹配模式。可选的匹配模式有：
-
-re.IGNORECASE：忽略大小写，同 re.I。
-
-re.MULTILINE：多行模式，改变^和$的行为，同 re.M。
-
-re.DOTALL：点任意匹配模式，让'.'可以匹配包括'\n'在内的任意字符，同 re.S。
-
-re.LOCALE：使预定字符类 \w \W \b \B \s \S 取决于当前区域设定， 同 re.L。
-
-re.ASCII：使 \w \W \b \B \s \S 只匹配 ASCII 字符，而不是 Unicode 字符，同 re.A。
-
-"""
+# def test_3():
+#     item_1 = "egerg455hert985".find('.')
+#     log(locals())

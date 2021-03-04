@@ -1,7 +1,7 @@
 import sys
 import logging
 
-import _conf_
+import _
 
 
 def test():

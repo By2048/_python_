@@ -2,7 +2,7 @@ import json
 import logging
 from pprint import pprint, pformat
 
-import base
+from loguru import logger as logging
 
 
 class Boy(object):

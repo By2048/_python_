@@ -1,8 +1,6 @@
 import pickle
 import logging
 
-import _conf_
-
 
 class Student(object):
     def __init__(self):

@@ -1,7 +1,7 @@
 from random import shuffle
 from functools import cmp_to_key
 
-from _tool_._decorator_ import log
+from _tool_._decorator_ import log_test
 from _tool_._other_ import run_all_test
 
 
@@ -16,7 +16,7 @@ def cmp(a, b):
 data = ["1", "1, 2, 3", "1, 2", "1, 2, 3, 4"]
 
 
-@log
+@log_test
 def test_1():
     global data
     shuffle(data)
@@ -24,7 +24,7 @@ def test_1():
     return data
 
 
-@log
+@log_test
 def test_2():
     global data
     shuffle(data)
@@ -32,7 +32,7 @@ def test_2():
     return data
 
 
-@log
+@log_test
 def test_3():
     global data
     shuffle(data)
@@ -40,7 +40,7 @@ def test_3():
     return data
 
 
-@log
+@log_test
 def test_4():
     global data
     shuffle(data)
