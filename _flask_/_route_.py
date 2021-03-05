@@ -3,6 +3,8 @@ from flask import Flask, url_for, Blueprint
 app = Flask(__name__)
 
 
+# https://dormousehole.readthedocs.io/en/latest/blueprints.html
+
 @app.route('/')
 def test_1():
     return 'test_1'
