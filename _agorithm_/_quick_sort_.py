@@ -8,10 +8,8 @@ import random
 4.分别对左右子序列重复前三步操作
 """
 
-data = [random.randint(1, 100) for _ in range(30)]
 
-
-def quick_sort(data, l, r):
+def quick_sort_1(data, l, r):
     if l >= r:
         return
 
@@ -34,13 +32,45 @@ def quick_sort(data, l, r):
         if left >= right:
             data[left] = pivot
 
-    quick_sort(data, l, left - 1)
-    quick_sort(data, right + 1, r)
+    quick_sort_1(data, l, left - 1)
+    quick_sort_1(data, right + 1, r)
+
+
+def quick_sort_2(data):
+    """Sort the array by using quicksort."""
+
+    less = []
+    equal = []
+    greater = []
+
+    if len(data) > 1:
+        pivot = data[0]
+        for x in data:
+            if x < pivot:
+                less.append(x)
+            elif x == pivot:
+                equal.append(x)
+            elif x > pivot:
+                greater.append(x)
+        return quick_sort_2(less) + equal + quick_sort_2(greater)
+    else:
+        return data
+
+
+def test_1():
+    data = [random.randint(1, 100) for _ in range(30)]
+    print(" ".join([str(item) for item in data]))
+    quick_sort_1(data, 0, len(data) - 1)
+    print(" ".join([str(item) for item in data]))
+
+
+def test_2():
+    data = [random.randint(1, 100) for _ in range(30)]
+    print(" ".join([str(item) for item in data]))
+    data = quick_sort_2(data)
+    print(" ".join([str(item) for item in data]))
 
 
 if __name__ == '__main__':
-    print()
-    print(" ".join([str(item) for item in data]))
-    quick_sort(data, 0, len(data) - 1)
-    print(" ".join([str(item) for item in data]))
-    print()
+    test_1()
+    test_2()
