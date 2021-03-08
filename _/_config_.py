@@ -38,3 +38,8 @@ QQMAIL_PORT = 465
 QQMAIL_USER = "124xxxx575@qq.com"
 QQMAIL_PASSWORD = "pmbyxxxxxxxxifig"
 # ----------------------------------------------------- #
+
+BOOL_ARGS = {
+    'true': True, 'True': True, 'TRUE': True, '1': True, 1: True,
+    'false': False, 'False': False, 'FALSE': False, '0': False, 0: False
+}
