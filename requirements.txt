@@ -1,48 +1,49 @@
 
-# WindowsÏµÍ³ÖĞ´ËÎÄ¼şÒÔGBK¸ñÊ½±£´æ 
+# Windowsç³»ç»Ÿä¸­æ­¤æ–‡ä»¶ä»¥GBKæ ¼å¼ä¿å­˜ 
 
-# ²âÊÔ°ü
-serial             # ´®¿Ú
-paho-mqtt          # MQTT¿â
-jieba              # ·Ö´Ê
-lxml               # ÍøÒ³½âÎö
-Pillow             # Í¼Ïñ´¦Àí
-Fabric             # Ô¶³Ì²¿Êğ
-Numpy              # Êı¾İ´¦Àí
-PyeCharts          # Êı¾İÉú³ÉÍ¼±í
-Python-Docx        # WordÎÄµµ
+# æµ‹è¯•åŒ…
+serial             # ä¸²å£
+paho-mqtt          # MQTTåº“
+jieba              # åˆ†è¯
+lxml               # ç½‘é¡µè§£æ
+Pillow             # å›¾åƒå¤„ç†
+Fabric             # è¿œç¨‹éƒ¨ç½²
+Numpy              # æ•°æ®å¤„ç†
+PyeCharts          # æ•°æ®ç”Ÿæˆå›¾è¡¨
+Python-Docx        # Wordæ–‡æ¡£
+openpyxl           # Excelå¤„ç†
 
-ShortUUID          # ¶ÌUID
-Scalene            # ÄÚ´æ·ÖÎö
-Pympler            # ÄÚ´æ×ÊÔ´Í³¼Æ
-Loguru             # ÈÕÖ¾Êä³ö
-PySnooper          # ³ÌĞòÔËĞĞÖĞÊı×·×Ù
-stackprinter       # ´íÎó×·×Ù
-VeryPrettyTable    # ±í¸ñÊä³öÊı¾İ
+ShortUUID          # çŸ­UID
+Scalene            # å†…å­˜åˆ†æ
+Pympler            # å†…å­˜èµ„æºç»Ÿè®¡
+Loguru             # æ—¥å¿—è¾“å‡º
+PySnooper          # ç¨‹åºè¿è¡Œä¸­æ•°è¿½è¸ª
+stackprinter       # é”™è¯¯è¿½è¸ª
+VeryPrettyTable    # è¡¨æ ¼è¾“å‡ºæ•°æ®
 
-Rich               # ÃüÁîĞĞÊä³ö
-Click              # ÃüÁîĞĞ½Å±¾
-Fire               # ÃüÁîĞĞ½Å±¾
+Rich               # å‘½ä»¤è¡Œè¾“å‡º
+Click              # å‘½ä»¤è¡Œè„šæœ¬
+Fire               # å‘½ä»¤è¡Œè„šæœ¬
 
-DBUtils            # Êı¾İ¿âÁ¬½Ó³Ø
-PyMySQL            # MySQLÊı¾İ¿â
-PyMongo            # MongoDBÊı¾İ¿â
-Redis              # RedisÊı¾İ¿â
+DBUtils            # æ•°æ®åº“è¿æ¥æ± 
+PyMySQL            # MySQLæ•°æ®åº“
+PyMongo            # MongoDBæ•°æ®åº“
+Redis              # Redisæ•°æ®åº“
 
-Selenium           # ¿ØÖÆä¯ÀÀÆ÷
-BeautifulSoup4     # ÍøÒ³½âÎö
+Selenium           # æ§åˆ¶æµè§ˆå™¨
+BeautifulSoup4     # ç½‘é¡µè§£æ
 
-Requests           # ÍøÂçÇëÇó
-Django             # Api½Ó¿Ú¿ª·¢ ORM
-Tornado            # Òì²½Api½Ó¿Ú¿ª·¢
-Flask              # ÇáÁ¿¼¶Api¿ª·¢
-FastApi            # Flask¼ÓÇ¿°æ
-Jupyter            # ±Ê¼Ç±¾
-JupyterLab         # ±Ê¼Ç±¾
-Celery[redis]      # Òì²½ÈÎÎñ ¶¨Ê±ÈÎÎñ
+Requests           # ç½‘ç»œè¯·æ±‚
+Django             # Apiæ¥å£å¼€å‘ ORM
+Tornado            # å¼‚æ­¥Apiæ¥å£å¼€å‘
+Flask              # è½»é‡çº§Apiå¼€å‘
+FastApi            # FlaskåŠ å¼ºç‰ˆ
+Jupyter            # ç¬”è®°æœ¬
+JupyterLab         # ç¬”è®°æœ¬
+Celery[redis]      # å¼‚æ­¥ä»»åŠ¡ å®šæ—¶ä»»åŠ¡
 
-# ½öLinuxÏµÍ³
-# Twisted            # ÍøÂç±à³Ì
+# ä»…Linuxç³»ç»Ÿ
+# Twisted            # ç½‘ç»œç¼–ç¨‹
 
-# ¼æÈİĞÔÎÊÌâ
-# redis-py-cluster   # Redis¼¯Èº
+# å…¼å®¹æ€§é—®é¢˜
+# redis-py-cluster   # Redisé›†ç¾¤
