@@ -31,22 +31,6 @@ def run_time(function):
     return wrapper
 
 
-def log_test(function):
-    @functools.wraps(function)
-    def wrapper():
-        _start_ = time.time()
-        _result_ = function()
-        _end_ = time.time()
-        for key, value in locals().items():
-            if key.startswith("_") and key.endswith("_"):
-                continue
-            if key.startswith(("data", "result")):
-                print(f"F:{function.__name__} | K:{key} V:{value}")
-        return _result_
-
-    return wrapper
-
-
 def cache(key: str = "", ex: int = 60):
     def decorator(function):
         @functools.wraps(function)
