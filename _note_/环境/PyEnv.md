@@ -8,13 +8,13 @@
 ## 安装
 ```sh
 apt update
+apt install libssl1.0-dev -y
 apt install make build-essential libssl-dev \
             zlib1g-dev libbz2-dev libreadline-dev \
             libsqlite3-dev wget curl llvm libncurses5-dev \
             xz-utils tk-dev libxml2-dev libxmlsec1-dev \
             libffi-dev liblzma-dev \
             -y
-apt install libssl1.0-dev -y
 
 git clone https://github.com/pyenv/pyenv.git ~/.pyenv
 echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bash_aliases
