@@ -1,7 +1,7 @@
+import time
 import threading
 
 threading_local = threading.local()
-
 
 """
 
@@ -28,21 +28,54 @@ localVal.val = name这条语句可以储存一个变量到当前线程，如果�
 所以也可以实现相同功能，并且灵活性更多，不过代码就没那么优雅简洁了
 """
 
-def print_data():
-    data = threading_local.data
-    print(f'{data} in {threading.current_thread().name}')
+
+def test_3():
+    def print_data():
+        data = threading_local.data
+        print(f'{data} in {threading.current_thread().name}')
+
+    def target(name):
+        threading_local.data = name
+        print_data()
+
+    thread_a = threading.Thread(target=target, args=('AAA',), name='ThreadA')
+    thread_b = threading.Thread(target=target, args=('BBB',), name='ThreadB')
+
+    thread_a.start()
+    thread_b.start()
+
+    thread_a.join()
+    thread_b.join()
 
 
-def target(name):
-    threading_local.data = name
-    print_data()
+value_global = 0
+
+value_local = threading.local()
 
 
-thread_a = threading.Thread(target=target, args=('AAA',), name='ThreadA')
-thread_b = threading.Thread(target=target, args=('BBB',), name='ThreadB')
+def test1():
+    def run(arg):
+        global value_global
+        value_global = arg
+        time.sleep(2)
+        print(value_global)
 
-thread_a.start()
-thread_b.start()
+    for i in range(10):
+        thread = threading.Thread(target=run, args=(i,))
+        thread.start()
 
-thread_a.join()
-thread_b.join()
+
+def test2():
+    def run(arg):
+        value_local.value = arg
+        time.sleep(2)
+        print(value_local.value)
+
+    for i in range(10):
+        thread = threading.Thread(target=run, args=(i,))
+        thread.start()
+
+
+if __name__ == '__main__':
+    test1()
+    test2()
