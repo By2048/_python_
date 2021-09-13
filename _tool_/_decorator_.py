@@ -3,7 +3,6 @@ import time
 import logging
 import functools
 import inspect
-from json import JSONDecodeError
 from pprint import pprint
 
 import redis
@@ -13,8 +12,9 @@ try:
     from _tool_ import _logging_
 except ImportError:
     from . import _logging_
+    from loguru import logger
 
-_logging_.init_logging_mini()
+    _logging_.init_logging_mini()
 
 
 def run_time(function):
@@ -41,7 +41,7 @@ def cache(key: str = "", ex: int = 60):
             if data:
                 try:
                     data = json.loads(data)
-                except JSONDecodeError as e:
+                except json.JSONDecodeError as e:
                     logging.exception(e)
 
             if data:
@@ -79,7 +79,7 @@ def cache_request(ex: int = 60):
             if data:
                 try:
                     data = json.loads(data)
-                except JSONDecodeError as e:
+                except json.JSONDecodeError as e:
                     logging.exception(e)
 
             if data and isinstance(data, dict):
