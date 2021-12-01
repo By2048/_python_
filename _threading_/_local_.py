@@ -50,8 +50,6 @@ def test_3():
 
 value_global = 0
 
-value_local = threading.local()
-
 
 def test1():
     def run(arg):
@@ -63,6 +61,9 @@ def test1():
     for i in range(10):
         thread = threading.Thread(target=run, args=(i,))
         thread.start()
+
+
+value_local = threading.local()
 
 
 def test2():
@@ -78,4 +79,5 @@ def test2():
 
 if __name__ == '__main__':
     test1()
+    time.sleep(3)
     test2()

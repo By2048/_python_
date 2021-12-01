@@ -8,7 +8,6 @@ from datetime import datetime
 from enum import Enum
 
 
-
 def make_password(data: str):
     md5 = hashlib.md5()
     md5.update(data.encode())

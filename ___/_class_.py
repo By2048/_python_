@@ -4,6 +4,14 @@ import base
 
 
 class A(object):
+    pass
+
+
+class B(A):
+    pass
+
+
+class A(object):
     def __init__(self, data):
         self.data = data
 
